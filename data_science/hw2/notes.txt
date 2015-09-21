@@ -1,0 +1,33 @@
+Age				unless not signed in
+Gender			0/1 = female/male
+Impressions		number of times ad was viewed
+Clicks			number of times ad was clicked
+Signed_In		true or false
+
+Each row is a single user
+
+May 2012
+So 1, 8, 15, 22, 29 = Tues
+
+Ads shown and clicks recored on the New York Times webpage
+
+Load data
+data1 <- read.csv(file = "nyt1.csv")
+
+create var age_group and categorize ages: <18, 18–24, 25–40, 41–64, and 65+
+
+
+ For a single day:
+	• Plot the distributions of the number of impressions and click-through-
+	rate (CTR = Nr. clicks/Nr. impressions) for these five age categories.
+	• Define a new variable to categorize (segment) users based on their
+	click behavior.
+	• Explore the data and make visual and quantitative comparisons across
+	user segments/demographics. In particular, compare under 18-year-
+	old males versus under-18-year-old females, and 18 to 24 year old
+	females versus 25 to 40 year old females.
+	• Create metrics/measurements/statistics that summarize the data.
+	Metrics you should include are CTR, quantiles, mean, median, vari-
+	ance and max, and these should be calculated across the various user
+	segments. Think about what will be important to track over time—
+	what will compress the data, but still capture user behavior.
