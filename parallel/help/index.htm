@@ -1,0 +1,104 @@
+<html>
+  <head>
+    <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+    <meta http-equiv="Content-Language" content="en-us">
+    <title>Programming Projects and Related</title>
+  </head>
+  <body>
+    <p><b>Programming Projects and Related Materials</b></p>
+    <p><u>Experimental platforms:<br>
+      </u></p>
+    <p>The following compute platforms are available for use by this class:</p>
+    <p>- A 5-node cluster ("glx nodes") which you will need to access from
+      within the EECS firewall. Each of these nodes contains a quad-core
+      Intel(R) Core(TM) i5-3330 CPU processor running at 3GHz, and 4GB RAM
+      (shared by the cores). The glx nodes are labeled glx1.eecs.wsu.edu through
+      glx5.eecs.wsu.edu. They are conencted by a gigabit ethernet switch.
+      Therefore you can use this system as a "cluster". There is no support for
+      job queue system at this point of time. Instructions on how to run your
+      parallel jobs are specified under Setup.</p>
+    <p>- It is expected that the students will also have restricted access to
+      another (larger) cluster within VCEA. More details will be posted here as
+      that arrangement is finalized.</p>
+    <p>The above will be the only dedicated platforms made available for this
+      course. Each student is welcome to use other clusters (for MPI codes) or
+      laptops (for OpenMP/multithreaded programs) that he/she may have access
+      to. If a student uses a different platform then the details of that
+      platform will have to mentioned in the experimental setup section of each
+      programming project report.</p>
+    <p><u>Setup:</u></p>
+    <ul>
+      <li>&nbsp;Instructions to set up MPI daemon on the cluster <a href="help/settingupMPD.pdf">PDF</a></li>
+      <li>Example machine file <a href="help/machinefile.txt">machinefile.txt</a></li>
+      <li>Commands to run MPI jobs on the cluster:<br>
+        &nbsp;&nbsp;&nbsp; &gt; To compile, use the
+        command:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>mpicc -o &lt;exec name&gt;
+          &lt;sourcefiles&gt;<br>
+        </i>&nbsp;&nbsp;&nbsp; &gt; To run your jobs, use the command:&nbsp; <i>mpiexec
+          -machinefile &lt;path&gt;/machinefile.txt -n &lt;number of procs&gt;
+          &lt;path&gt;/executable-name &lt;args if any&gt;</i></li>
+    </ul>
+    <p><i>&nbsp;&nbsp;&nbsp; OpenMP instructions:</i></p>
+    <ul>
+      <li>To compile your OpenMP function you need to use the -fopenmp flag. For
+        instance to compile a C/OpenMP code on the glx nodes you will use "<i>gcc
+          -fopenmp -o &lt;execname&gt; &lt;sourcefile(s)&gt;</i>". </li>
+      <li>To run the executable, simply run the executable directly with its
+        arguments like you would do if it were a serial code. No need to do
+        anything different. It is a good practice to have the user specify the
+        number of threads as one of the executable's arguments.&nbsp; </li>
+    </ul>
+    <p><u>Examples:&nbsp; </u></p>
+    <ul>
+      <li>MPI Hello World&nbsp; <a href="help/helloworld.c">helloworld.c</a> </li>
+      <li>MPI Send receive&nbsp; test <a href="help/send_recv_test.c">
+          send_recv_test.c</a></li>
+      <li>OpenMP: Simple for loop parallelization: <a href="help/loop.c">loop.c</a></li>
+      <li>OpenMP: Sum of n numbers using p threads: <a href="help/sumcomp.c">sumcomp.c</a></li>
+      <li>OpenMP: Matrix vector parallelization using p threads: <a href="help/matrix_vector.c">matrix_vector.c</a></li>
+      <li>OpenMP: Synchronization primitives (critical section, atomic, locks):
+        <a href="help/sync.c">sync.c</a> </li>
+    </ul>
+    <p><strong>Programming Projects:</strong></p>
+    <span style="text-decoration: underline;"> </span><i><span style="text-decoration: underline;">Project
+        1 - Due date: 9/17/2015 (Thursday, 11:59pm PT) via OSBLE dropbox</span><br>
+      <span style="text-decoration: underline;"> Assignment type: </span>Individual<br>
+    </i>The goal of this project is to empirically estimate the <b>network
+      parameters </b>(latency and bandwidth constants) for the network
+    connecting the nodes of the GLX compute cluster. To derive this estimate
+    write a simple MPI send receive program involving only two processors (one
+    sends and the other receives). Each MPI_Send should send a message of size <i>m
+    </i>bytes to the other processor. By increasing the message size <i>m</i>
+    from 1, 2, 4, 8, ... and so on, you are expected to plot a runtime curve
+    with runtime for each send-recv communication on the Y-axis and message size
+    (m) on the X-axis. For the message size, you may have to go on up to 1MB or
+    so to observe a meaningful trend. Make sure you double <em>m</em> for each
+    step.<br>
+    From the curve derive the values for latency and bandwidth. To make sure the
+    observed numbers are accurate, please do the send-recv inside a large loop
+    and average the time out. <br>
+    <u>Deliverables (zipped into one zip file - with your name on it):</u> <br>
+    &nbsp;&nbsp;&nbsp; i) Source code with timing functions, <br>
+    &nbsp;&nbsp;&nbsp; ii) Report in PDF or Word that shows your tables and
+    charts followed by your derivation for the network parameter estimates.<br>
+    (As an alternative to MPI_Send and MPI_Recv, you are also allowed to use
+    MPI_Sendrecv. Please look at the API for MPI routines for help.)<br>
+    <br>
+    <i style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><span
+        style="text-decoration: underline;">Project 2 - Due date: 9/29/2015
+        (Tuesday, 11:59pm PT) via OSBLE dropbox</span><br>
+      <span style="text-decoration: underline;">Assignment type: </span>Individual
+      or Teams of 2<span class="Apple-converted-space">&nbsp;</span><br>
+      <br>
+    </i><span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">In
+      this project you will implement the<span class="Apple-converted-space">&nbsp;</span></span><b
+      style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">Conway's
+      Game of Life<span class="Apple-converted-space">&nbsp;</span></b><span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">in
+      MPI. Please see the<span class="Apple-converted-space">&nbsp;</span></span><a
+      href="Program2.pdf" style="font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">PDF<span
+        class="Apple-converted-space">&nbsp;</span></a><span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">for
+      details.</span><br>
+    <ol>
+    </ol>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+data/
+output/
+
+*.csv
+*.dat
+*.zip
+*.rar
+*.exe
+*.out
+*.pcap
+*sorted.txt

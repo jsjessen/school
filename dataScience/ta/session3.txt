@@ -1,0 +1,246 @@
+> # R Tutorial
+> # S.L. Broschat
+> # Session #3, More on What Makes R Special
+> # ========================================
+> # Cleaning up your workspace.
+> # ==========
+> # Recall that you can see all the files in your working directory using the command
+> # list.files().  Similarly, you can see all the data in your workspace using ls().
+> x <- 3
+> y <- 4
+> z <- x + y
+> ls()
+[1] "x"       "y"       "z"      
+> # You can remove a variable using the rm() command:
+> rm(x)
+> ls()
+[1] "y"       "z"      
+> # If you want to remove all the variables in your workspace, use the following, but think twice
+> # before doing so!
+> rm(list = ls())
+> ls()
+character(0)
+> #
+> # ==========
+> # with() and within()
+> # ==========
+> # with() and within() are used with data frames.  They allow you to do one-off calculations and
+> # expansions, respectively.  First you'll need to download the cancer_data.csv file from
+> # www.eecs.wsu.edu/~shira/r/ and read it into R.  Of course you'll need to be in the correct
+> # working directory!
+> cancer <- read.csv(file = "cancer_data.csv")
+> str(cancer)
+'data.frame':	779 obs. of  7 variables:
+ $ State.Name      : Factor w/ 51 levels "Alabama","Alaska",..: 48 17 38 8 32 29 23 18 7 21 ...
+ $ State.Code      : Factor w/ 51 levels "AK","AL","AR",..: 8 18 39 9 35 31 24 19 7 20 ...
+ $ Year            : int  2011 2011 2011 2011 2011 2011 2011 2011 2011 2011 ...
+ $ Total           : num  509 506 498 497 494 ...
+ $ Caucasian       : num  407 497 489 507 502 ...
+ $ African.American: num  556 498 517 469 468 ...
+ $ Hispanic        : num  315 0 0 0 408 ...
+> summary(cancer)
+    State.Name    State.Code       Year          Total           Caucasian    
+ Hawaii  : 17   HI     : 17   Min.   :2000   Min.   :  0.0   Min.   :0.0  
+ Oregon  : 17   OR     : 17   1st Qu.:2006   1st Qu.:180.8   1st Qu.:179.0  
+ Alabama : 16   AK     : 16   Median :2008   Median :416.5   Median :410.4  
+ Alaska  : 16   AL     : 16   Mean   :2007   Mean   :331.5   Mean :329.9  
+ Arizona : 16   AR     : 16   3rd Qu.:2010   3rd Qu.:477.1   3rd Qu.:473.7  
+ Arkansas: 16   AZ     : 16   Max.   :2011   Max.   :544.3   Max. :548.4  
+ (Other) :681   (Other):681                                                 
+ African.American    Hispanic     
+ Min.   :  0.0    Min.   :  0.00  
+ 1st Qu.:195.3    1st Qu.: 81.55  
+ Median :253.7    Median :130.60  
+ Mean   :301.9    Mean   :198.03  
+ 3rd Qu.:473.3    3rd Qu.:352.10  
+ Max.   :589.5    Max.   :707.90  
+> #
+> # with() allows you to make calculations between columns:
+> diffBtwnAAandHisp <- with(cancer, African.American - Hispanic)
+>
+> head(diffBtwnAAandHisp, 20)
+ [1]  241.3  497.8  516.8  469.1   60.3 -200.9   16.2  144.6  -58.5   419.5   51.4
+[12]   38.6  302.2  239.0  130.5  183.3   80.8   80.8  135.1 -143.0
+> 
+> # within() allows you to add columns to an existing data frame to create a new data frame
+> c2 <- within(cancer, {diffBtwnAAandHisp <- African.American - Hispanic})
+> str(c2)
+'data.frame':	779 obs. of  8 variables:
+ $ State.Name       : Factor w/ 51 levels "Alabama","Alaska",..: 48 17 38 8 32 29 23 18 7 21 ...
+ $ State.Code       : Factor w/ 51 levels "AK","AL","AR",..: 8 18 39 9 35 31 24 19 7 20 ...
+ $ Year             : int  2011 2011 2011 2011 2011 2011 2011 2011 2011 2011 ...
+ $ Total            : num  509 506 498 497 494 ...
+ $ Caucasian        : num  407 497 489 507 502 ...
+ $ African.American : num  556 498 517 469 468 ...
+ $ Hispanic         : num  315 0 0 0 408 ...
+ $ diffBtwnAAandHisp: num  241.3 497.8 516.8 469.1 60.3 ...
+> str(cancer)
+'data.frame':	779 obs. of  7 variables:
+ $ State.Name      : Factor w/ 51 levels "Alabama","Alaska",..: 48 17 38 8 32 29 23 18 7 21 ...
+ $ State.Code      : Factor w/ 51 levels "AK","AL","AR",..: 8 18 39 9 35 31 24 19 7 20 ...
+ $ Year            : int  2011 2011 2011 2011 2011 2011 2011 2011 2011 2011 ...
+ $ Total           : num  509 506 498 497 494 ...
+ $ Caucasian       : num  407 497 489 507 502 ...
+ $ African.American: num  556 498 517 469 468 ...
+ $ Hispanic        : num  315 0 0 0 408 ...
+> # ==========
+> # ifelse
+> # ==========
+> score <- 70 > 50
+> grade <- ifelse(score, 'pass', 'fail')
+> grade
+[1] "pass"
+> # ==========
+> # Data Type Conversion
+> # ==========
+> # Use as.numeric(), as.character(), as.factor(), as.matrix(), as.data.frame(), as.list().  Note
+> # that if a factor looks like a number, first convert it to a character before converting it to a
+> # numerical value.
+> # Can also use unlist().  Let's try something a little different that you can do in R.  First we
+> # create a list.
+> data <- list()
+> data$a1 <- c(89, 65, 59)
+> data$a2 <- c(56, 34, 32)
+> data$a3 <- c(43, 25, 22)
+> data$a4 <- c(42, 23, 20)
+> data
+$a1
+[1] 89 65 59
+
+$a2
+[1] 56 34 32
+
+$a3
+[1] 43 25 22
+
+$a4
+[1] 42 23 20
+
+> udata <- unlist(data)                          # Unlist the data
+> udata
+a11 a12 a13 a21 a22 a23 a31 a32 a33 a41 a42 a43 
+ 89  65  59  56  34  32  43  25  22  42  23  20 
+> mdata <- matrix(udata, 4, 3, byrow=TRUE)       # Create a matrix from the data
+> mdata
+     [,1] [,2] [,3]
+[1,]   89   65   59
+[2,]   56   34   32
+[3,]   43   25   22
+[4,]   42   23   20
+> ddata <- as.data.frame(mdata)                  # Convert the matrix to a data frame
+> ddata
+  V1 V2 V3
+1 89 65 59
+2 56 34 32
+3 43 25 22
+4 42 23 20
+> colnames(ddata) <- c('% Red', '% Blue', '% Yellow')
+> ddata
+  % Red % Blue % Yellow
+1    89     65       59
+2    56     34       32
+3    43     25       22
+4    42     23       20
+> # ==========
+> # apply() redux
+> # ==========
+> # The apply() function is really powerful with custom anonymous functions.  Suppose, e.g., we
+> # create a very large matrix with 1000 rows and 10 columns:
+> x <- matrix(rpois(1e4, 8), 1e3)
+> # rpois(n, lambda) generates a set of integers with a Poisson distribution where n gives the
+> # number of integers and lambda gives the mean.  All values are positive.
+> apply(x, 2, function(x) sd(x)/sqrt(length(x)))
+ [1] 0.09362267 0.08868741 0.09228731 0.08957716 0.08679572 0.08479898 0.09299311
+ [8] 0.09105039 0.09039049 0.08801529
+> #
+> # ==========
+> # plotting and graphing
+> # ==========
+> # I found a great website that explains much more than I could ever hope to explain:
+> # www.statmethods.net/graphs/.  Open up a browser and go to this site.  Click on the link
+> # Creating a Graph and scroll to the section Saving Graphs.  Note that you can save graphs in
+> # many forms, but what I want to point out to you is that of the different file types, only .pdf
+> # and .ps use vector graphics.  This means that you can increase their size without losing
+> # resolution.  The other file types will become pixelated.  For those of you who want to use
+> # LaTeX, you should save your files as .ps files and then convert them to .eps which is fairly
+> # easy to do (on Macs and Linux boxes you use ps2eps).  The 'e' stands for encapsulated, and I
+> # think the only difference between them really is that .eps files have a bounding box.
+> # Next return to R Studio and click on the Packages and then on datasets.  All these datasets
+> # come preloaded in R Studio and are available for your practice.  I must admit, some of them are
+> # pretty obsure.  If you click on airquality, you should recognize the data we used last week.
+> # Apparently it was the source of my Coursera homework.  Click the back button and scroll down
+> # to mtcars.  Click on it and check it out.  We're going to use this dataset to do some plotting.
+> # To load data from a package into R for statistical manipulation, use data(name_of_pkg). 
+> # To plot it, use attach(name_of_pkg).
+> attach(mtcars)
+> # ==========
+> # Simple graph
+> # ==========
+> plot(wt, mpg)
+> abline(lm(mpg~wt))                   # lm() is the linear model function with y~x the argument (y
+> title("Regression of MPG on Weight") # depending on x), and abline() creates a straight line
+> # ==========
+> # Simple histogram
+> # ==========
+> hist(mtcars$mpg, breaks=12, col='red')
+> # ==========
+> # Simple density plot
+> # ==========
+> d <- density(mtcars$mpg)
+> plot(d)
+> # ==========
+> # Not so simple dot plot
+> # ==========
+> x <- mtcars[order(mtcars$mpg),]            # Orders mpg from low to high
+> x$cyl <- factor(x$cyl)
+> x$color[x$cyl==4] <- "red"
+> x$color[x$cyl==6] <- "blue"
+> x$color[x$cyl==8] <- "darkgreen"
+> dotchart(x$mpg, labels=row.names(x),cex=.7, groups= x$cyl, main="Gas Mileage for Car Models\ngrouped by cylinder", xlab="Miles per Gallon", gcolor="black", color=x$color)
+> # ==========
+> # Not so simple scatterplot matrices
+> # ==========
+> # Next you'll need to install the car package.  Click on the Packages tab, then the Install tab,
+> # and then type car in the pop-up window.
+> library(car)
+> scatterplotMatrix(~mpg+disp+drat+wt|cyl, data=mtcars,main="Three Cylinder Options")
+> #
+> # ==========
+> # ggplot2
+> # ==========
+> # Next return to the website and click on the Advanced Graphs link at the top of the page.  Click
+> # on ggplot2 Graphs on the links at the left side of the following page.  You'll have to install
+> # this package now as well.  Simply do the same thing you did to install the car package.
+> # It turns out that ggplot2 is very complex and far beyond the scope of this tutorial.  However,
+> # qplot() which is part of ggplot2 can be used quite effectively, and we'll use it with
+> # mtcars to create some nice graphics.
+> library(ggplot2)          
+> #
+> # Create factors with value labels
+> mtcars$gear <- factor(mtcars$gear, levels=c(3,4,5), labels=c('3gears','4gears','5gears'))
+> mtcars$am <- factor(mtcars$am, level=c(0,1), labels=c('Automatic','Manual'))
+> mtcars$cyl <- factor(mtcars$cyl, levels=c(4,6,8), labels=c('4cyl','6cyl','8cyl'))
+> #
+> # Create kernel density plots for mpg grouped by number of gears as indicated by color
+> qplot(mpg, data=mtcars, geom='density', fill=gear, alpha=I(.5), main='Distribution of Gas Mileage', xlab='Miles per Gallon', ylab='Density')
+> #
+> # Create scatterplot of mpg vs hp for each combination of gears and cylinders in each facet where
+> # transmission type is represented by shape and color
+> qplot(hp, mpg, data=mtcars, shape=am, color=am, facets=gear~cyl, size=I(3), xlab='Horsepower', ylab='Miles per Gallon')
+> #
+> # Create separate regressions of mpg on weight for number of cylinders
+> qplot(wt, mpg, data=mtcars, geom=c('point', 'smooth'), method='lm', formula=y~x, color=cyl, main='Regression of MPG on Weight', xlab='Weight', ylab='Miles per Gallon')
+> #
+> # Create a boxplot of mpg by number of gears
+> qplot(gear, mpg, data=mtcars, geom=c('boxplot', 'jitter'), fill=gear, main='Mileage by Gear Number', xlab='', ylab='Miles per Gallon')
+> # Note that jitter adds a bit of randomness so that points really close to each other don't
+> # overlap.
+> #
+> # ==========
+> # More Data 
+> # ==========
+> # There are two more data sets at www.eecs.wsu.edu/~shira/r/.  These are savings_data.csv and 
+> # sales_data.csv.  Explore it and work with it to practice some of the skills you've learned.
+> #  For example, you might want to break up the savings data and apply a regression model to it to
+> # see how savings patterns have changed over the decades. Another example might be that you want
+> # to break up the sales data into expenditures according to card type.

@@ -1,0 +1,147 @@
+Project 1 - Due date: 9/17/2015 (Thursday, 11:59pm PT) via OSBLE dropbox
+Assignment type: Individual
+
+The goal of this project is to empirically estimate the network parameters (latency and bandwidth constants) for the network connecting the nodes of the GLX compute cluster. To derive this estimate write a simple MPI send receive program involving only two processors (one sends and the other receives). Each MPI_Send should send a message of size m bytes to the other processor. By increasing the message size m from 1, 2, 4, 8, ... and so on, you are expected to plot a runtime curve with runtime for each send-recv communication on the Y-axis and message size (m) on the X-axis. For the message size, you may have to go on up to 1MB or so to observe a meaningful trend. Make sure you double m for each step.
+From the curve derive the values for latency and bandwidth. To make sure the observed numbers are accurate, please do the send-recv inside a large loop and average the time out. 
+
+Deliverables (zipped into one zip file - with your name on it): 
+    i) Source code with timing functions, 
+    ii) Report in PDF or Word that shows your tables and charts followed by your derivation for the network parameter estimates.
+
+(As an alternative to MPI_Send and MPI_Recv, you are also allowed to use MPI_Sendrecv. Please look at the API for MPI routines for help.)
+
+===============================================================================
+
+cost = T + u * m
+
+T = network stack / latency (CPU)
+u = network bandwidth (Network)
+m = message size
+
+Hockney model
+
+estimate by sending messages of various sizes 1B to 1MB
+
+m by t graph, linear m=x-axis and t=y-axis
+slope = u
+m=1, t=T
+
+will probably only see 0's for messages under a few bytes
+
+try thousands of times for each size, then find mean for that size
+
+do MPI_send/MPI_recieve at the very beginning (before loop) to get consistent graph, clean communition
+and then begin running your tests
+
+latency is tao=T
+
+convert MB to Mb
+
+--------------------------
+
+graph of message size vs time: steep climb at first, but then no so steep
+
+bytes per second (using bytes so don't use bit unit) use scale (seconds, megabytes) that makes sense, such that you have the resolution to 
+
+for calculating the mean, you ignore the small msg sizes
+
+the small msg sizes indicate the effective latency
+
+Hockney model of communication 
+    Sender -> m bytes -> Receiver
+
+    Total communication time = setup latency + time to transfer m bytes
+                   T = t (tau) + u (mew) * m
+                   y = mx + c (m's not the same)
+            x = msg size, m = slope = u, c = t, y = T
+
+    u = 1 / bandwidth = sec / bytes = time taken for every byte
+    
+    trying to measure t and u with this experiment
+
+    for small msg sizes, there will be noise
+    if you take an average of the zone, you will know t
+    
+    goal of experiment is to find cutoff of negligible msg size
+    where does increasing msg size start to increase time linearly
+    this point onward is the linear line finding function for
+
+    can use linear regression line (withholding the small msg sizes)
+
+    Send        Recv
+    ----        ----
+    buf
+    t1      ->t1
+t0: MPI_send    MPI_recv    *measure the recv (definitely blocking)
+    t2      ->t2
+
+    t2-t1      <=   t2-t1
+
+    put a timer on both, find the diff and use max or just use the recv
+    report the send time seperately and the recv time seperately
+    can even plot on the same graph for comparison
+
+    sender puts msg in buf, then might return before recv returns
+    for small msg sizes the send should be faster
+    but as msg size increases, send time should approach recv time
+
+    use log_2() scale for both axis, (possibly just for on x axis)
+    because msg size is doubling
+
+    t:tau = latency (sec)
+    u:mew = sec/byte (some measure of byte Mb, kb, etc...)
+
+--------------------------
+
+There are 3 versions of send and 2 versions of recv:
+
+MPI_Isend   MPI_Irecv   Non-blocking (don't wait for msg to arrive)
+MPI_Send    MPI_Recv    Blocking
+MPI_Ssend           Blocking
+
+Ssend is just like Send but safe and slow, like TCP
+
+
+    Sender      Recv
+
+    MPI_Send    > Irecv
+            {
+             local comp
+             MPI_Test()
+            }
+             add to the local task pool
+
+MPI_Irecv + MPI_Wait = MPI_Recv (blocking)
+
+Send will be erratict for small msg size
+
+#Start
+t1              t1
+MPI_Send(buf)           MPI_Recv(buf)
+t2              t2
+t2 - t1             t2 - t1
+MPI_Barrier(MPI_COMM_WORLD) MPI_Barrier(MPI_COMM_WORLD)
+goto: Start         goto: Start
+        --->
+
+packet i+1 could come before packet i
+
+may see aberrations on Send side
+
+put a function called MPI_Barrier(MPI_COMM_WORLD)
+right after you do a time difference, both on sender and receiver sides
+
+If send completes faster then the recv, then send waits so they stay in synch
+
+MPI_Ssend()?
+
+Normally synchronization is bad for parallelism but is important for this special scenario.
+
+MEMORY: char[]   = ......0................................
+    char* cp =   ^ 
+
+old_time
+new_time
+time_taken = new_time - old_time
+
+
