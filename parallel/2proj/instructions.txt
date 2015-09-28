@@ -1,0 +1,39 @@
+Game of Life
+
+query your 8 neighbors whether they are alive or dead, in order to determine whether you are alive/dead next time step
+
+synch, simulation code, one time step at a time
+perform queries for all cells and then MPI_Barrier
+
+n by n square grid
+visit every cell in parallel
+
+take data from neighbors as of previous iteration
+then update
+wait for all cells to get calculated
+continue
+
+how to partition the grid in parallel?
+have n be nice number, divisible by p
+if n^2, divide into n^2/p blocks
+perform calculations within block and communications along block borders
+
+grid is wrapped
+far left, left side is far right, right side
+
+alternatively, can divide grid in to p columns, so only 1D division to worry about - easier to work with
+
+column(or row) vs. block decomposition
+which has more/less communication?
+
+choose one way to implement
+then in the report, make a case for why it is better
+
+is it a question of ease of programming or better performance?
+
+-------------------------------------------------------------------------------
+
+Fast Multiple Method - one class of FMM method
+simulating N bodies
+
+game of life is a super simplified version of this
