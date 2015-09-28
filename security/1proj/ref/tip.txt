@@ -1,0 +1,17 @@
+In this programming assignment you will implement logical clock in a distributed system and to make a consistent global cut using the Chandy-Lamport snapshot algorithm (original paper attached with project specification). You will use DETERLab for this project, so you *must* read the “Student Introduction to DETERLab” – https://education.deterlab.net/DETERintro/DETERintro.html before starting the experiments. 
+
+Deadline: May 7, 12:00 PM (noon)
+
+1. Introduction -- How to run your software (Remember! I give you the liberty to chooseyour pro- gramming language of choice. Don’t expect my system tohave all the software needed to run your program. So make sure toinclude such information)
+
+
+2. The output of a sample run (including screenshots where applicable)
+
+
+3. Proof showing that your cut is in fact consistent. This can be verifiedby showing the total number of units (in each army and in transit messages) is equal to that at the beginning of the run
+
+
+4. Output of a sample run, with a clear/legible snapshot
+
+
+5. Summary and Issues encountered, Challenges, et al (if applicable)

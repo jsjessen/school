@@ -1,0 +1,303 @@
+> # R Tutorial
+> # S.L. Broschat
+> # Session #2, What Makes R Different
+> # ==================================
+> # vector redux: Can extend vector using append() function:
+> x <- 1:5
+> x <- append(x, 4:6)
+> x
+[1] 1 2 3 4 5 4 5 6
+> # ==========
+> # A word on scoping: R uses lexical scoping which means that a free variable is looked up in the
+> # environment in which it is defined.  Compare this to dynamic scoping where it is looked up in
+> # the environment in which it is called.  Consider the following:
+> # ==========
+> y <- 10
+> f <- function(x) {
++     y <- 2
++     y^2 + g(x)
++ }
+> g <- function(x) {
++     x*y
++ }
+> #
+> # Now given what you just read about lexical scoping, figure out what f(3) will return.
+> #
+> # R's lexical scoping allows functions to be defined inside other functions.  For example:
+> create_power <- function(n) {
++     power <- function(x) {
++         x^n
++     }
++     power
++ }
+> square <- create_power(2)
+> cube <- create_power(3)
+> square(2)
+[1] 4
+> cube(2)
+[1] 8
+> #
+> # Pretty neat, eh?
+> #
+> # ==========
+> # Data frames: Objects in R that set R apart.
+> # ==========
+> # First we need to determine our current working directory and to change to a different working
+> # directory.
+> getwd()
+[1] "/Users/shira"
+> # setwd('') or setwd("") and put the path and name of the working directory between the quotes.
+> # However, in R Studio, rather than using getwd() and setwd(), simply choose Session from the
+> # Menu, then Set Working Directory, then Choose Directory (or simply Control Shift H for OS X).
+> # So now we want to download a data file from the web.  Open a browser and download 
+> # www.eecs.wsu.edu/~shira/r/climate_data.csv to a folder of your choice.  Next set your working
+> # directory to that folder.
+> #
+> # There are a number of ways to load data into R.  Among these are read.table(), read.csv(),
+> # read.delim(), and readLines().  You can use ?read.table or ?read.csv to get help on using
+> # each of these.  read.table(), read.csv(), and read.delim() are used for reading tabular data
+> # and are probably why R is so popular.  readlines() is used for reading lines of a text file.
+> # read.delim() is used for tab-delimited data and, as its name implies, read.csv() is used for
+> # reading in .csv files.  If a data file is given as a .txt file, try read.table().
+> #
+> # ==========
+> # read.csv():
+> # ==========
+> # First check to see what files are in your directory using the list.files() function.
+> list.files()
+ [1] "bank.R"                         "best.R"                        
+ [3] "best2.R"                        "cancer.csv"                    
+ [5] "climate_data.csv"               "complete.R"                    
+ [7] "corr.R"                         "diet_data"                     
+ [9] "Hospital_Revised_Flatfiles.pdf" "hospital-data.csv"             
+[11] "matrix.R"                       "meanVector.R"                  
+[13] "movies.csv"                     "optimizExample.R"              
+[15] "outcome-of-care-measures.csv"   "pollutantmean.R"               
+(truncated)
+> climate <- read.csv("climate_data.csv")
+> # The str() function is very useful because it gives you a relatively terse idea of the structure
+> # of an object.
+> str(climate)
+'data.frame':	153 obs. of  6 variables:
+ $ Ozone: int  41 36 12 18 NA 28 23 19 8 NA ...
+ $ Sol.R: int  190 118 149 313 NA NA 299 99 19 194 ...
+ $ Wind : num  7.4 8 12.6 11.5 14.3 14.9 8.6 13.8 20.1 8.6 ...
+ $ Temp : int  67 72 74 62 56 66 65 59 61 69 ...
+ $ Month: int  5 5 5 5 5 5 5 5 5 5 ...
+ $ Day  : int  1 2 3 4 5 6 7 8 9 10 ...
+> # What does all this mean?  First we see that our object is a data.frame.  There are 153 rows and
+> # 6 columns.  The columns are variables, and each column has a name that is listed in the left:
+> # Ozone, Sol.R, Wind, Temp, Month, Day.  The type of each variable is given next to its name,
+> # and then examples of the values in the rows follow.
+> #
+> # Another useful command is the summary() function:
+> summary(climate)
+     Ozone            Sol.R            Wind             Temp           Month            Day      
+ Min.   :  1.00   Min.   :  7.0   Min.   : 1.700   Min.   :56.00   Min.   :5.000   Min.   : 1.0  
+ 1st Qu.: 18.00   1st Qu.:115.8   1st Qu.: 7.400   1st Qu.:72.00   1st Qu.:6.000   1st Qu.: 8.0  
+ Median : 31.50   Median :205.0   Median : 9.700   Median :79.00   Median :7.000   Median :16.0  
+ Mean   : 42.13   Mean   :185.9   Mean   : 9.958   Mean   :77.88   Mean   :6.993   Mean   :15.8  
+ 3rd Qu.: 63.25   3rd Qu.:258.8   3rd Qu.:11.500   3rd Qu.:85.00   3rd Qu.:8.000   3rd Qu.:23.0  
+ Max.   :168.00   Max.   :334.0   Max.   :20.700   Max.   :97.00   Max.   :9.000   Max.   :31.0  
+ NA's   :37       NA's   :7                                                                      
+> #
+> # As you can see, the summary statement gives quite a bit of information about the data!  Of 
+> # special interest is the NA's at the bottom.  These indicate missing data that you'll have to
+> # consider when trying to find statistics for the data.
+> # 
+> # Note that we can find the dimension of a data frame just as we did for a matrix:
+> dim(climate)
+[1] 153   6
+> # And we can use head(), tail(), and length() as well:
+> head(hospital, 2)
+Error in head(hospital, 2) : object 'hospital' not found
+> head(climate, 2)
+  Ozone Sol.R Wind Temp Month Day
+1    41   190  7.4   67     5   1
+2    36   118  8.0   72     5   2
+> tail(climate, 2)
+    Ozone Sol.R Wind Temp Month Day
+152    18   131  8.0   76     9  29
+153    20   223 11.5   68     9  30
+> length(climate)
+[1] 6
+> # length() gives the number of variables which can be very handy when there are a lot of columns!
+> # We can subset data frames the same way we do matrices:
+> climate[2:4, 3:6]
+  Wind Temp Month Day
+2  8.0   72     5   2
+3 12.6   74     5   3
+4 11.5   62     5   4
+> climate[ ,1]
+  [1]  41  36  12  18  NA  28  23  19   8  NA   7  16  11  14  18  14  34   6  30  11   1  11   4
+ [24]  32  NA  NA  NA  23  45 115  37  NA  NA  NA  NA  NA  NA  29  NA  71  39  NA  NA  23  NA  NA
+ [47]  21  37  20  12  13  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA 135  49  32  NA  64  40  77  97
+ [70]  97  85  NA  10  27  NA   7  48  35  61  79  63  16  NA  NA  80 108  20  52  82  50  64  59
+ [93]  39   9  16  78  35  66 122  89 110  NA  NA  44  28  65  NA  22  59  23  31  44  21   9  NA
+[116]  45 168  73  NA  76 118  84  85  96  78  73  91  47  32  20  23  21  24  44  21  28   9  13
+[139]  46  18  13  24  16  13  23  36   7  14  30  NA  14  18  20
+> # But there are better ways of doing things with data frames.  We can use names() to learn the
+> # names of the variables:
+> names(climate)
+[1] "Ozone" "Sol.R" "Wind"  "Temp"  "Month" "Day"  
+> # We can then use these names to extract data using the variable names.
+> climate$Temp
+  [1] 67 72 74 62 56 66 65 59 61 69 74 69 66 68 58 64 66 57 68 62 59 73 61 61 57 58 57 67 81 79 76
+ [32] 78 74 67 84 85 79 82 87 90 87 93 92 82 80 79 77 72 65 73 76 77 76 76 76 75 78 73 80 77 83 84
+ [63] 85 81 84 83 83 88 92 92 89 82 73 81 91 80 81 82 84 87 85 74 81 82 86 85 82 86 88 86 83 81 81
+ [94] 81 82 86 85 87 89 90 90 92 86 86 82 80 79 77 79 76 78 78 77 72 75 79 81 86 88 97 94 96 94 91
+[125] 92 93 93 87 84 80 78 75 73 81 76 77 71 71 78 67 76 68 82 64 71 81 69 63 70 77 75 76 68
+> # Let's try to find the mean of the Ozone values.
+> mean(climate$Ozone)
+[1] NA
+> # Uh-oh.  We seem to have a problem.  Let's look at the Ozone values.
+> climate$Ozone
+  [1]  41  36  12  18  NA  28  23  19   8  NA   7  16  11  14  18  14  34   6  30  11   1  11   4
+ [24]  32  NA  NA  NA  23  45 115  37  NA  NA  NA  NA  NA  NA  29  NA  71  39  NA  NA  23  NA  NA
+ [47]  21  37  20  12  13  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA 135  49  32  NA  64  40  77  97
+ [70]  97  85  NA  10  27  NA   7  48  35  61  79  63  16  NA  NA  80 108  20  52  82  50  64  59
+ [93]  39   9  16  78  35  66 122  89 110  NA  NA  44  28  65  NA  22  59  23  31  44  21   9  NA
+[116]  45 168  73  NA  76 118  84  85  96  78  73  91  47  32  20  23  21  24  44  21  28   9  13
+[139]  46  18  13  24  16  13  23  36   7  14  30  NA  14  18  20
+> # Recall that there were 37 NA's in the summary statement for ozone.  These are missing values.
+> # We need to do something about these.  Fortunately R has a simple way of allowing us to ignore 
+> # them.
+> mean(climate$Ozone, na.rm=TRUE)
+[1] 42.12931
+> #
+> # Note that you can change the names of variables using the colnames() function.  You might want
+> # to do this when the variable names are long or are meaningless.
+> colnames(climate) <- c('O', 'S', 'W', 'T', 'M', 'D')
+> str(climate)
+'data.frame':	153 obs. of  6 variables:
+ $ O: int  41 36 12 18 NA 28 23 19 8 NA ...
+ $ S: int  190 118 149 313 NA NA 299 99 19 194 ...
+ $ W: num  7.4 8 12.6 11.5 14.3 14.9 8.6 13.8 20.1 8.6 ...
+ $ T: int  67 72 74 62 56 66 65 59 61 69 ...
+ $ M: int  5 5 5 5 5 5 5 5 5 5 ...
+ $ D: int  1 2 3 4 5 6 7 8 9 10 ...
+# But let's not use these rather obscure names.  Revert to better names:
+> colnames(climate) <- c('ozone', 'sol.r', 'wind', 'temp', 'month', 'day')
+> str(climate)
+'data.frame':	153 obs. of  6 variables:
+ $ ozone: int  41 36 12 18 NA 28 23 19 8 NA ...
+ $ sol.r: int  190 118 149 313 NA NA 299 99 19 194 ...
+ $ wind : num  7.4 8 12.6 11.5 14.3 14.9 8.6 13.8 20.1 8.6 ...
+ $ temp : int  67 72 74 62 56 66 65 59 61 69 ...
+ $ month: int  5 5 5 5 5 5 5 5 5 5 ...
+ $ day  : int  1 2 3 4 5 6 7 8 9 10 ...
+> #
+> # Can use subset() function to query data frame.
+> high.ozone <- subset(climate, ozone > 75 , na.rm=TRUE)
+> high.ozone
+    ozone sol.r wind temp month day
+30    115   223  5.7   79     5  30
+62    135   269  4.1   84     7   1
+68     77   276  5.1   88     7   7
+69     97   267  6.3   92     7   8
+70     97   272  5.7   92     7   9
+71     85   175  7.4   89     7  10
+80     79   187  5.1   87     7  19
+(truncated)
+> # Can select number of columns using the select option:
+> high.ozone <- subset(climate, ozone > 75 , select = c("ozone", "temp", "month"), na.rm=TRUE)
+> high.ozone
+    ozone temp month
+30    115   79     5
+62    135   84     7
+68     77   88     7
+69     97   92     7
+70     97   92     7
+71     85   89     7
+80     79   87     7
+(truncated)
+> # You can use plotting for a quick way of analyzing data relationships.
+> plot(high.ozone[c(1,2)])
+> plot(high.ozone[c(2,1)])
+> plot(high.ozone[c(3,1)])
+> #
+> # ==========
+> # split(): The split() function allows you to split() data frames or other objects into lists.
+> # split is often used in conjunction with lapply() and sapply().
+> # ==========
+> # Recall that the various climate values were given for the months of May through September.
+> # Suppose we want to know the statistics for each month separately.  The way to accomplish this
+> # easily is using the split() function because the data easily falls into different groups.
+> climate.list <- split(climate, climate$month)
+> str(climate.list)
+List of 5
+ $ 5:'data.frame':	31 obs. of  6 variables:
+  ..$ ozone: int [1:31] 41 36 12 18 NA 28 23 19 8 NA ...
+  ..$ sol.r: int [1:31] 190 118 149 313 NA NA 299 99 19 194 ...
+  ..$ wind : num [1:31] 7.4 8 12.6 11.5 14.3 14.9 8.6 13.8 20.1 8.6 ...
+  ..$ temp : int [1:31] 67 72 74 62 56 66 65 59 61 69 ...
+  ..$ month: int [1:31] 5 5 5 5 5 5 5 5 5 5 ...
+  ..$ day  : int [1:31] 1 2 3 4 5 6 7 8 9 10 ...
+ $ 6:'data.frame':	30 obs. of  6 variables:
+  ..$ ozone: int [1:30] NA NA NA NA NA NA 29 NA 71 39 ...
+  ..$ sol.r: int [1:30] 286 287 242 186 220 264 127 273 291 323 ...
+  ..$ wind : num [1:30] 8.6 9.7 16.1 9.2 8.6 14.3 9.7 6.9 13.8 11.5 ...
+  ..$ temp : int [1:30] 78 74 67 84 85 79 82 87 90 87 ...
+  ..$ month: int [1:30] 6 6 6 6 6 6 6 6 6 6 ...
+  ..$ day  : int [1:30] 1 2 3 4 5 6 7 8 9 10 ...
+ $ 7:'data.frame':	31 obs. of  6 variables:
+  ..$ ozone: int [1:31] 135 49 32 NA 64 40 77 97 97 85 ...
+  ..$ sol.r: int [1:31] 269 248 236 101 175 314 276 267 272 175 ...
+  ..$ wind : num [1:31] 4.1 9.2 9.2 10.9 4.6 10.9 5.1 6.3 5.7 7.4 ...
+  ..$ temp : int [1:31] 84 85 81 84 83 83 88 92 92 89 ...
+  ..$ month: int [1:31] 7 7 7 7 7 7 7 7 7 7 ...
+  ..$ day  : int [1:31] 1 2 3 4 5 6 7 8 9 10 ...
+ $ 8:'data.frame':	31 obs. of  6 variables:
+  ..$ ozone: int [1:31] 39 9 16 78 35 66 122 89 110 NA ...
+  ..$ sol.r: int [1:31] 83 24 77 NA NA NA 255 229 207 222 ...
+  ..$ wind : num [1:31] 6.9 13.8 7.4 6.9 7.4 4.6 4 10.3 8 8.6 ...
+  ..$ temp : int [1:31] 81 81 82 86 85 87 89 90 90 92 ...
+  ..$ month: int [1:31] 8 8 8 8 8 8 8 8 8 8 ...
+  ..$ day  : int [1:31] 1 2 3 4 5 6 7 8 9 10 ...
+ $ 9:'data.frame':	30 obs. of  6 variables:
+  ..$ ozone: int [1:30] 96 78 73 91 47 32 20 23 21 24 ...
+  ..$ sol.r: int [1:30] 167 197 183 189 95 92 252 220 230 259 ...
+  ..$ wind : num [1:30] 6.9 5.1 2.8 4.6 7.4 15.5 10.9 10.3 10.9 9.7 ...
+  ..$ temp : int [1:30] 91 92 93 93 87 84 80 78 75 73 ...
+  ..$ month: int [1:30] 9 9 9 9 9 9 9 9 9 9 ...
+  ..$ day  : int [1:30] 1 2 3 4 5 6 7 8 9 10 ...
+> #
+> # ==========
+> # apply family of functions: loop functions that do a lot in a little amount of space
+> # ==========
+> # lapply() and sapply() are used with lists:
+> #
+> lapply(climate.list, function(x) colMeans(x[ , c("ozone", "sol.r", "wind")], na.rm=TRUE))
+$`5`
+    ozone     sol.r      wind 
+ 23.61538 181.29630  11.62258 
+
+$`6`
+    ozone     sol.r      wind 
+ 29.44444 190.16667  10.26667 
+
+$`7`
+     ozone      sol.r       wind 
+ 59.115385 216.483871   8.941935 
+(truncate)
+
+> sapply(climate.list, function(x) colMeans(x[ , c("ozone", "sol.r", "wind")], na.rm=TRUE))
+              5         6          7          8         9
+ozone  23.61538  29.44444  59.115385  59.961538  31.44828
+sol.r 181.29630 190.16667 216.483871 171.857143 167.43333
+wind   11.62258  10.26667   8.941935   8.793548  10.18000
+> #
+> # Can usse tapply() and apply() with the data frame itself.
+> apply(climate, 2, mean, na.rm=TRUE)
+     ozone      sol.r       wind       temp      month        day 
+ 42.129310 185.931507   9.957516  77.882353   6.993464  15.803922 
+> #
+> # However, it doesn't make much sense to average the months and days!
+> #
+> apply(climate[c(1,2,3)], 2, mean, na.rm=TRUE)
+     ozone      sol.r       wind 
+ 42.129310 185.931507   9.957516 
+> #
+> # Will try to do tapply() next week.
+
+

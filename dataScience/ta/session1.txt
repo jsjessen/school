@@ -1,0 +1,296 @@
+> # R Tutorial
+> # S.L. Broschat
+> # Session #1, How R Is Like Every Other Language
+> # ==============================================
+> # Download R and R Studio:
+> # https://cran.rstudio.com/
+> # https://www.rstudio.com/products/rstudio/download/
+> #
+> # After downloading R and R Studio, open R Studio.  R Studio is one of the nicest IDEs I've 
+> # ever used (not that I've used that many, but I've heard other people say so as well).
+> # You'll want to explore R Studio a bit.  The console is on the left, and you can run R 
+> # commands directly in the console, but you can't rerun these commands.  In order to write
+> # a program (traditionally you end an R program with a .R), you need to open a script file.
+> # There are 3 ways to do this.  Click on the menu item File->New File->R Script or on the 
+> # +Page icon on the top left corner of the window or simplest of all use the keyboard with
+> # shift-control(Windows)/command(Mac)-N.  Type commands in the script window and then run
+> # them either by highlighting them and clicking the Run icon or else by using
+> # control-enter(Windows) or command-enter(Mac) on the keyboard.  If you're on the same line as
+> # the command, you don't need to highlight it, just use control- or command-enter.  You don't
+> # even have to be at the end of the line.  You can save the script file to the directory of
+> # your choice.  You can also have more than one script file open at a time.
+> #
+> # This tutorial is being created using the console so that comments can be included and
+> # commands run interactively.  However, you should run all the commands in a script file to get
+> # used to using a script file.  You can tell when the console is being used by the prompt sign
+> # '>'.  As you've no doubt figured out, '#' is the comment sign.
+> # ==========
+> # Basics:
+> # ==========
+> # assignment operator: <-
+> x <- 3
+> x
+[1] 3
+> #
+> # usual operators and functions:
+> sqrt(x)
+[1] 1.732051
+> 3 * 4
+[1] 12
+> 4 + x
+[1] 7
+> 11 / x
+[1] 3.666667
+> 25 - 2
+[1] 23
+> 2 ^ x
+[1] 8
+> exp(x)
+[1] 20.08554
+> factorial(3)
+[1] 6
+> #
+> # variable/object names: use letters, numbers, underscores, periods; can't start w/
+> #                        number; usually start with lowercase letter
+> ham <- 10
+> eggs <- 3.44
+> ham + eggs
+[1] 13.44
+> ham_eggs <- ham + eggs
+> ham_eggs
+[1] 13.44
+> you <- 'me'
+> you
+[1] "me"
+> I <- "they"
+> I
+[1] "they"
+> # ==========
+> # Logical operators and booleans: ==, !=, >, <, <=, >=, &, |, ||
+> # ==========
+> you == 'me'
+[1] TRUE
+> I != 'they'
+[1] FALSE
+> #
+> # ==========
+> # Conditionals: if (condition) {action} else if (condition) {action} else {action}
+> # ==========
+> my.income <- 100
+> my.expenses <- 150
+> if (my.income < my.expenses) {status <- 'dire'} else if (my.income == my.expenses) {status <- 'shaky'} else {status <- 'okay'}
+> status
+[1] "dire"
+> #
+> # normally break lines after each condition, but can't in R console.  Actually, can break lines
+> # if you include '{' at end of line:
+> if (my.income < my.expenses) {
++     status <- 'dire'} else if (my.income == my.expenses) {
++     status <- 'shaky'} else {
++     status <- 'okay'}
+> status
+[1] "dire"
+> #
+> # ==========
+> # which(): gives all occurrences that satisfy a condition, i.e., are TRUE
+> # ==========
+> # ==========
+> # for() loops: for (i in 1:100){ } or for (item in list){ }
+> # There are also while() loops.
+> # ==========
+> # ==========
+> # Functions:
+> # ==========
+> stats <- function(x) {
++     m <- mean(x)
++     std <- sd(x)
++     se <- std/sqrt(length(x))
++     return(c(m,std,se))
++ }
+> # Note that x is a vector.
+> #
+> # c() = concatenate function
+> #
+> # ==========
+> # help:  type ?command, e.g., ?factorial 
+> # The help information will show up in the help window on the right side of R Studio.  If
+> # you're using R (not R Studio), a separate window will pop up.
+> # ==========
+> # ==========
+> # Vectors: commonly use concatenate function to create vectors
+> # ==========
+> v <- c(7, 6, 5, 4, 3)
+> v
+[1] 7 6 5 4 3
+> w <- c(1, 2, 3, 4, 5, 6, 7, 8, 9)
+> w
+[1] 1 2 3 4 5 6 7 8 9
+> v + 1
+[1] 8 7 6 5 4
+> v * 100
+[1] 700 600 500 400 300
+> length(w)
+[1] 9
+> w[2:5]
+[1] 2 3 4 5
+> v[3]
+[1] 5
+> v ^ 2
+[1] 49 36 25 16  9
+> sqrt(w)
+[1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490 2.645751 2.828427 3.000000
+> v * w
+[1]  7 12 15 16 15 42 42 40 36
+Warning message:
+In v * w : longer object length is not a multiple of shorter object length
+> # In above, shorter vector is recycled!  Need to be careful, but at least got warning
+> # message.
+> u <- c(10, 20, 30)
+> u * w
+[1]  10  40  90  40 100 180  70 160 270
+> length(u)
+[1] 3
+> length(v)
+[1] 5
+> length(w)
+[1] 9
+> # No warning message for u*w because length(u) a multiple of length(w).  Careful!
+> #
+> # Can also obtain vector by using seq() function: seq(0, 100, 20) gives sequence
+> # that starts at 0, ends at 100, and has intervals of 20.
+> #
+> z <- seq(0, 100, 20)
+> z
+[1]   0  20  40  60  80 100
+> #
+> # Can create an integer sequence using n:m
+> #
+> i <- 1:10
+> i
+ [1]  1  2  3  4  5  6  7  8  9 10
+> #
+> small.ints <- i < 5
+> which(small.ints)
+[1] 1 2 3 4
+> small.ints
+ [1]  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
+> #
+> # ==========
+> # Matrices:
+> # ==========
+> # Usually start with a vector that you divide into rows and columns.
+> #
+> # matrix(v, nrow=3, ncol=4) 
+> # matrix(v, 3, 4) -- more tersely
+> # matrix(v, 3) -- 3 understood to mean number of rows
+> # matrix(v, ncol=4) -- but not if columns specified
+> # matrix(0, 3, 4) -- 3x4 matrix of zeros
+> # matrix(1:3, 3, 4) -- will give matrix of columns of 1 2 3
+> # matrix(1:3, 3, 4, byrows=TRUE) -- will give matrix of rows that wrap around: 1 2 3 1
+> v <- 1:12
+> matrix(v, 3, 4)
+     [,1] [,2] [,3] [,4]
+[1,]    1    4    7   10
+[2,]    2    5    8   11
+[3,]    3    6    9   12
+> m <- matrix(v, 3, 4)
+> m
+     [,1] [,2] [,3] [,4]
+[1,]    1    4    7   10
+[2,]    2    5    8   11
+[3,]    3    6    9   12
+> dim(m)
+[1] 3 4
+> # dim() give number of rows and columns.
+> length(m)
+[1] 12
+> # length() gives number of elements in matrix.
+> head(m, 2)
+     [,1] [,2] [,3] [,4]
+[1,]    1    4    7   10
+[2,]    2    5    8   11
+> # head(m, n) gives up to first 6 rows in matrix, i.e., n_max = 6.
+> tail(m, 2)
+     [,1] [,2] [,3] [,4]
+[2,]    2    5    8   11
+[3,]    3    6    9   12
+> # tail(m, n) gives up to last 6 rows in matrix, i.e., n_max = 6.
+> #
+> # ==========
+> # Matrix subsetting:
+> # ==========
+> m[2,4]
+[1] 11
+> # one element
+> m[1, ]
+[1]  1  4  7 10
+> # one row
+> m[ ,3]
+[1] 7 8 9
+> # one column
+> m[1:2,3]
+[1] 7 8
+> # part of column
+> m[1:2, 3:4]
+     [,1] [,2]
+[1,]    7   10
+[2,]    8   11
+> # gives a submatrix!
+> m[3 ]
+[1] 3
+> # Note that m[3 ] gives a value.  In fact, it gives you the value for the 3rd element in 
+> # the matrix so it's not a mistake, but if you meant to include a comma for a row or 
+> # column, you'll end up with a problem.  So be careful!
+> #
+> # ==========
+> # Lists:
+> # ==========
+> alist <- list('Hello, World!', TRUE, 2:5, 3.141592)
+> alist
+[[1]]
+[1] "Hello, World!"
+
+[[2]]
+[1] TRUE
+
+[[3]]
+[1] 2 3 4 5
+
+[[4]]
+[1] 3.141592
+
+> # to index, use double brackets:
+> alist[[1]]
+[1] "Hello, World!"
+> alist[[3]]
+[1] 2 3 4 5
+> alist[[3]][[4]]
+[1] 5
+> # can add to list by naming element:
+> alist[['me']] <- 'Shira'
+> alist
+[[1]]
+[1] "Hello, World!"
+
+[[2]]
+[1] TRUE
+
+[[3]]
+[1] 2 3 4 5
+
+[[4]]
+[1] 3.141592
+
+$me
+[1] "Shira"
+
+> alist$me
+[1] "Shira"
+> alist[[5]]
+[1] "Shira"
+> # lists are very useful and very powerful and, thus, are used a lot!
+> #
+> # ==========
+> # to exit R: type q() in R console
+> # ==========
+> q()
