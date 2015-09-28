@@ -39,32 +39,72 @@
 //    Connections: 3-8 each    |    Connections: 2-3 each
 // Implimentation: complicated | Implimentation: simple
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-#define BIGPRIME 2147483647
+#define ROOT 0
+#define BIGPRIME 2147483647 // (2^32 - 1) = largest prime storable by signed 32bit int
+
+int n, G;
 
 // Get user input n and G
 get_input()
 {
+    printf("n = ");
+    scanf("%d", n);
 
+    printf("G = ");
+    scanf("%d", G);
 }
 
 // Initialize
-GenerateInitialGoL()
+void GenerateInitialGoL()
 {
     // Goal:
     //      - generate and store initial matrix in parallel
     //      - rank i owns rows [i*(n/p) ... (i+1)*(n/p)-1]
     
-    // Implementation:
-    //      - rank 0 generate p random numbers [1 to BIGPRIME] and distribute ith to rank i
-    //
-    //      -  each rank:
-    //          - use given number as seed, to randomly generate n/p values [1 to BIGPRIME]
-    //          - if kth random number is even, then kth cell fixxed in local portion of matrix, state=Alive, else state=Dead
+    // Generate p random numbers in interval [1 to BIGPRIME] and distribute ith to rank i
+    if(rank = ROOT)
+    {
+        min = 1;
+        max = BIGPRIME;
+        range = max - min;
+
+        srand(time(NULL))
+
+        for(i = 0; i < p; i++)
+        {
+            int rand_num = rand() % range + min;
+            MPI_Send(&rand_num, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
+        }
+    }
+    
+    // Each rank:
+    {
+        int rand_num;
+        int sender;
+        MPI_Recv(&rand_num, 1, MPI_INT, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &sender); 
+
+        srand(rand_num)
+
+        // use given number as seed, to randomly generate n/p values [1 to BIGPRIME]
+        numLocalCells = n / p;
+        for(i = 0; i < numLocalCells; i++)
+        {
+            int rand_num = rand() % range + min;
+            MPI_Send(&rand_num, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
+        }
+
+        // if kth random number is even, then kth cell in local portion of matrix, state=Alive, else state=Dead
+        
+    }
+
 }
 
 // Run Game of Life
-Simulate()
+Simulate() 
 {
     // Run for G generations
     
