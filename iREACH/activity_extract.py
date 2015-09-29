@@ -5,7 +5,15 @@
 # James Jessen
 # Project iREACH
 
+# Feature Extraction for Activity Recognition
+
 #-------------------------------------------------------------------------------
+
+# Next time use this:
+# wget https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda3-2.3.0-Linux-x86_64.sh
+# bash Anaconda3-2.3.0-Linux-x86_64.sh
+# import pandas as pd
+# import numpy as np
 
 import os
 import sys
@@ -13,12 +21,6 @@ import csv
 import statistics
 import math
 import timeit
-
-# Next time use this:
-# wget https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda3-2.3.0-Linux-x86_64.sh
-# bash Anaconda3-2.3.0-Linux-x86_64.sh
-# import pandas as pd
-# import numpy as np
 
 #  0     1      2      3       4          5          6         7        8
 # Min | Max | Range | Mean | Median | Amplitude | Std Dev | Variance | RMS |
@@ -33,17 +35,22 @@ DATA_GAP_LIMIT = 100
 HOME_DIR = '/media/jsj/DROPSHIP/iReach/data/'
 
 INPUT_FILE = 'processed.csv'
-OUTPUT_FILE = 'extracted.csv'
-LOG_FILE = 'extract_log.csv'
+OUTPUT_DIR = '/home/jsj/school/iREACH/activityFeatures-window' + str(WINDOW) + '-overlap' \
+              + str(OVERLAP) + '-gapLimit' + str(DATA_GAP_LIMIT)
 
 # Sensor info
 NUM_SENSOR_TYPES = 4
 NUM_DIMENSIONS = 3
+NUM_NODES = 10
 
 # Headers
 NUM_FIELDS_PER_NODE = NUM_SENSOR_TYPES * NUM_DIMENSIONS
 
 NUM_FEATURES = 9
+
+SUBJECT_COL = 12
+MOVEMENT_COL = 13
+NODE_COL = 14
 
 #===============================================================================
 
@@ -62,7 +69,7 @@ def print_outfile_header(writer):
     outrow = []
     for i in range(NUM_SENSOR_TYPES * NUM_DIMENSIONS * NUM_FEATURES):
         outrow.append('F' + str(i+1))
-    outrow.append('Mote')
+    outrow.append('Movement')
     writer.writerow(outrow)
 
 #-------------------------------------------------------------------------------
@@ -111,6 +118,7 @@ def get_data(reader):
     """Read input file row by row until window filled or reach new section"""
     goalSize = WINDOW
     startNode = 1
+    startMovement = 1
     gap = 0 # Data gap within this window
     curOverlapGap = 0 # Data gap within the overlap used by this window
     nextOverlapGap = 0 # Data gap within the overlap that will be part of next window
@@ -118,11 +126,12 @@ def get_data(reader):
     # For each row
     for row in reader:
         size = len(rowBuf)
-        endNode = int(row[-1])
+        endNode = int(row[NODE_COL])
+        endMovement = int(row[MOVEMENT_COL])
 
         # Submit data
         if startNode != endNode or size + gap == goalSize:
-            yield (startNode, rowBuf, gap + curOverlapGap, nextOverlapGap)
+            yield (startMovement, startNode, rowBuf, gap + curOverlapGap, nextOverlapGap)
             del rowBuf[:]
             if startNode != endNode:
                 # New Node
@@ -137,6 +146,7 @@ def get_data(reader):
             gap = 0
             nextOverlapGap = 0
             startNode = endNode
+            startMovement = endMovement
 
         fieldBuf = []
         # Read each field in the row and look for data gaps
@@ -149,7 +159,7 @@ def get_data(reader):
                 nextOverlapGap += 1
             continue
         rowBuf.append(fieldBuf)
-    yield (startNode, rowBuf, gap + curOverlapGap, nextOverlapGap)
+    yield (startMovement, startNode, rowBuf, gap + curOverlapGap, nextOverlapGap)
 
 #-------------------------------------------------------------------------------
 
@@ -164,17 +174,14 @@ def get_features(data):
 
 def extract_features(startTime):
     """Extract data by subject->movement->node"""
-    with open(OUTPUT_FILE, 'w', newline='') as outfile, \
-         open(os.path.join(HOME_DIR, INPUT_FILE), 'r', newline='') as infile:
-        writer = csv.writer(outfile, delimiter=',')
+    with open(os.path.join(HOME_DIR, INPUT_FILE), 'r', newline='') as infile:
         reader = csv.reader(infile, delimiter=',')
-
         next(reader) # skip over header
-        print_outfile_header(writer)
 
+        hasHeader = [False] * (NUM_NODES + 1)
         prevNode = -1
         overlapBuf = []
-        for node, data, gap, nextOverlapGap in get_data(reader):
+        for movement, node, data, gap, nextOverlapGap in get_data(reader):
             if node == prevNode:
                 data = overlapBuf + data
             prevNode = node
@@ -183,15 +190,24 @@ def extract_features(startTime):
             if gap > DATA_GAP_LIMIT:
                 continue
 
-            features = get_features(data)
-            features.append(node)
-            writer.writerow(features)
+            with open(os.path.join(OUTPUT_DIR, \
+                    'node' + str(node) + '.csv'), 'a', newline='') as outfile:
+                writer = csv.writer(outfile, delimiter=',')
+                features = get_features(data)
+                features.append(movement)
+                if not hasHeader[node]:
+                    print_outfile_header(writer)
+                    hasHeader[node] = True
+                writer.writerow(features)
 
 #================================= Main ========================================
 
 if __name__ == '__main__':
+    if not os.path.exists(OUTPUT_DIR):
+        os.makedirs(OUTPUT_DIR)
+
     startTime = timeit.default_timer()
     extract_features(startTime)
     endTime = timeit.default_timer()
 
-    print('Total Time:', round(endTime - startTime), 'sec')
+    print('\nTotal Time:', round(endTime - startTime), 'sec')
