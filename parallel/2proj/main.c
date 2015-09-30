@@ -39,45 +39,33 @@
 //    Connections: 3-8 each    |    Connections: 2-3 each
 // Implimentation: complicated | Implimentation: simple
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
+#include <mpi.h> 
+#include "helper.h"
+
+#define CORNER_TL 218   //Top-left corner
+#define CORNER_TR 191   //Top-right corner
+#define CORNER_BL 192   //Bottom-left corner
+#define CORNER_BR 217   //Bottom-right corner
+#define BAR_HOR 196     //Horizontal bar
+#define BAR_VERT 179    //Vertical bar
 
 #define ROOT 0
 #define BIGPRIME 2147483647 // (2^32 - 1) = largest prime storable by signed 32bit int
+#define DEAD 0
+#define ALIVE 1
 
+// p: number of processors
 // n: world is a n by n grid 
 // G: number of generations to simulate
 
-// Get user input n and G
-get_input(int* n, int* G)
-{
-    printf("n = ");
-    scanf("%d", n);
-
-    printf("G = ");
-    scanf("%d", G);
-}
-
-// Precondition: random number generator seeeded
-int get_random_number(int min, int max)
-{
-    int range = max - min;
-    return rand() % range + min;
-}
-
-// Returns true if odd, false if even
-bool check_isOdd(int x)
-{
-    return x & 1;
-}
-
 // Initialize
-void GenerateInitialGoL(int n, bool matrix[][])
+int** GenerateInitialGoL(int n)
 {
     // Goal:
     //      - generate and store initial matrix in parallel
     //      - rank i owns rows [i*(n/p) ... (i+1)*(n/p)-1]
+
+    int seed;
 
     // Generate p random numbers in interval [1 to BIGPRIME] and distribute ith to rank i
     if(rank = ROOT)
@@ -88,58 +76,106 @@ void GenerateInitialGoL(int n, bool matrix[][])
 
         srand(time(NULL));
 
-        for(i = 0; i < p; i++)
+        for(dest = 0; dest < p; dest++)
         {
             int rand_num = get_random_number(1, BIGPRIME);
-            MPI_Send(&rand_num, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
+
+            if(dest == ROOT)
+                seed = rand_num; 
+            else
+                MPI_Send(&rand_num, 1, MPI_INT, dest, 0, MPI_COMM_WORLD);
         }
     }
-
-    // Each rank:
-    // Assuming you can send msgs to yourself, otherwise have Root give to itself
+    else
     {
-        int rand_num;
-        int sender;
-        MPI_Recv(&rand_num, 1, MPI_INT, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &sender); 
+        MPI_Recv(&seed, 1, MPI_INT, ROOT, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE); 
+        srand(seed);
+    }
 
-        srand(rand_num);
+    num_rows = n / p; // owned by this rank
+    int world[num_rows][n]; // local
+    // world[generation(even or odd)][row][col]
+    // world[0][2][4] = gen0 cell (2,4)
+    // alternate generations
+    
+    // true_row = (rank * num_rows) + local_row
 
-        // use given number as seed, to randomly generate n/p values [1 to BIGPRIME]
-        numLocalCells = n / p;
-        for(i = 0; i < numLocalCells; i++)
+    // start_row = rank * num_rows;
+    // end_row = ((rank + 1) * num_rows) - 1;
+    
+    // for each row owned by current rank
+    for(row = 0; row < num_rows; row++)
+    {
+        for(i = 0; i < n; i++)
         {
-            int rand_num = rand() % range + min;
-            MPI_Send(&rand_num, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
+            // Check if random number is odd
+            if(1 & get_random_number(1, BIGPRIME))
+                world[row][i] = DEAD;
+            else
+                world[row][i] = ALIVE;
         }
-        // (i * n/p) to (i * n/p - 1)
-
-
-        // if kth random number is even, then kth cell in local portion of matrix, state=Alive, else state=Dead
-
     }
 }
-    
+
 
 // Run Game of Life
-void Simulate() 
+void Simulate(int n, int G, int** world) 
 {
+    int** g[2];
+    int last = p - 1;
+
+    g[0] = world;
+
     // Run for G generations
-
-    // For each gen in G:
-    //      Barrier: synch cells to same generation
-    //      Each rank i determines states for cells it owns
-    
+    for(gen = 0; gen < G; gen++)
     {
+        // Barrier: synch cells to same generation
+        MPI_Barrier();
 
-        DisplayGoL();
+        // Send data accross border
+        if(rank == NODE)
+            MPI_Send();
+
+        // Send data accross border
+        if(rank == last)
+            MPI_Send();
+
+        // Each rank i determines states for cells it owns
+        DetermineState(world, row, col);
+
+        if(n <= 16)
+            DisplayGoL();
     }
 }
 
 // Determines whether a cell should be alive or dead next generation
 // Precondition: All cells have access to neighboring entries
-bool DetermineState(int row, int col)
+bool DetermineState(int** world, int row, int col)
 {
-    return alive or dead
+    int num_alive = 0; // number of living neighbors
+
+    for(i = -1; i <= 1; i++)
+    {
+        for(j = -1; j <= 1; j++)
+        {
+            if(i == 0 && j == 0)
+                continue;
+
+            if(row + i < 0 || row + i > n)
+                MPI_Recv();
+
+            if(world[row+i][col+j])
+                num_alive++;
+        }
+    }
+
+    if(num_alive == 3)
+        return ALIVE;
+
+    if(world[row][col] == ALIVE && num_alive == 2)
+        return ALIVE;
+
+    return DEAD;
 }
 
 // Display
@@ -155,17 +191,62 @@ void DisplayGoL()
     //      send only alive cells for smaller msgs
     //      ok to not do this, for simplicity
     // Display it
+
+    int i = 0, row = 0, col = 0;
+
+    // Top border
+    printf("\n %c", CORNER_TL);
+
+    for (i = 0; i < n; i ++)
+        printf("%c", BAR_HOR);
+
+    printf("%c\n", CORNER_TR);
+
+    // Interior
+    for (row = 0; row < n; row ++)
+    {
+        printf(" %c", BAR_VERT);
+
+        for (col = 0; col < n; col ++)
+            printf("%c", Current(row, col)); //Cells
+
+        printf("%c\n", BAR_VERT);
+    }
+
+    // Bottom border
+    printf(" %c", CORNER_BL);
+
+    for (i = 0; i < n; i ++)
+        printf("%c", BAR_HOR);
+
+    printf("%c\n", CORNER_BR);
+
+    return;
 }
 
-void main()
+int main(int argc, char *argv[])
 {
-    int n;
-    int G;
+    int n, G;
+    int rank, p;
 
-    get_input(&n, &G);
+    MPI_Init(&argc, &argv);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &p);
 
-    GenerateInitialGoL();
-    Simulate();
+    printf("my rank = %d\n", rank);
+    printf("Rank = %d: number of processes = %d\n", rank, p);
+
+    if(argc == 3)
+    {
+        n = argv[1];
+        G = argv[2];
+    }
+    else
+        get_input(&n, &G);
+
+    Simulate(n, G, GenerateInitialGoL(n));
+
+    MPI_Finalize();
 }
 
 // Report:
