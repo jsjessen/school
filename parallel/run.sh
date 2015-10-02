@@ -6,7 +6,7 @@
 # ln -s run.sh q
 
 PROJECT=1
-USERNAME="yourname"
+USERNAME="jjessen"
 
 NUM_NODES=2
 PROCS_PER_NODE=1
@@ -43,8 +43,6 @@ mpicc ${COMP_ARGS} -o ${EXE_FILE} $*
 mpiexec -machinefile ${MACHINE_FILE} -n ${NUM_PROCS} ${EXE_FILE} ${EXE_ARGS}
 
 
-#To compile your OpenMP function you need to use the -fopenmp flag. 
-#For instance to compile a C/OpenMP code on the glx nodes you will use "gcc -fopenmp -o <execname> <sourcefile(s)>".
-
-#To run the executable, simply run the executable directly with its arguments like you would do if it were a serial code. 
-#No need to do anything different. It is a good practice to have the user specify the number of threads as one of the executable's arguments.
+# To compile your OpenMP function you need to use the -fopenmp flag. 
+# For instance to compile a C/OpenMP code on the glx nodes you will use:
+#   gcc -fopenmp -o <execname> <sourcefile(s)>
