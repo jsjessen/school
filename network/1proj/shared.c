@@ -20,6 +20,28 @@
 
 // --------------------------------------------------
 
+void DieWithError(const char* msg)
+{
+    fputs(msg, stderr);
+    exit(1);
+}
+
+void DieWithUserMessage(const char *msg, const char *detail) 
+{
+    fputs(msg, stderr);
+    fputs(": ", stderr);
+    fputs(detail, stderr);
+    fputc('\n', stderr);
+    exit(1);
+}
+
+void DieWithSystemMessage(const char *msg) 
+{
+    perror(msg);
+    exit(1);
+}
+
+/*
 // send msg  as a new-line-terminated (\n) string. Note that a null terminating character should not be sent when a newline-terminated string is specified.
 int send_term(char* str)
 {
@@ -38,6 +60,8 @@ int recv_term()
 // This password will be sent to the server by first sending the length of the msg as a 2-byte binary number in network byte order (remember to use htons() on the sending side and ntohs() on the receiving side) followed by the msg string (not null terminated). No null term sent.
 int send_sized(char* str)
 {
+    // This sends only the length, add code to send msg
+
     uint16_t length = 20;
     // convert and send
     network_byte_order = htons(length);
@@ -50,3 +74,4 @@ int recv_sized()
     recv();
     ntohs(length);
 }
+*/
