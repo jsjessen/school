@@ -8,31 +8,37 @@
 #  Also, what interesting feature occurs in the cipher text?
 
 echo "a)"
-openssl des-ecb -in p7.txt -out p7_a.out -K 01234567
-echo "------------------------------------------"
-cat p7_a.out
+openssl enc -des-ecb -in p7.txt -out p7a.out -K 01234567
 echo
-echo "------------------------------------------"
+echo "openssl enc -des-ecb -in p7.txt -out p7a.out -K 01234567"
+echo
+echo "------------------------------------------------------------------"
+xxd p7a.out
+echo "------------------------------------------------------------------"
 echo
 
 # b) Cipher: AES-128-ECB, Key: 0123456789abcdef
 
 echo "b)"
-openssl aes-128-ecb -in p7.txt -out p7_b.out -K 0123456789abcdef
-echo "------------------------------------------"
-cat p7_b.out
+openssl enc -aes-128-ecb -in p7.txt -out p7b.out -K 0123456789abcdef
 echo
-echo "------------------------------------------"
+echo "openssl enc -aes-128-ecb -in p7.txt -out p7b.out -K 0123456789abcdef"
+echo
+echo "------------------------------------------------------------------"
+xxd p7b.out
+echo "------------------------------------------------------------------"
 echo
  
 # c) Cipher: AES-128-CBC, Key: 0123456789abcdef, IV = 0000000000000001
 
 echo "c)"
-openssl aes-128-cbc -in p7.txt -out p7_c.out -K 0123456789abcdef -iv 0000000000000001
-echo "------------------------------------------"
-cat p7_c.out
+openssl enc -aes-128-cbc -in p7.txt -out p7c.out -K 0123456789abcdef -iv 0000000000000001
 echo
-echo "------------------------------------------"
+echo "openssl enc -aes-128-cbc -in p7.txt -out p7c.out -K 0123456789abcdef -iv 0000000000000001"
+echo
+echo "------------------------------------------------------------------"
+xxd p7c.out
+echo "------------------------------------------------------------------"
 echo
  
 #  Also, why is this ciphertext different from b's?
