@@ -15,14 +15,17 @@
 
 #define BUFSIZE 256
 
+typedef enum { false, true } bool;
+
+void DieWithError(const int sock, const char* msg);
 void DieWithUserMessage(const char *msg, const char *detail);
 void DieWithSystemMessage(const char *msg);
 
-//int send_term(char* str);
-//int recv_term();
-//
-//int send_sized(char* str);
-//int recv_sized();
+int send_term(const int socket, const char* msg);
+char* recv_term(const int socket);
+
+int send_sized(const int socket, const char* msg);
+char* recv_sized(const int socket);
 
 
 #endif

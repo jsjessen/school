@@ -10,59 +10,69 @@
 int main(int argc, char* argv[])
 {
     int sock;
-    struct sockaddr_in echoServAddr; // Server address
+    struct sockaddr_in servAddr; // Server address
 
-    if (argc < 3 || argc > 4) // Test for correct number of arguments
+    if (argc < 2 || argc > 3) // Test for correct number of arguments
         DieWithUserMessage("Parameter(s)",
-                "<Server Address> <Echo Word> [<Server Port>]");
+                "<Server Address> [<Server Port>]");
 
     char *servIP = argv[1]; // First arg: server IP address (dotted quad)
-    char *echoString = argv[2]; // Second arg: string to echo
-    in_port_t echoServPort = atoi(argv[3]);
+    in_port_t servPort = (argc == 3) ? atoi(argv[2]) : 51716;
 
-    // Create a reliable, stream socket using TCP
-    if ((sock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
-        DieWithError("socket() failed");
+    char* validation;
+    do 
+    {
+        // Create a reliable, stream socket using TCP
+        if ((sock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
+            DieWithError(sock, "socket() failed");
 
-    echoServAddr.sin_family      = AF_INET;             // Internet address family
-    echoServAddr.sin_addr.s_addr = inet_addr(servIP);   // Server IP address
-    echoServAddr.sin_port        = htons(echoServPort); // Server port
+        memset(&servAddr, 0, sizeof(servAddr)); // Zero out structure
+        servAddr.sin_family      = AF_INET;             // Internet address family
+        servAddr.sin_addr.s_addr = inet_addr(servIP);   // Server IP address
+        servAddr.sin_port        = htons(servPort); // Server port
 
-    // Establish connection
-    if (connect(sock, (struct sockaddr *) &echoServAddr, sizeof(echoServAddr)) < 0)
-        DieWithError("connect() failed");
+        // Connect to server 
+        if (connect(sock, (struct sockaddr *) &servAddr, sizeof(servAddr)) < 0)
+            DieWithError(sock, "connect() failed");
 
-    //char* echoString = "Test Successful";
-    int echoStringLen = strlen(echoString); // Determine input length
-    // Send the string to the server
-    if (send(sock, echoString, echoStringLen, 0) != echoStringLen)
-        DieWithError("send() sent a different number of bytes than expected");
+        // Listen for welcome msg
+        char* welcomeMsg = recv_term(sock);
+        puts(welcomeMsg);
+        if(strcmp(welcomeMsg, "Welcome") != 0)
+            DieWithError(sock, "Not Welcome :("); // let OS free msg
+        free(welcomeMsg);
 
-    // Connect to server
-    // Listen for welcome msg
-    //      if not welcome:
-    //          close connection, print error, exit
+        // Get ID and Name
+        // Assuming none malicious user 
+        char myID[32];
+        printf("Enter ID: ");
+        scanf("%s", myID);
+        send_term(sock, myID);
 
-    // prompt user for numeric ID
-    // get from stdin
-    // prompt user for name 
-    // get from stdin
+        char myName[32];
+        printf("Enter Name: ");
+        scanf("%s", myName);
+        send_term(sock, myName);
 
-    // send_term ID
-    // send_term Name
-    // wait for server response
-    // recv_term validation response
-    // if don't recv success:
-    //      close (or try again?)
+        // wait for server response
+        validation = recv_term(sock);
+        printf("Validation: %s\n", validation);
+        printf("--------------------\n");
+    } 
+    while(strcmp(validation, "Success") != 0);
+    free(validation);
 
-    // prompt user for password
-    // send_sized password
-    // recv_sized result
-    
-    // print result
+    // Password
+    char myPwd[32];
+    printf("Enter Password: ");
+    scanf("%s", myPwd);
+    send_sized(sock, myPwd);
+
+    char* result = recv_sized(sock);
+    printf("%s\n", result);
+    free(result);
+
     // close the connection/socket
     close(sock);
-    // exit
-
     return 0;
 }
