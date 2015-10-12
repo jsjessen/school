@@ -1,7 +1,7 @@
 client:
 		clear
-		gcc client.c shared.c shared.h -o client.exe
+		gcc client.c util.c util.h -o client.exe
 
 server:
 		clear
-		gcc server.c shared.c shared.h -o server.exe
+		gcc server.c util.c util.h -o server.exe

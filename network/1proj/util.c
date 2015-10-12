@@ -1,31 +1,22 @@
-#include "shared.h"
+// James Jessen, Adam Rodriguez, Forrest Weston
+// Team: TCP
+// Computer Networks - Project 1
 
-// examples of major sections of code include handling the command line parameters; establishing the listening socket in the server; handling the input for the initial contact from the client; handling the interaction for the password interaction from the client.
+#include "util.h"
 
- // You should also avoid repeating very similar pieces of code – instead move what would be repeated into functions with appropriate parameters. For example, there should be a function that reads a string that is prefixed by a length;there should be a function that reads a newline-terminated string; etc.
+// TODO:
 
-
- 
-// Check return value of all syscalls
-// print appropriate msg
-// exit if error occurs
-
-// remember that send and recv on TCP sockets do not necessarily send and receive as much data as was requested to be sent/received
-
-// Make sure that buffers are big enough for the values that may be stored in them.
-
-// use memcpy instead of strcpy
-
-// send only neccesary char, not entire buf
+// Remember that send and recv on TCP sockets do not necessarily send and receive as much data as was requested to be sent/received
 
 // To go from a hostname or an IP address expressed in dotted decimal notation as a string to a value suitable for storing in a struct sockaddr_in for use in a call to connect you use the library function getaddrinfo()
 
-// --------------------------------------------------
+// ----------------------------------------------------------------------------
 
 void DieWithError(const int sock, const char* msg)
 {
     close(sock);
     fputs(msg, stderr);
+    fputc('\n', stderr);
     exit(1);
 }
 
@@ -45,7 +36,7 @@ void DieWithSystemMessage(const char *msg)
 }
 
 // send msg  as a new-line-terminated (\n) string. Note that a null terminating character should not be sent when a newline-terminated string is specified.
-int send_term(const int socket, const char* msg)
+int send_termed(const int socket, const char* msg)
 {
     char buf[BUFSIZE];
     int size = strlen(msg);

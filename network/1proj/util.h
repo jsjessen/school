@@ -1,7 +1,9 @@
-// James Jessen
+// James Jessen, Adam Rodriguez, Forrest Weston
+// Team: TCP
+// Computer Networks - Project 1
 
-#ifndef __SHARED_H__
-#define __SHARED_H__
+#ifndef __UTIL_H__
+#define __UTIL_H__
 
 
 #include <stdio.h>
@@ -21,7 +23,7 @@ void DieWithError(const int sock, const char* msg);
 void DieWithUserMessage(const char *msg, const char *detail);
 void DieWithSystemMessage(const char *msg);
 
-int send_term(const int socket, const char* msg);
+int send_termed(const int socket, const char* msg);
 char* recv_term(const int socket);
 
 int send_sized(const int socket, const char* msg);
