@@ -1,9 +1,13 @@
 // James Jessen
 // Computer Networks - Project 1
 
+// *** CLIENT ***
+
+#include "shared.h"
+
 // Usage: Start server first
 //  Server_IP_Address Port_server_listening
-int main(int argc, char argv)
+int main(int argc, char* argv[])
 {
     // Connect to server
     // Listen for welcome msg
@@ -15,12 +19,20 @@ int main(int argc, char argv)
     // prompt user for name 
     // get from stdin
 
-    // send ID
-    // send Name
+    // send_term ID
+    // send_term Name
     // wait for server response
-    // recv validation response
+    // recv_term validation response
     // if don't recv success:
     //      close (or try again?)
+
+    // prompt user for password
+    // send_sized password
+    // recv_sized result
+    
+    // print result
+    // close socket
+    // exit
 
     return 0;
 }
