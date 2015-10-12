@@ -13,7 +13,6 @@ import os
 import sys
 import csv
 import re
-import statistics
 import datetime
 import timeit
 from operator import itemgetter
@@ -29,28 +28,23 @@ LEAVE_DATA_GAPS = True
 #HOME_DIR = '/home/jsjessen/Downloads/iReach/data/'
 HOME_DIR = '/media/jsj/DROPSHIP/iReach/data/'
 RAW_DIR = HOME_DIR + 'raw/'
-PARSED_DIR = HOME_DIR
-FEATURES_DIR = HOME_DIR
 
+# SurfaceV collected data for nodes 1-5 and SurfaceH nodes 6-10
 SURFACES = ('surfaceV', 'surfaceH')
-
 INITIAL_NODE = {}
 INITIAL_NODE['surfaceV'] = 1
 INITIAL_NODE['surfaceH'] = 6
 
-#                              "S12 - 6-14-2015PM 15-59-35.dat"
+# RegEx to match fields in data files
 DATA_FILE_PATTERN = re.compile('S\d+ - \d+-\d+-\d+[AP]M \d+-\d+-\d+\.dat')
-
 NODE_PATTERN = re.compile('Head|Chest|Backpack|Arm|Thigh|Ankle|Wrist|Waist', re.IGNORECASE)
 SENSOR_PATTERN = re.compile('(((Low Noise|Wide Range) Accelerometer)|Gyroscope|Magnetometer).*[XYZ]', re.IGNORECASE)
 FORMAT_PATTERN = re.compile('CAL', re.IGNORECASE)
-# Formats: | RAW | CAL |
 
+# IO files
 MOVEMENT_ORDER_FILE = 'order.csv'
-OUTPUT_FILE = 'processed.csv'
-LOG_FILE = 'processing_log.csv'
-
-NUM_MOVEMENTS = 26
+OUTPUT_FILE = HOME_DIR + 'processed.csv'
+LOG_FILE = HOME_DIR + 'processing_log.csv'
 
 # Rows of interest
 HEADER_NODE_ROW = 1
@@ -69,7 +63,7 @@ NUM_DIMENSIONS = 3
 NUM_FIELDS_PER_FILE = NODES_PER_FILE * NUM_SENSOR_TYPES * NUM_DIMENSIONS
 NUM_FIELDS_PER_NODE = NUM_SENSOR_TYPES * NUM_DIMENSIONS
 
-NUM_FEATURES = 9
+NUM_MOVEMENTS = 24
 
 #===============================================================================
 
@@ -84,6 +78,7 @@ def print_warning(log, logger):
 
 #-------------------------------------------------------------------------------
 
+# For display purposes only
 def print_start_seperator(subject):
     print()
     print('                    Subject', subject)
@@ -91,6 +86,7 @@ def print_start_seperator(subject):
 
 #-------------------------------------------------------------------------------
 
+# For display purposes only
 def print_end_seperator(startTime):
     print('\n' + '-' * NUM_MOVEMENTS * len(SURFACES))
     endTime = timeit.default_timer()
@@ -114,6 +110,7 @@ def process_data(startTime):
         logger = csv.writer(logfile, delimiter=',')
         logger.writerow(['Description', 'Surface', 'File', 'Start', 'End', 'Size'])
 
+        # Get sorted subject directories
         subjects = {}
         for surface in SURFACES:
             subjects[surface] = order_subject_dirs(os.path.join(RAW_DIR, surface))
@@ -124,54 +121,56 @@ def process_data(startTime):
         for subject in subjects[SURFACES[0]]:
             print_start_seperator(subject)
 
-            # Get movement order file from surfaceV
-            # Determine how the order of data files maps to movement ID
+            # Read the movement order file from surfaceV
+            # Determine how the data files map to movement numbers
+            # Get an ordered list of movements and file associations
             movements = get_col_array(os.path.join(RAW_DIR, SURFACES[0], \
-                                                   subject, MOVEMENT_ORDER_FILE), 2, 0)
+                                      subject, MOVEMENT_ORDER_FILE), 2, 0)
             numMovements = len(movements)
             for i in range(numMovements):
                 movements[i]= {'mvt_num': movements[i], 'file_index': i}
             movements = sorted(movements, key=itemgetter('mvt_num'))
 
+            # Get a sorted list of the data files in a subject's directory
             dataFiles = {}
             for surface in SURFACES:
                 sub_dir = os.path.join(RAW_DIR, surface, subject)
-                dataFiles[surface] = get_datafiles_from_subjectdir(subject, sub_dir, logger)
+                dataFiles[surface] = get_datafiles(subject, sub_dir, logger)
                 if len(dataFiles[surface]) > numMovements:
                     print_error('Cannot determine movement order:', surface, subject)
-
             if len(dataFiles[SURFACES[0]]) != len(dataFiles[SURFACES[1]]):
                 print_error('Unequal number of data files between surfaces:', \
                                                             surface, subject)
             # For each movement
-            for mvt in movements:
+            for movement in movements:
                 # For each surface
                 for surface in SURFACES:
-                    movement = {}
+                    mvt = {}
                     try:
-                        movement['file'] = dataFiles[surface][mvt['file_index']]
-                        movement['num'] = mvt['mvt_num']
+                        mvt['file'] = dataFiles[surface][movement['file_index']]
+                        mvt['num'] = movement['mvt_num']
                     except:
-                        # Some order.csv files have valid order, but too many movements
+                        #print_warning(['No data file associated with movement', \
+                        #                surface, mvt['num']], logger)
                         continue
                     sub_dir = os.path.join(RAW_DIR, surface, subject)
-                    with open(os.path.join(sub_dir, movement['file']), 'r') as infile:
+                    with open(os.path.join(sub_dir, mvt['file']), 'r') as infile:
                         reader = list(csv.reader(infile, delimiter='\t'))
-                        process_file(reader, writer, logger, surface, subject, movement)
+                        process_file(reader, writer, logger, surface, subject, mvt)
+
                     # Print dot for each file processed to indicate progress.
                     print('.', end="", flush=True)
 
             # After all of the movements have been processed for a subject.
-
             print_end_seperator(startTime)
             startTime = timeit.default_timer()
 
 #-------------------------------------------------------------------------------
 
 def process_file(reader, writer, logger, surface, subject, movement):
-    numRows = len(reader)
     numFields = len(reader[0])
 
+    # Figure out which columns are important and should be kept
     valid_fields = get_valid_fields(reader, logger, INITIAL_NODE[surface], numFields)
     check_fields(valid_fields, surface, movement['file'], writer)
 
@@ -179,8 +178,11 @@ def process_file(reader, writer, logger, surface, subject, movement):
     dataGaps = []
     node_data = []
     init_node = INITIAL_NODE[surface]
-    for row in range(DATA_START_ROW - 1, numRows):
+    time = 0
+    # Loop through row by row
+    for row in range(DATA_START_ROW - 1, len(reader)):
         outrow = []
+        # Check for gaps in the data
         try:
             for field in sorted(valid_fields):
                 outrow.append(reader[row][field])
@@ -192,18 +194,22 @@ def process_file(reader, writer, logger, surface, subject, movement):
                     dataGaps.append(gap)
                     gap = []
                 gap.append(row)
-            if not LEAVE_DATA_GAPS:
+            if LEAVE_DATA_GAPS:
+                outrow = [None] * NUM_FIELDS_PER_FILE
+            else:
                 continue
-            outrow = [None] * NUM_FIELDS_PER_FILE
 
+        # Add subject, movement, node, and time fields to the end
         outrows = list(segment_list(outrow, NUM_FIELDS_PER_NODE))
         for node in range(NODES_PER_FILE):
             outrows[node].append(re.findall('\d+', subject)[0])
             outrows[node].append(movement['num'])
             outrows[node].append(node + init_node)
+            outrows[node].append(time)
         node_data.append(outrows)
+        time += 1
 
-    # Log the gaps in data
+    # Log any data gaps
     for gap in dataGaps:
         gapStart = gap[0]
         gapEnd = gap[-1]
@@ -211,6 +217,7 @@ def process_file(reader, writer, logger, surface, subject, movement):
         print_warning(['Data Gap', surface, movement['file'], \
                         gapStart, gapEnd, gapSize], logger)
 
+    # Write the desired data to the output file
     for node in range(NODES_PER_FILE):
         for row in node_data:
             writer.writerow(row[node])
@@ -240,17 +247,18 @@ def numerical_sort(value):
 #-------------------------------------------------------------------------------
 
 def order_subject_dirs(surface_dir):
+    """Return a sorted list of subject directories"""
     return sorted([ s for s in os.listdir(surface_dir) \
                         if os.path.isdir(os.path.join(surface_dir, s)) ], \
                         key=numerical_sort)
 
 #-------------------------------------------------------------------------------
 
-def get_datafiles_from_subjectdir(subject, sub_dir, logger):
-    """Build a list of all data files (sorted by version) for subject on surface"""
+def get_datafiles(subject, sub_dir, logger):
+    """Return a list of all data files (sorted by version) for subject on surface"""
     dataFiles = list(filter(lambda s: re.match(DATA_FILE_PATTERN, s), \
                             os.listdir(sub_dir)))
-    dataFile = sorted(dataFiles, key=lambda x: datetime.datetime.strptime(x, \
+    dataFiles = sorted(dataFiles, key=lambda x: datetime.datetime.strptime(x, \
                         subject + ' - %m-%d-%Y%p %H-%M-%S.dat'))
     if not dataFiles:
         print_warning(list("Failed to detect data files!"), logger)
@@ -297,6 +305,7 @@ def check_fields(valid_fields, surface, dataFile, writer):
         outrow.append('Subject')
         outrow.append('Movement')
         outrow.append('Node')
+        outrow.append('Time')
         writer.writerow(outrow)
         check_fields.header = outrow
 check_fields.header = []

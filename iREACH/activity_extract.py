@@ -34,8 +34,8 @@ DATA_GAP_LIMIT = 100
 #HOME_DIR = '/home/jsjessen/Downloads/iReach/data/'
 HOME_DIR = '/media/jsj/DROPSHIP/iReach/data/'
 
-INPUT_FILE = 'processed.csv'
-OUTPUT_DIR = '/home/jsj/school/iREACH/activityFeatures-window' + str(WINDOW) + '-overlap' \
+INPUT_FILE = HOME_DIR + 'processed.csv'
+OUTPUT_DIR = HOME_DIR + 'activityFeatures-window' + str(WINDOW) + '-overlap' \
               + str(OVERLAP) + '-gapLimit' + str(DATA_GAP_LIMIT)
 
 # Sensor info

@@ -34,18 +34,23 @@ DATA_GAP_LIMIT = 100
 #HOME_DIR = '/home/jsjessen/Downloads/iReach/data/'
 HOME_DIR = '/media/jsj/DROPSHIP/iReach/data/'
 
-INPUT_FILE = 'processed.csv'
-OUTPUT_FILE = 'extracted.csv'
-LOG_FILE = 'extract_log.csv'
+INPUT_FILE = HOME_DIR + 'processed.csv'
+OUTPUT_FILE = HOME_DIR + 'extracted.csv'
+LOG_FILE = HOME_DIR + 'extract_log.csv'
 
 # Sensor info
 NUM_SENSOR_TYPES = 4
 NUM_DIMENSIONS = 3
+NUM_NODES = 10
 
 # Headers
 NUM_FIELDS_PER_NODE = NUM_SENSOR_TYPES * NUM_DIMENSIONS
 
 NUM_FEATURES = 9
+
+SUBJECT_COL = 12
+MOVEMENT_COL = 13
+NODE_COL = 14
 
 #===============================================================================
 
@@ -120,7 +125,7 @@ def get_data(reader):
     # For each row
     for row in reader:
         size = len(rowBuf)
-        endNode = int(row[-1])
+        endNode = int(row[NODE_COL])
 
         # Submit data
         if startNode != endNode or size + gap == goalSize:
