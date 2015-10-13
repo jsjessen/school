@@ -4,37 +4,6 @@
 
 #include "util.h"
 
-// TODO:
-
-// Remember that send and recv on TCP sockets do not necessarily send and receive as much data as was requested to be sent/received
-
-// To go from a hostname or an IP address expressed in dotted decimal notation as a string to a value suitable for storing in a struct sockaddr_in for use in a call to connect you use the library function getaddrinfo()
-
-// ----------------------------------------------------------------------------
-
-void DieWithError(const int sock, const char* msg)
-{
-    close(sock);
-    fputs(msg, stderr);
-    fputc('\n', stderr);
-    exit(1);
-}
-
-void DieWithUserMessage(const char *msg, const char *detail) 
-{
-    fputs(msg, stderr);
-    fputs(": ", stderr);
-    fputs(detail, stderr);
-    fputc('\n', stderr);
-    exit(1);
-}
-
-void DieWithSystemMessage(const char *msg) 
-{
-    perror(msg);
-    exit(1);
-}
-
 // Send msg as a new-line-terminated (\n) string. Note that a null terminating character should not be sent when a newline-terminated string is specified.
 int send_termed(const int socket, const char* msg)
 {
@@ -58,6 +27,7 @@ char* recv_termed(const int socket)
     char buf[BUFSIZE];
     int size = 0;
 
+    // Data might not all arrive at once in a single packet, so loop
     while(true)
     {
         if((size += recv(socket, buf + size, BUFSIZE, 0)) < 0)
@@ -107,6 +77,7 @@ char* recv_sized(const int socket)
     bool gotSize = false;
 
     int n = 0;
+    // Data might not all arrive at once in a single packet, so loop
     while(n < size || !gotSize)
     {
         if((n += recv(socket, buf + n, BUFSIZE, 0)) < 0)
@@ -126,4 +97,28 @@ char* recv_sized(const int socket)
     memcpy(msg, msgBuf, size);
     msg[size] = '\0';
     return msg;
+}
+
+
+void DieWithError(const int sock, const char* msg)
+{
+    close(sock);
+    fputs(msg, stderr);
+    fputc('\n', stderr);
+    exit(1);
+}
+
+void DieWithUserMessage(const char *msg, const char *detail) 
+{
+    fputs(msg, stderr);
+    fputs(": ", stderr);
+    fputs(detail, stderr);
+    fputc('\n', stderr);
+    exit(1);
+}
+
+void DieWithSystemMessage(const char *msg) 
+{
+    perror(msg);
+    exit(1);
 }

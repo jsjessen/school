@@ -19,15 +19,15 @@
 
 typedef enum { false, true } bool;
 
-void DieWithError(const int sock, const char* msg);
-void DieWithUserMessage(const char *msg, const char *detail);
-void DieWithSystemMessage(const char *msg);
-
 int send_termed(const int socket, const char* msg);
 char* recv_termed(const int socket);
 
 int send_sized(const int socket, const char* msg);
 char* recv_sized(const int socket);
+
+void DieWithError(const int sock, const char* msg);
+void DieWithUserMessage(const char *msg, const char *detail);
+void DieWithSystemMessage(const char *msg);
 
 
 #endif
