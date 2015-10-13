@@ -35,12 +35,14 @@ void DieWithSystemMessage(const char *msg)
     exit(1);
 }
 
-// send msg  as a new-line-terminated (\n) string. Note that a null terminating character should not be sent when a newline-terminated string is specified.
+// Send msg as a new-line-terminated (\n) string. Note that a null terminating character should not be sent when a newline-terminated string is specified.
 int send_termed(const int socket, const char* msg)
 {
     char buf[BUFSIZE];
     int size = strlen(msg);
 
+    if(BUFSIZE < size + 1)
+        DieWithError(socket, "String exceeds send_termed() buffer size");
     strncpy(buf, msg, size);
     buf[size++] = '\n';
     
@@ -50,17 +52,23 @@ int send_termed(const int socket, const char* msg)
     return size;
 }
 
-char* recv_term(const int socket)
+// Receive a new-line-terminated string.
+char* recv_termed(const int socket)
 {
     char buf[BUFSIZE];
+    int size = 0;
 
-    int size;
-    if((size = recv(socket, buf, BUFSIZE, 0)) < 0)
-        DieWithSystemMessage("recv() failed");
+    while(true)
+    {
+        if((size += recv(socket, buf + size, BUFSIZE, 0)) < 0)
+            DieWithSystemMessage("recv() failed");
+        if(buf[size - 1] == '\n')
+            break;
+    }
 
     char* msg;
     if((msg = malloc(size)) < 0)
-        DieWithSystemMessage("recv_term: malloc() failed");
+        DieWithSystemMessage("recv_termed: malloc() failed");
 
     memcpy(msg, buf, size);
     msg[size - 1] = '\0';
@@ -76,36 +84,46 @@ int send_sized(const int socket, const char* msg)
     uint16_t size = strlen(msg);
     uint16_t network_size;
 
+    if(BUFSIZE < size)
+        DieWithError(socket, "String exceeds send_sized() buffer size");
     strncpy(msgBuf, msg, size);
-    msgBuf[size++] = '\n';
 
     network_size = htons(size);
     memcpy(buf, &network_size, sizeof(uint16_t));
-    
-    if(send(socket, buf, size + sizeof(uint16_t), 0) != size + sizeof(uint16_t))
+    size += sizeof(uint16_t);
+
+    if(send(socket, buf, size, 0) != size)
         DieWithError(socket, "send() sent a different number of bytes than expected");
 
     return size;
 }
 
+// Receive string preceeded by 2-byte length.
 char* recv_sized(const int socket)
 {
     char buf[BUFSIZE];
     char* msgBuf = buf + sizeof(uint16_t);
-    uint16_t size;
+    uint16_t size = 0;
+    bool gotSize = false;
 
-    int n;
-    if((n = recv(socket, buf, BUFSIZE, 0)) < 0)
-        DieWithSystemMessage("recv() failed");
+    int n = 0;
+    while(n < size || !gotSize)
+    {
+        if((n += recv(socket, buf + n, BUFSIZE, 0)) < 0)
+            DieWithSystemMessage("recv() failed");
 
-    size = *((uint16_t*)buf);
-    size = ntohs(size);
+        if(!gotSize && n >= sizeof(uint16_t))
+        {
+            size = *((uint16_t*)buf);
+            size = ntohs(size);
+            gotSize = true;
+        }
+    }
 
     char* msg;
-    if((msg = malloc(size)) < 0)
-        DieWithSystemMessage("recv_term: malloc() failed");
-
+    if((msg = malloc(size + 1)) < 0)
+        DieWithSystemMessage("recv_termed: malloc() failed");
     memcpy(msg, msgBuf, size);
-    msg[size - 1] = '\0';
+    msg[size] = '\0';
     return msg;
 }

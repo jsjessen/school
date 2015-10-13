@@ -2,12 +2,20 @@
 // Team: TCP
 // Computer Networks - Project 1
 
+// References: 
+//
+//      PracticalSocketC.ppt
+//
+//      Donahoo, Michael J., and Kenneth L. Calvert. 
+//      TCP/IP sockets in C practical guide for programmers. 
+//      Amsterdam Boston: Morgan Kaufmann, 2009. Print. 
+
 #include "util.h"
 
 typedef struct client
 {
-    char name[32];
-    char pwd[32];
+    char name[64];
+    char pwd[64];
 } Client;
 
 static const int MAXPENDING = 4; // Maximum outstanding connection requests
@@ -24,8 +32,8 @@ int main(int argc, char* argv[])
     strcpy(lookupTable[2].name, "James");
     strcpy(lookupTable[2].pwd, "bond");
 
-    // Get Port from commandline arguments
-    if (argc != 2)
+    // Get port from commandline arguments
+    if(argc != 2)
         DieWithUserMessage("Parameter(s)", "<Server Port>");
     in_port_t servPort = atoi(argv[1]);
 
@@ -42,11 +50,11 @@ int main(int argc, char* argv[])
     servAddr.sin_port = htons(servPort);          // Local port
 
     // Assign a port to socket
-    if (bind(servSock, (struct sockaddr *) &servAddr, sizeof(servAddr)) < 0)
+    if(bind(servSock, (struct sockaddr *) &servAddr, sizeof(servAddr)) < 0)
         DieWithError(servSock, "bind() failed");
 
     // Mark the socket so it will listen for incoming connections
-    if (listen(servSock, MAXPENDING) < 0)
+    if(listen(servSock, MAXPENDING) < 0)
         DieWithError(servSock, "listen() failed");
 
     // Run until Ctrl-C signal
@@ -54,23 +62,24 @@ int main(int argc, char* argv[])
     {
         // Accept new connection
         int clntSock;
-        struct sockaddr_in clntAddr; // Client address
-        int clntLen = sizeof(clntAddr); // Set length of client address structure (in-out parameter)
-        if ((clntSock = accept(servSock,(struct sockaddr*)&clntAddr,&clntLen)) < 0)
+        struct sockaddr_in clntAddr; 
+        int clntLen = sizeof(clntAddr); 
+        if((clntSock = accept(servSock,(struct sockaddr*)&clntAddr,&clntLen)) < 0)
             DieWithError(clntSock, "accept() failed");
 
         // ---------- Sever Blocked, Waiting for Connection from a Client ---------- 
 
+        // Welcome client
         send_termed(clntSock, "Welcome");
 
         // Get client ID
-        char* clientID_str = recv_term(clntSock);
+        char* clientID_str = recv_termed(clntSock);
+        printf("ID: '%s'\n", clientID_str);
         int clientID = atoi(clientID_str);
         free(clientID_str);
-        printf("ID: '%d'\n", clientID);
 
         // Get client Name
-        char* clientName = recv_term(clntSock);
+        char* clientName = recv_termed(clntSock);
         printf("Name: '%s'\n", clientName);
 
         // Look up ID and name in table  
@@ -86,12 +95,14 @@ int main(int argc, char* argv[])
             continue;
         }
 
-        // verify password matches the previously recveived name and ID number
+        // Verify password matches the previously recveived name and ID number
         char* clientPwd = recv_sized(clntSock);
+        printf("Password: '%s'\n", clientPwd);
         if(strcmp(lookupTable[clientID].pwd, clientPwd) == 0)
         {
             char output[64];
-            sprintf(output, "Congratulations %s; you’ve just revealed the password for %d to the world!", clientName, clientID);
+            sprintf(output, "Congratulations %s; you’ve just revealed the " \
+                    "password for %d to the world!", clientName, clientID);
             send_sized(clntSock, output); 
         }
         else
@@ -102,5 +113,6 @@ int main(int argc, char* argv[])
 
         // close the connection
         close(clntSock);
+        clntSock = -1;
     }
 }
