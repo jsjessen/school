@@ -1,0 +1,62 @@
+Private-Key (256 bit)
+modulus
+    00cb6ef2ab88d0435b704939ff1e759e5e959884a8cf3fa3974ca4e64249c0d975 (HEX)
+    92015536286703648657957880439538857981018784402774461165473493706699649898869 (DEC)
+publicExponent 65537 (0x10001)
+privateExponent
+    0a3a5ecb0f0ae18814622a1f5089bb57910f86b4421fd555f834078eab71a0c1
+prime1
+    00f46409aaf81c6e0cfceaf00dc41439e5
+prime2
+    00d518d6ff5473329a6e06e59a2527e851
+exponent1
+    00c355ca1c6b1f5e1ee77068dab7e46ab9
+exponent2
+    00978ab8aa8f55f4f099ba51e1d2f69461
+coefficient
+    7836fe9950691694301363bbef4d5181
+
+
+
+Msieve v. 1.52 (SVN unknown)
+Thu Oct 15 20:44:58 2015
+random seeds: 61d0f71d bb1797f8
+factoring 92015536286703648657957880439538857981018784402774461165473493706699649898869 (77 digits)
+no P-1/P+1/ECM available, skipping
+commencing quadratic sieve (77-digit input)
+using multiplier of 1
+using generic 32kb sieve core
+sieve interval: 12 blocks of size 32768
+processing polynomials in batches of 17
+using a sieve bound of 918257 (36471 primes)
+using large prime bound of 91825700 (26 bits)
+using trial factoring cutoff of 26 bits
+polynomial 'A' values have 10 factors
+36752 relations (19004 full + 17748 combined from 196329 partial), need 36567
+begin with 215332 relations
+reduce to 52287 relations in 2 passes
+attempting to read 52287 relations
+recovered 52287 relations
+recovered 41098 polynomials
+attempting to build 36752 cycles
+found 36752 cycles in 1 passes
+distribution of cycle lengths:
+   length 1 : 19004
+   length 2 : 17748
+largest cycle: 2 relations
+matrix is 36471 x 36752 (4.7 MB) with weight 1086643 (29.57/col)
+sparse part has weight 1086643 (29.57/col)
+filtering completed in 4 passes
+matrix is 26049 x 26113 (3.7 MB) with weight 855815 (32.77/col)
+sparse part has weight 855815 (32.77/col)
+saving the first 48 matrix rows for later
+matrix includes 64 packed rows
+matrix is 26001 x 26113 (2.3 MB) with weight 638036 (24.43/col)
+sparse part has weight 451800 (17.30/col)
+commencing Lanczos iteration
+memory use: 2.3 MB
+lanczos halted after 413 iterations (dim = 25999)
+recovered 15 nontrivial dependencies
+prp39 factor: 283254538891764545647772122422845106257
+prp39 factor: 324851056744633668099894652759207852517
+elapsed time 00:05:22

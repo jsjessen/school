@@ -1,0 +1,51 @@
+CONNECTED(00000003)
+---
+Certificate chain
+ 0 s:/C=US/ST=Washington/L=Pullman/O=WSUCpts483Corp/CN=server.wsu483corp.university/emailAddress=fakeemail@wsu483corp.university
+   i:/C=US/ST=Washington/L=Pullman/O=WSUCpts483Corp/CN=server.wsu483corp.university/emailAddress=fakeemail@wsu483corp.university
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIDUjCCAvygAwIBAgIJAOxIgNRLeEZnMA0GCSqGSIb3DQEBBQUAMIGkMQswCQYD
+VQQGEwJVUzETMBEGA1UECBMKV2FzaGluZ3RvbjEQMA4GA1UEBxMHUHVsbG1hbjEX
+MBUGA1UEChMOV1NVQ3B0czQ4M0NvcnAxJTAjBgNVBAMTHHNlcnZlci53c3U0ODNj
+b3JwLnVuaXZlcnNpdHkxLjAsBgkqhkiG9w0BCQEWH2Zha2VlbWFpbEB3c3U0ODNj
+b3JwLnVuaXZlcnNpdHkwHhcNMTQwOTI4MjMwMTE4WhcNMTQwOTI5MjMwMTE4WjCB
+pDELMAkGA1UEBhMCVVMxEzARBgNVBAgTCldhc2hpbmd0b24xEDAOBgNVBAcTB1B1
+bGxtYW4xFzAVBgNVBAoTDldTVUNwdHM0ODNDb3JwMSUwIwYDVQQDExxzZXJ2ZXIu
+d3N1NDgzY29ycC51bml2ZXJzaXR5MS4wLAYJKoZIhvcNAQkBFh9mYWtlZW1haWxA
+d3N1NDgzY29ycC51bml2ZXJzaXR5MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKcJ
+RkAICJ2PzrF2DjaFQNBokFjwspa126w/olir5US6O3HVZ+ZuOJ37gUEILKgP7DeN
+HpLZJjZGQNna/PZsTV0CAwEAAaOCAQ0wggEJMB0GA1UdDgQWBBQBsg+7sl552ewJ
+c5Ih4S9xENc2BjCB2QYDVR0jBIHRMIHOgBQBsg+7sl552ewJc5Ih4S9xENc2BqGB
+qqSBpzCBpDELMAkGA1UEBhMCVVMxEzARBgNVBAgTCldhc2hpbmd0b24xEDAOBgNV
+BAcTB1B1bGxtYW4xFzAVBgNVBAoTDldTVUNwdHM0ODNDb3JwMSUwIwYDVQQDExxz
+ZXJ2ZXIud3N1NDgzY29ycC51bml2ZXJzaXR5MS4wLAYJKoZIhvcNAQkBFh9mYWtl
+ZW1haWxAd3N1NDgzY29ycC51bml2ZXJzaXR5ggkA7EiA1Et4RmcwDAYDVR0TBAUw
+AwEB/zANBgkqhkiG9w0BAQUFAANBAIgLGJjrPudC8aXsfDAcYi6KK8s6NjE1yTJz
+NMfsVbMhU6N9WPVWwoSkWZV4g7tgQwXfCl8q/McLjmmVyOvo0nM=
+-----END CERTIFICATE-----
+subject=/C=US/ST=Washington/L=Pullman/O=WSUCpts483Corp/CN=server.wsu483corp.university/emailAddress=fakeemail@wsu483corp.university
+issuer=/C=US/ST=Washington/L=Pullman/O=WSUCpts483Corp/CN=server.wsu483corp.university/emailAddress=fakeemail@wsu483corp.university
+---
+No client certificate CA names sent
+---
+SSL handshake has read 1011 bytes and written 243 bytes
+---
+New, TLSv1/SSLv3, Cipher is RC4-SHA
+Server public key is 512 bit
+Secure Renegotiation IS supported
+Compression: NONE
+Expansion: NONE
+SSL-Session:
+    Protocol  : TLSv1
+    Cipher    : RC4-SHA
+    Session-ID: C959ECE47DAD22EFD016451E96C6DA4E3B577E9C7A0705C258C857919DDB6E54
+    Session-ID-ctx: 
+    Master-Key: 18F25CEB184FB9A2848CA11BC6F40C6BF6B770D2FE976DC86C6C761BACD12961E48A265AF2F71335BD9C5E36507B73E5
+    Key-Arg   : None
+    Start Time: 1444964358
+    Timeout   : 300 (sec)
+    Verify return code: 10 (certificate has expired)
+---
+closed
