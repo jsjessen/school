@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <sys/time.h>
 #include <math.h>
+#include <assert.h>
 #include <mpi.h> 
 
 void prand(const int rank, const int numProc, 

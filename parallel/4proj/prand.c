@@ -4,6 +4,12 @@
 
 #include "prand.h"
 
+#ifdef DEBUG
+    #define debug_print(...) printf(__VA_ARGS__)
+#else
+    #define debug_print(...)
+#endif
+
 // Caller must free result
 void prand(const int rank, const int numProc, 
            const unsigned long outputSize, const unsigned long seed, 
@@ -11,13 +17,12 @@ void prand(const int rank, const int numProc,
            const unsigned long modulus, 
            const unsigned long size, int rands[size])
 {
-    printf("%d) -1.0\n", rank);
-        printf("\n"
-               "rank = %d\n"
-               "numProc = %d\n"
-               "output_size = %d\n"
-               "seed = %d\n" 
-               "modulus = %d, multiplier = %d, increment = %d\n", rank, numProc, outputSize, seed, modulus, multiplier, increment);  
+    assert(numProc % 2 == 0);
+
+    if(rank == 0)
+    {
+        //printf("P = %d\nn = %d\n", numProc, outputSize);
+    }
 
     if(!(0 < outputSize  && 
          0 < modulus  && 
@@ -26,8 +31,6 @@ void prand(const int rank, const int numProc,
          0 <= seed && seed < modulus))
         return;
 
-    printf("%d) 0.0\n", rank);
-
     // Initialize prefix values
     unsigned long prefix[2] = {1, 0};
     if(rank == 0)
@@ -35,7 +38,6 @@ void prand(const int rank, const int numProc,
 
     // Run parallel prefix
     pp(rank, numProc, multiplier, increment, modulus, size, prefix);
-    printf("%d) 0.1\n", rank);
 
     // Share prefix for use at the start of the next block
     if(rank == 0)
@@ -55,19 +57,15 @@ void prand(const int rank, const int numProc,
         MPI_Recv(prefix, 2, MPI_UNSIGNED_LONG, rank - 1, 0, \
                 MPI_COMM_WORLD, MPI_STATUS_IGNORE);
     }
-    printf("%d) 0.2\n", rank);
 
     // Use prefix to serially generate random numbers for your block
     rands[0] = (prefix[0]*seed + prefix[1]) % modulus;
     int prev = rands[0];
     for(int i = 1; i < size; i++)
     {
-        printf("%d) 0.2%d\n", rank, i);
-        printf("rands[i] = %d\n", rands[i]);
         rands[i] = (multiplier*prev + increment) % modulus;
         prev = rands[i];
     }
-    printf("%d) 0.3\n", rank);
 }
 
 // Parallel Prefix Operation
