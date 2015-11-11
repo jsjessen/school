@@ -1,5 +1,3 @@
-// James Jessen, Joseph Villarreal
-// Parallel Computing - Project 3
 // Serial Random Number Generator
 
 // Usage: srand <output_size> <seed> <modulus> <multiplier> <increment>
@@ -8,38 +6,40 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-//#define DEBUG
+#define DEBUG
+
 #ifndef DEBUG
-    #define DEFAULT_OUTPUT_SIZE 100
-    #define DEFAULT_SEED 314159 
-    #define DEFAULT_MODULUS 2147483647
-    #define DEFAULT_MULTIPLIER 1103515245
-    #define DEFAULT_INCREMENT 12345
+    #define OUTPUT_SIZE 100
+    #define SEED time(NULL)
+    #define MODULUS 2147483647
+    #define MULTIPLIER 1103515245
+    #define INCREMENT 12345
 #else
-    #define DEFAULT_OUTPUT_SIZE 16 
-    #define DEFAULT_SEED 17 
-    #define DEFAULT_MODULUS 50 
-    #define DEFAULT_MULTIPLIER 3 
-    #define DEFAULT_INCREMENT 2 
+    #define OUTPUT_SIZE 1
+    #define SEED 13 
+    #define MODULUS 50 
+    #define MULTIPLIER 3 
+    #define INCREMENT 2 
 #endif
 
-int* srand(const unsigned long n, const unsigned long s, 
-           const unsigned long P, const unsigned long a, const unsigned long b);
+int* serial_rand(const unsigned int n, const unsigned int s, 
+                 const unsigned int P, const unsigned int a, const unsigned int b);
 
 int main(int argc, char* argv[])
 {
+
     // Check for user inputs, else use defaults
-    const unsigned long n = (argc > 1) ? atoi(argv[1]) : DEFAULT_OUTPUT_SIZE;
-    const unsigned long s = (argc > 2) ? atoi(argv[2]) : DEFAULT_SEED;
-    const unsigned long P = (argc > 3) ? atoi(argv[3]) : DEFAULT_MODULUS;
-    const unsigned long a = (argc > 4) ? atoi(argv[4]) : DEFAULT_MULTIPLIER;
-    const unsigned long b = (argc > 5) ? atoi(argv[5]) : DEFAULT_INCREMENT;
+    const unsigned int n = (argc > 1) ? atoi(argv[1]) : OUTPUT_SIZE;
+    const unsigned int s = (argc > 2) ? atoi(argv[2]) : SEED;
+    const unsigned int P = (argc > 3) ? atoi(argv[3]) : MODULUS;
+    const unsigned int a = (argc > 4) ? atoi(argv[4]) : MULTIPLIER;
+    const unsigned int b = (argc > 5) ? atoi(argv[5]) : INCREMENT;
 
     //shift "n" to double the size of our input
-    unsigned long temp = n;
+    unsigned int temp = n;
     while(temp < 1000000000)
     {
-        int* rands = srand(temp, s, P, a, b);
+        int* rands = serial_rand(temp, s, P, a, b);
         //print_array(n, rands);
         free(rands);
         temp = temp << 1;
@@ -48,8 +48,8 @@ int main(int argc, char* argv[])
     return 0;
 }
 
-int* srand(const unsigned long n, const unsigned long s, 
-           const unsigned long P, const unsigned long a, const unsigned long b) 
+int* serial_rand(const unsigned int n, const unsigned int s, 
+                 const unsigned int P, const unsigned int a, const unsigned int b) 
 {
     // Show the parameters being used 
     //printf("\n"

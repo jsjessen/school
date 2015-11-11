@@ -1,0 +1,60 @@
+Project 4 - Due date: 11/10/2015 (Tuesday, 11:59pm PT) via OSBLE dropbox
+Assignment type: Individuals or Teams of 2
+
+In this project you will implement the parallel sample sort algorithm discussed in class. For a detailed description of the sample sort algorithm, please refer to the lecture notes section (Parallel sorting chapter).
+
+Your code should use Alltoallv (for step S4) and Allgather (for step S2).  You may also be using an Alltoall to relay all the receive count values prior to performing the Alltoallv in Step S4.
+
+For help on how to write an MPI code using Alltoall and Alltoallv, you can refer to code examples on pages like these:
+
+MPI_Alltoall example code
+MPI_Alltoallv example
+
+Make sure you are familiar with the syntax by referring to the MPI Routines API page (also linked from  lecture notes).
+
+----------------------------------------------------------------------------------
+
+*When clocking communication time, be sure to include the time taken to prepare the send/receive buffers and send/receive counts, in addition to the times taken to do Alltoallv and Alltoall.
+
+For performing the local sorts in steps S1 and S5, you are allowed to reuse existing library functions (e.g., qsort in C).
+
+For generating the input array, you are required to use the parallel random number series generator function you implemented in Project 3. You can use the same set of parameters (a=7, b=19, P=9973) for your experiments. This would imply that the values are bounded within the range [0,9972]. However, treat this as a comparison-based sort problem. That is, don't use any integer sorting methods like counting sort.
+
+Your test code (e.g., main.c) should first call the random generator function to generate the input array in a distributed manner and then it should call your sample sort function to sort the array.
+
+P=2,4,8,16
+n=128,256,...,1048576
+
+
+
+Performance analysis:
+a) Runtime Table that shows the input sizes (n) along rows and the number of processors used along columns.Vary the number of processors from 1 to 16. Vary input size from a small size (e.g., 128) to something that is order of a million or more (stop when the parallel time-to-solution exceeds the order of ~15-20 mins.
+b) Generate speedup charts (speedups calculated over your parallel code's single processor run) using the runtime data in the above table. Note, your speedup charts should have speedup along the y-axis and number of processors along the x-axis. Use different curves for different input sizes.
+c) In addition to the speedup chart, also plot another chart that shows the total runtime broken down into two parts: total computational time and total communication time. Express this in percentages. So the y-axis contains 100% to mean the total runtime, and a split of that into two segments - one for computation and another for communication. The x-axis is the number of processors. Show one such plot for doubling input sizes you tested.
+Compile a brief report that presents and discusses your results/findings.
+Deliverables (zipped into one zip file - with your name on it):
+    i) Source code,
+    ii) Report in PDF or Word
+
+
+------------------------------------------------
+
+Raeanne Marks
+11/08/2015 11:12 PM
+I have a couple questions about the programming assignment.
+
+My partition function is where I prepare the send buffers and send counts. Should I just clock all of partition then? Or leave that out, and only clock the receiving buffers, receiving counts, and receiving calculations?
+
+For displaying communication times, the assignment says “Show one such plot for doubling input sizes you tested.“ Could I get a clarification on that? Does this mean show the plot for two different input sizes, one double the other, or does it mean something else?
+
+Thank you!
+
+    Ananth Ananth Kalyanaraman Instructor
+    11/09/2015 08:50 AM
+    1) For timing, please include the times to prepare all the send and receive buffers (including displacement and count buffers) as part of your communication cost.
+    
+    2) As for doubling input sizes, this is the same kind of analysis you have done before - double the input sizes from very small - e.g., 128, 256, and keep going up (hopefully into the millions), and then make a chart with input size along x-axis and time along y-axis (keeping number of cores fixed). There will be one curve for each core count. Independently you can study this trend for growing number of processes too (1,2,.. up to 16). For large inputs when the runtimes are probably going to be in tens of minutes, you can skip running on very little number of processes.
+    
+    Basically I suggest you prepare a table first - say, number of processes along the rows, input size along the columns - with each cell corresponding to the parallel runtime for the corresponding combination of processes and input size, and then generate two plots from there - one to show the runtime (y-axis) as a function of input size (x-axis), and another to show the runtime (y-axis) as a function of number of processes (x-axis).
+    
+    Hope this helps.

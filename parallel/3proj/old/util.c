@@ -1,7 +1,3 @@
-// James Jessen, Joseph Villarreal
-// Parallel Computing - Project 3
-// Parallel Random Number Generator
-
 #include "util.h"
 
 void print_array(const unsigned int n, int arr[n])
@@ -20,7 +16,7 @@ void print_array(const unsigned int n, int arr[n])
     putchar('\n');
 }
 
-void print_array_by_line(const unsigned n, int arr[n])
+void print_array_by_line(const unsigned int n, int arr[n])
 {
     if(!arr)
         return;
@@ -62,7 +58,7 @@ int** mult_matrix(const unsigned int nrow1, const unsigned int ncol1, int M1[nro
     const unsigned int nrow = nrow1;
     const unsigned int ncol = ncol2;
     //int product[nrow][ncol];
-    int** product = malloc(nrow*sizeof(*product) + (nrow*(ncol*sizeof(**product))));
+    int **product = malloc(nrow*sizeof(*product) + (nrow*(ncol*sizeof(**product))));
 
     // Perform the calculations
     for(int row = 0; row < nrow; row++)

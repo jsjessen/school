@@ -1,15 +1,17 @@
 #!/bin/bash
 
 NAME='jjessen'
-PROJECT='3proj'
+PROJECT='4proj'
 
 EXE_FILE="/net/u/${NAME}/pvt/parallel_483/${PROJECT}/${PROJECT}.exe"
 MACHINE_FILE="/net/u/${NAME}/pvt/machinefile.txt"
+
+CFLAGS="-std=c99 -Wall -lm"
 ARGS=""
 
-NUM_NODES=1
-PROCS_PER_NODE=4
-TOTAL_NUM_PROCS=4
+NUM_NODES=2
+PROCS_PER_NODE=1
+TOTAL_NUM_PROCS=2
 
 NODES=($(shuf -i 1-5 -n ${NUM_NODES}))
 
@@ -27,7 +29,7 @@ cat ${MACHINE_FILE}
 echo "-------------------"
 
 # Compile
-mpicc -std=c99 -lm -o ${EXE_FILE} $* 
+mpicc ${CFLAGS} -o ${EXE_FILE} $*
 
 # Execute
 mpiexec -machinefile ${MACHINE_FILE} -n ${TOTAL_NUM_PROCS} ${EXE_FILE} ${ARGS}

@@ -1,7 +1,3 @@
-// James Jessen, Joseph Villarreal
-// Parallel Computing - Project 3
-// Parallel Random Number Generator
-
 #ifndef __UTIL_H__
 #define __UTIL_H__
 

@@ -1,3 +1,3 @@
 q:
-	gcc srand_james.c util.c -std=c99 -lm
+	gcc srand.c util.c -std=c99 -lm
 	a.out
