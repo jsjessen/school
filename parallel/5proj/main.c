@@ -5,10 +5,21 @@
 // Usage: proj5.exe <n> <number of threads>
 // Throw dart n times
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <omp.h>
 
-typedef enum bool { false, true };
+#ifdef DEBUG
+    #define debug(...) printf(__VA_ARGS__)
+#else
+    #define debug(...)
+#endif
+
+#define DEFAULT_N 10
+#define DEFAULT_NUM_THREADS 1
+
+typedef enum { false, true } bool;
 
 typedef struct Coords 
 {
@@ -18,26 +29,17 @@ typedef struct Coords
 
 Coord center = { .x = 0.5, .y = 0.5 };
 
-Coord throwDart()
-{
+Coord throwDart();
+bool hitTarget(Coord* dart);
+double distance(const Coord* c1, const Coord* c2);
 
-}
-
-bool hitTarget(Coord* dart)
+int main (int argc, char* argv[])
 {
-    if(distance(dart, &center) <= radius)
-        return true;
-    else
-        return false;
-}
+    // Check for user inputs, else use defaults
+    const unsigned long n = (argc > 1) ? atoi(argv[1]) : DEFAULT_N;
+    const int numThreads = (argc > 2) ? atoi(argv[2]) : DEFAULT_NUM_THREADS;
 
-double distance(const Coord* c1, const Coord* c2)
-{
-    return sqrt(pow(c2->x - c1->x, 2) + pow(c2->y - c1->y, 2));
-}
 
-int main(int argc, char* argv)
-{
     double pi;
     Coord rand_coord;
 
@@ -45,15 +47,17 @@ int main(int argc, char* argv)
     double radius = diameter / 2;
 
     struct drand48_data rand_buf;
-    long int seedval = 12345;
+    long int seed = 12345;
     double* rands;
 
-    srand48_r(seedval, rand_buf);
-    drand48_r(rand_buf, rands);
+    srand48_r(seed, &rand_buf);
 
     int hit_count = 0;
     for(int i = 0; i < n; i++)
     {
+        drand48_r(&rand_buf, &rand_coord.x);
+        drand48_r(&rand_buf, &rand_coord.y);
+
         if(hitTarget)
             hit_count++;
     }
@@ -66,4 +70,23 @@ int main(int argc, char* argv)
     printf("Accuracy = %%%lf\n", accuracy);
 
     return 0;
+}
+
+Coord throwDart()
+{
+
+}
+
+bool hitTarget(Coord* dart)
+{
+    double radius = 0.5;
+    if(distance(dart, &center) <= radius)
+        return true;
+    else
+        return false;
+}
+
+double distance(const Coord* c1, const Coord* c2)
+{
+    return sqrt(pow(c2->x - c1->x, 2) + pow(c2->y - c1->y, 2));
 }
