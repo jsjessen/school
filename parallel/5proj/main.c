@@ -10,14 +10,14 @@
 #include <math.h>
 #include <omp.h>
 
-#ifdef DEBUG
-    #define debug(...) printf(__VA_ARGS__)
-#else
-    #define debug(...)
-#endif
+#define DEBUG
+#define debug_print(fmt, ...) \
+            do { if (DEBUG) fprintf(stderr, fmt, __VA_ARGS__); } while (0)
 
 #define DEFAULT_N 10
 #define DEFAULT_NUM_THREADS 1
+
+#define M_PI 3.14159265358979323846
 
 typedef enum { false, true } bool;
 
