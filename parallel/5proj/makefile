@@ -1,9 +1,9 @@
 run:
-	gcc -std=c99 main.c -o proj5.exe -lm 
+	gcc -o proj5.exe -fopenmp main.c -lm 
 
 debug:
-	gcc -std=c99 -Wall main.c -o proj5.exe -lm
+	gcc -o proj5.exe -Wall -fopenmp main.c -lm 
 
 q: run
 	clear
-	proj5.exe
+	proj5.exe 10000000 2
