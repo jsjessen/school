@@ -1,0 +1,1570 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+ <HEAD>
+ <TITLE>OpenVAS Scan Report</TITLE>
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+ <style type="text/css">
+ <!--
+  BODY {
+	BACKGROUND-COLOR: #ffffff
+ }
+  A {	TEXT-DECORATION: none }
+  A:visited {	COLOR: #0000cf; TEXT-DECORATION: none }
+  A:link {	COLOR: #0000cf; TEXT-DECORATION: none }
+  A:active {	COLOR: #0000cf; TEXT-DECORATION: underline }
+  A:hover {	COLOR: #0000cf; TEXT-DECORATION: underline }
+  OL {	COLOR: #333333; FONT-FAMILY: tahoma,helvetica,sans-serif }
+  UL {	COLOR: #333333; FONT-FAMILY: tahoma,helvetica,sans-serif }
+  P {	COLOR: #333333; FONT-FAMILY: tahoma,helvetica,sans-serif }
+  BODY {	COLOR: #333333; FONT-FAMILY: tahoma,helvetica,sans-serif }
+  TD {	COLOR: #333333; FONT-FAMILY: tahoma,helvetica,sans-serif }
+  TR {	COLOR: #333333; FONT-FAMILY: tahoma,helvetica,sans-serif }
+  TH {	COLOR: #333333; FONT-FAMILY: tahoma,helvetica,sans-serif }
+  FONT.title {	BACKGROUND-COLOR: white; COLOR: #363636; FONT-FAMILY:                   tahoma,helvetica,verdana,lucida console,utopia; FONT-SIZE: 10pt; FONT-WEIGHT: bold }
+  FONT.sub {	BACKGROUND-COLOR: white; COLOR: #000000; FONT-FAMILY:                   tahoma,helvetica,verdana,lucida console,utopia; FONT-SIZE: 10pt }
+  FONT.layer {	COLOR: #ff0000; FONT-FAMILY: courrier,sans-serif,arial,helvetica; FONT-SIZE: 8pt; TEXT-ALIGN: left }
+  TD.title {	BACKGROUND-COLOR: #A2B5CD; COLOR: #555555; FONT-FAMILY:                   tahoma,helvetica,verdana,lucida console,utopia; FONT-SIZE: 10pt; FONT-WEIGHT: bold; HEIGHT: 20px; TEXT-ALIGN: right }
+  TD.sub {	BACKGROUND-COLOR: #DCDCDC; COLOR: #555555; FONT-FAMILY:                   tahoma,helvetica,verdana,lucida console,utopia; FONT-SIZE: 10pt; FONT-WEIGHT: bold; HEIGHT: 18px; TEXT-ALIGN: left }
+  TD.content {	BACKGROUND-COLOR: white; COLOR: #000000; FONT-FAMILY:                   tahoma,arial,helvetica,verdana,lucida console,utopia; FONT-SIZE: 8pt; TEXT-ALIGN: left; VERTICAL-ALIGN: middle }
+  TD.default {	BACKGROUND-COLOR: WHITE; COLOR: #000000; FONT-FAMILY:                   tahoma,arial,helvetica,verdana,lucida console,utopia; FONT-SIZE: 8pt; }
+  TD.border {	BACKGROUND-COLOR: #cccccc; COLOR: black; FONT-FAMILY:                   tahoma,helvetica,verdana,lucida console,utopia; FONT-SIZE: 10pt; HEIGHT: 25px }
+  TD.border-HILIGHT {	BACKGROUND-COLOR: #ffffcc; COLOR: black; FONT-FAMILY:                   verdana,arial,helvetica,lucida console,utopia; FONT-SIZE: 10pt; HEIGHT: 25px }
+-->
+</style>
+</HEAD>
+<BODY>
+<table bgcolor="#a1a1a1" border=0 cellpadding=0 cellspacing=0 width="95%">
+<tbody>
+	<tr><td>
+<table border=0 cellpadding=2 cellspacing=1 width="100%">
+	<tbody>
+   <tr>
+	<td class=title>OpenVAS Scan Report</td></tr>
+   <tr>
+	<td class=content>This report gives details on hosts that were tested
+		and issues that were found. Please follow the recommended
+		steps and procedures to eradicate these threats.
+</td></tr></tbody></table></td></tr></tbody></table><br>
+
+<table bgcolor="#a1a1a1" border=0 cellpadding=0 cellspacing=0  width="60%">
+<tbody><tr><td>
+    <table border=0 cellpadding=2 cellspacing=1 width="100%">
+   <tbody>
+    <tr>
+	<td class=title colspan=2>Scan Details</td></tr>
+    <tr>
+	<td class=default width="60%">Hosts which were alive and responding during test</td>
+	<td class=default width="30%">1</td></tr>
+   <tr>
+	<td class=default width="60%">Number of security holes</td>
+	<td class=default width="30%">6</td></tr>
+   <tr>
+	<td class=default width="60%">Number of security warnings</td>
+	<td class=default width="30%">18</td></tr>
+   <tr>
+	<td class=default width="60%">Number of security notes</td>
+	<td class=default width="30%">47</td></tr>
+   <tr>
+	<td class=default width="60%">Number of false positives</td>
+	<td class=default width="30%">0</td></tr>
+</tbody></table></td></tr></tbody></table><br><br>
+<a name="toc"></a>
+<table bgcolor="#a1a1a1" border=0 cellpadding=0 cellspacing=0  width="60%">
+<tbody><tr><td>
+   <table border=0 cellpadding=2 cellspacing=1 width="100%">
+   <tbody>
+   <tr>
+	<td class=title colspan=2>Host List</td></tr>
+   <tr>
+	<td class=sub width="60%">Host(s)</td>
+	<td class=sub width="40%">Possible Issue</td></tr>
+   <tr>
+	 <td class=default width="60%"><a href="#server2">server2</a></td>
+	<td class=default width="40%"><font color=red>Security hole(s)</font></td></tr>
+</tbody></table></td></tr></tbody></table>
+
+<a name="server2"></a>
+<a name="server2_toc"></a>
+<div align="left"><font size=-2><a href="#toc">[ return to top ]</a></font></div><br><br>
+<table bgcolor="#a1a1a1" border=0 cellpadding=0 cellspacing=0 width="60%">
+<tbody><tr><td>
+   <table cellpadding=2 cellspacing=1 border=0 width="100%">
+   <tbody>
+   <tr>
+	<td class=title colspan=3>Analysis of Host</td></tr>
+   <tr>
+	<td class=sub width="20%">Address of Host</td>
+	<td class=sub width="30%">Port/Service</td>
+	<td class=sub width="30%">Issue regarding Port</td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_53_tcp">domain (53/tcp)</a></td>
+	<td class=default width="30%">Security note(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_80_tcp">http (80/tcp)</a></td>
+	<td class=default width="30%"><font color=red>Security hole(s) </font></td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_111_tcp">sunrpc (111/tcp)</a></td>
+	<td class=default width="30%">Security note(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_21_tcp">ftp (21/tcp)</a></td>
+	<td class=default width="30%">Security note(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_22_tcp">ssh (22/tcp)</a></td>
+	<td class=default width="30%">Security warning(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_23_tcp">telnet (23/tcp)</a></td>
+	<td class=default width="30%">Security note(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_25_tcp">smtp (25/tcp)</a></td>
+	<td class=default width="30%">Security note(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_139_tcp">netbios-ssn (139/tcp)</a></td>
+	<td class=default width="30%">Security note(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_445_tcp">microsoft-ds (445/tcp)</a></td>
+	<td class=default width="30%">Security note(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_512_tcp">exec (512/tcp)</a></td>
+	<td class=default width="30%">Security warning(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%">login (513/tcp)</td>
+	<td class=default width="30%">No Information</td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_514_tcp">shell (514/tcp)</a></td>
+	<td class=default width="30%">Security warning(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%">rmiregistry (1099/tcp)</td>
+	<td class=default width="30%">No Information</td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%">ingreslock (1524/tcp)</td>
+	<td class=default width="30%">No Information</td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_2049_tcp">nfs (2049/tcp)</a></td>
+	<td class=default width="30%">Security note(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_2121_tcp">scientia-ssdb (2121/tcp)</a></td>
+	<td class=default width="30%">Security warning(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_3306_tcp">mysql (3306/tcp)</a></td>
+	<td class=default width="30%"><font color=red>Security hole(s) </font></td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%">distcc (3632/tcp)</td>
+	<td class=default width="30%">No Information</td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_5432_tcp">postgresql (5432/tcp)</a></td>
+	<td class=default width="30%">Security note(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_5900_tcp">vnc (5900/tcp)</a></td>
+	<td class=default width="30%">Security note(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_6000_tcp">x11 (6000/tcp)</a></td>
+	<td class=default width="30%">Security note(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_6667_tcp">ircd (6667/tcp)</a></td>
+	<td class=default width="30%">Security note(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%">ajp13 (8009/tcp)</td>
+	<td class=default width="30%">No Information</td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%">msgsrvr (8787/tcp)</td>
+	<td class=default width="30%">No Information</td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_43455_tcp">unknown (43455/tcp)</a></td>
+	<td class=default width="30%">Security note(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_51602_tcp">unknown (51602/tcp)</a></td>
+	<td class=default width="30%">Security note(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_53299_tcp">unknown (53299/tcp)</a></td>
+	<td class=default width="30%">Security note(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_111_udp">sunrpc (111/udp)</a></td>
+	<td class=default width="30%">Security note(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_2049_udp">nfs (2049/udp)</a></td>
+	<td class=default width="30%">Security note(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_53705_udp">unknown (53705/udp)</a></td>
+	<td class=default width="30%">Security note(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_55910_udp">unknown (55910/udp)</a></td>
+	<td class=default width="30%">Security note(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_60221_udp">unknown (60221/udp)</a></td>
+	<td class=default width="30%">Security note(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_137_udp">netbios-ns (137/udp)</a></td>
+	<td class=default width="30%">Security warning(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_general_tcp">general/tcp</a></td>
+	<td class=default width="30%">Security warning(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_69_udp">tftp (69/udp)</a></td>
+	<td class=default width="30%">Security note(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_123_udp">ntp (123/udp)</a></td>
+	<td class=default width="30%">Security note(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_53_udp">domain (53/udp)</a></td>
+	<td class=default width="30%">Security warning(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_general_SMBClient">general/SMBClient</a></td>
+	<td class=default width="30%">Security note(s) </td></tr>
+   <tr>
+	<td class=default width="20%">server2</td>
+	<td class=default width="30%"><a href="#server2_general_icmp">general/icmp</a></td>
+	<td class=default width="30%">Security note(s) </td></tr>
+</tbody></table></td></tr></tbody></table><br><br>
+<table bgcolor="#a1a1a1" cellpadding=0 cellspacing=0 border=0 width="75%">
+<tbody><tr><td>
+	<table cellpadding=2 cellspacing=1 border=0 width="100%">
+		<tr><td class=title colspan=3>Security Issues and Fixes: server2</td></tr>
+		<tr>
+		<td class=sub width="10%">Type</td>
+		<td class=sub width="10%">Port</td>
+		<td class=sub width="80%">Issue and Fix</td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_53_tcp"></a>domain (53/tcp)</td>
+	<td class=default width="80%"><br>
+<br>
+ Overview:<br>
+  A DNS Server is running at this Host.<br>
+  A Name Server translates domain names into IP addresses. This makes it<br>
+  possible for a user to access a website by typing in the domain name instead of<br>
+  the website's actual IP address.<br>
+<br>
+ Risk factor : None<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.100069">1.3.6.1.4.1.25623.1.0.100069</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_53_tcp"></a>domain (53/tcp)</td>
+	<td class=default width="80%">BIND 'NAMED' is an open-source DNS server from ISC.org.<br>
+Many proprietary DNS servers are based on BIND source code.<br>
+<br>
+The BIND based NAMED servers (or DNS servers) allow remote users<br>
+to query for version and type information.  The query of the CHAOS<br>
+TXT record 'version.bind', will typically prompt the server to send<br>
+the information back to the querying source.<br>
+<br>
+The remote bind version is : 9.4.2<br>
+<br>
+Solution :<br>
+Using the 'version' directive in the 'options' section will block<br>
+the 'version.bind' query, but it will not log such attempts.<br>
+<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.10028">1.3.6.1.4.1.25623.1.0.10028</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%"><font color=red>Vulnerability</font></td>
+	<td valign=top class=default width="10%"><a name="server2_80_tcp"></a>http (80/tcp)</td>
+	<td class=default width="80%"><br>
+<br>
+  Overview: The host is installed with PHP, that is prone to multiple<br>
+  vulnerabilities.<br>
+<br>
+  Vulnerability Insight:<br>
+  The flaws are caused by,<br>
+  - an unspecified stack overflow error in FastCGI SAPI (fastcgi.c).<br>
+  - an error during path translation in cgi_main.c.<br>
+  - an error with an unknown impact/attack vectors.<br>
+  - an unspecified error within the processing of incomplete multibyte<br>
+    characters in escapeshellcmd() API function.<br>
+  - error in curl/interface.c in the cURL library(libcurl), which could be<br>
+    exploited by attackers to bypass safe_mode security restrictions.<br>
+  - an error in PCRE. i.e buffer overflow error when handling a character class<br>
+    containing a very large number of characters with codepoints greater than<br>
+    255(UTF-8 mode).<br>
+<br>
+  Impact:<br>
+  Successful exploitation could result in remote arbitrary code execution,<br>
+  security restrictions bypass, access to restricted files, denial of service.<br>
+<br>
+  Impact Level: System<br>
+<br>
+  Affected Software/OS:<br>
+  PHP version prior to 5.2.6<br>
+<br>
+  Fix:<br>
+  Upgrade to PHP version 5.2.6 or above,<br>
+  <a href="http://www.php.net/downloads.php">http://www.php.net/downloads.php</a><br>
+<br>
+  References:<br>
+  <a href="http://pcre.org/changelog.txt">http://pcre.org/changelog.txt</a><br>
+  <a href="http://www.php.net/ChangeLog-5.php">http://www.php.net/ChangeLog-5.php</a><br>
+  <a href="http://wiki.rpath.com/wiki/Advisories:rPSA-2008-0176">http://wiki.rpath.com/wiki/Advisories:rPSA-2008-0176</a><br>
+  <a href="http://wiki.rpath.com/wiki/Advisories:rPSA-2008-0178">http://wiki.rpath.com/wiki/Advisories:rPSA-2008-0178</a><br>
+  <a href="http://wiki.rpath.com/wiki/Advisories:rPSA-2008-0086">http://wiki.rpath.com/wiki/Advisories:rPSA-2008-0086</a><br>
+<br>
+  CVSS Score:<br>
+    CVSS Base Score     : 9.0 (AV:N/AC:L/Au:NR/C:P/I:P/A:C)<br>
+    CVSS Temporal Score : 7.0<br>
+  Risk factor : High<br>
+CVE : <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2050">CVE-2008-2050</a>, <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2051">CVE-2008-2051</a>, <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-4850">CVE-2007-4850</a>, <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-0599">CVE-2008-0599</a>, <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-0674">CVE-2008-0674</a><br>
+BID : <a href="http://www.securityfocus.com/bid/29009">29009</a>, <a href="http://www.securityfocus.com/bid/27413">27413</a>, <a href="http://www.securityfocus.com/bid/27786">27786</a><br>
+Other references : CB-A:08-0118<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.800110">1.3.6.1.4.1.25623.1.0.800110</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%"><font color=red>Vulnerability</font></td>
+	<td valign=top class=default width="10%"><a name="server2_80_tcp"></a>http (80/tcp)</td>
+	<td class=default width="80%"><br>
+<br>
+  Overview: The host is running PHP and is prone to Buffer Overflow<br>
+  vulnerability.<br>
+<br>
+  Vulnerability Insight:<br>
+  The flaw is caused due to error in mbfilter_htmlent.c file in the mbstring<br>
+  extension. These can be exploited via mb_convert_encoding, mb_check_encoding,<br>
+  mb_convert_variables, and mb_parse_str functions.<br>
+<br>
+  Impact:<br>
+  Successful exploitation could allow attackers to execute arbitrary code via<br>
+  a crafted string containing an HTML entity.<br>
+<br>
+  Impact Level: Application<br>
+<br>
+  Affected Software/OS:<br>
+  PHP version 4.3.0 to 5.2.6 on all running platform.<br>
+<br>
+  Fix: Upgrade to version 5.2.7 or later,<br>
+  <a href="http://www.php.net/downloads.php">http://www.php.net/downloads.php</a><br>
+<br>
+  References:<br>
+  <a href="http://bugs.php.net/bug.php?id=45722">http://bugs.php.net/bug.php?id=45722</a><br>
+  <a href="http://archives.neohapsis.com/archives/fulldisclosure/2008-12/0477.html">http://archives.neohapsis.com/archives/fulldisclosure/2008-12/0477.html</a><br>
+<br>
+  CVSS Score:<br>
+    CVSS Base Score     : 10.0 (AV:N/AC:L/Au:NR/C:C/I:C/A:C)<br>
+    CVSS Temporal Score : 7.4<br>
+  Risk factor: High<br>
+CVE : <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-5557">CVE-2008-5557</a><br>
+BID : <a href="http://www.securityfocus.com/bid/32948">32948</a><br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.900185">1.3.6.1.4.1.25623.1.0.900185</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%"><font color=red>Vulnerability</font></td>
+	<td valign=top class=default width="10%"><a name="server2_80_tcp"></a>http (80/tcp)</td>
+	<td class=default width="80%"><br>
+<br>
+  Overview: The host is running PHP and is prone to Security Bypass and File<br>
+  Writing vulnerability.<br>
+<br>
+  Vulnerability Insight:<br>
+  The flaw is caused due to,<br>
+  - An error in initialization of 'page_uid' and 'page_gid' global variables<br>
+    for use by the SAPI 'php_getuid' function, which bypass the safe_mode<br>
+    restrictions.<br>
+  - When 'safe_mode' is enabled through a 'php_admin_flag' setting in<br>
+    'httpd.conf' file, which does not enforce the 'error_log', 'safe_mode<br>
+    restrictions.<br>
+  - In 'ZipArchive::extractTo' function which allows attacker to write files<br>
+    via a ZIP file.<br>
+<br>
+  Impact:<br>
+  Successful exploitation could allow remote attackers to write arbitrary file,<br>
+  bypass security restrictions and cause directory traversal attacks.<br>
+<br>
+  Impact Level: System/Application<br>
+<br>
+  Affected Software/OS:<br>
+  PHP versions prior to 5.2.7.<br>
+<br>
+  Fix: Upgrade to version 5.2.7 or later<br>
+  <a href="http://www.php.net/downloads.php">http://www.php.net/downloads.php</a><br>
+<br>
+  References:<br>
+  <a href="http://www.php.net/ChangeLog-5.php#5.2.7">http://www.php.net/ChangeLog-5.php#5.2.7</a><br>
+  <a href="http://www.php.net/archive/2008.php#id2008-12-07-1">http://www.php.net/archive/2008.php#id2008-12-07-1</a><br>
+  <a href="http://www.securityfocus.com/archive/1/archive/1/498985/100/0/threaded">http://www.securityfocus.com/archive/1/archive/1/498985/100/0/threaded</a><br>
+<br>
+  CVSS Score:<br>
+    CVSS Base Score     : 7.5 (AV:N/AC:L/Au:NR/C:P/I:P/A:P)<br>
+    CVSS Temporal Score : 5.9<br>
+  Risk factor: High<br>
+CVE : <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-5624">CVE-2008-5624</a>, <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-5625">CVE-2008-5625</a>, <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-5658">CVE-2008-5658</a><br>
+BID : <a href="http://www.securityfocus.com/bid/32383">32383</a>, <a href="http://www.securityfocus.com/bid/32625">32625</a>, <a href="http://www.securityfocus.com/bid/32688">32688</a><br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.900184">1.3.6.1.4.1.25623.1.0.900184</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%"><font color=red>Vulnerability</font></td>
+	<td valign=top class=default width="10%"><a name="server2_80_tcp"></a>http (80/tcp)</td>
+	<td class=default width="80%"><br>
+<br>
+  Overview:<br>
+  The host is running PHP and is prone to denial of service vulnerability.<br>
+<br>
+  Vulnerability Insight:<br>
+  This bug is due to an error in 'mbstring.func_overload' setting in .htaccess<br>
+  file. It can be exploited via modifying behavior of other sites hosted on<br>
+  the same web server which causes this setting to be applied to other virtual<br>
+  hosts on the same server.<br>
+<br>
+  Impact:<br>
+  Successful exploitation will let the local attackers to crash an affected web<br>
+  server.<br>
+<br>
+  Impact Level: Application<br>
+<br>
+  Affected Software/OS:<br>
+  PHP version 4.4.4 and prior<br>
+  PHP 5.1.x to 5.1.6<br>
+  PHP 5.2.x to 5.2.5<br>
+<br>
+  Fix: No solution or patch is available as on 17th March, 2009. Information<br>
+  regarding this issue will be updated once the solution details are available.<br>
+  For updates refer, <a href="http://www.php.net">http://www.php.net</a><br>
+<br>
+  References:<br>
+  <a href="http://bugs.php.net/bug.php?id=27421">http://bugs.php.net/bug.php?id=27421</a><br>
+  <a href="https://bugzilla.redhat.com/show_bug.cgi?id=479272">https://bugzilla.redhat.com/show_bug.cgi?id=479272</a><br>
+<br>
+  CVSS Score:<br>
+    CVSS Base Score     : 2.1 (AV:L/AC:L/Au:NR/C:N/I:P/A:N)<br>
+    CVSS Temporal Score : 1.9<br>
+  Risk factor : Low<br>
+CVE : <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0754">CVE-2009-0754</a><br>
+BID : <a href="http://www.securityfocus.com/bid/33542">33542</a><br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.800373">1.3.6.1.4.1.25623.1.0.800373</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Warning</td>
+	<td valign=top class=default width="10%"><a name="server2_80_tcp"></a>http (80/tcp)</td>
+	<td class=default width="80%"><br>
+<br>
+ Overview:<br>
+  <br>
+ phpMyAdmin is prone to multiple input-validation vulnerabilities,<br>
+ including an HTTP response-splitting vulnerability and a<br>
+ local file-include vulnerability.<br>
+<br>
+ These issues can be leveraged to view or execute arbitrary local<br>
+ scripts, or misrepresent how web content is served, cached, or<br>
+ interpreted. This could aid in various attacks that try to entice<br>
+ client users into a false sense of trust. Other attacks are also<br>
+ possible.<br>
+<br>
+ Versions prior to phpMyAdmin 3.1.3.1 are vulnerable. <br>
+<br>
+ Solution:<br>
+  Vendor updates are available. Please see <a href="http://www.phpmyadmin.net">http://www.phpmyadmin.net</a> for more<br>
+  Information.<br>
+<br>
+ See also:<br>
+  <a href="http://www.securityfocus.com/bid/34253">http://www.securityfocus.com/bid/34253</a><br>
+<br>
+ Risk factor : Medium<br>
+BID : <a href="http://www.securityfocus.com/bid/34253">34253</a><br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.100078">1.3.6.1.4.1.25623.1.0.100078</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Warning</td>
+	<td valign=top class=default width="10%"><a name="server2_80_tcp"></a>http (80/tcp)</td>
+	<td class=default width="80%"><br>
+<br>
+ Overview:<br>
+  phpMyAdmin is prone to multiple input-validation vulnerabilities,<br>
+  including an HTML-injection vulnerability, cross-site<br>
+  scripting vulnerabilities, and information-disclosure<br>
+  vulnerabilities.<br>
+<br>
+  An attacker could exploit these vulnerabilities to view sensitive<br>
+  information or to have arbitrary script code execute in the context<br>
+  of the affected site, which may allow the attacker to steal<br>
+  cookie-based authentication credentials or change the way the site<br>
+  is rendered to the user. Data gained could aid in further attacks.<br>
+<br>
+ Solution:<br>
+  Vendor updates are available. Please see <a href="http://www.phpmyadmin.net">http://www.phpmyadmin.net</a> for more<br>
+  Information.<br>
+<br>
+ See also:<br>
+  <a href="http://www.securityfocus.com/bid/21137">http://www.securityfocus.com/bid/21137</a><br>
+<br>
+ Risk factor : Medium<br>
+CVE : <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-6942">CVE-2006-6942</a><br>
+BID : <a href="http://www.securityfocus.com/bid/21137">21137</a><br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.100068">1.3.6.1.4.1.25623.1.0.100068</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Warning</td>
+	<td valign=top class=default width="10%"><a name="server2_80_tcp"></a>http (80/tcp)</td>
+	<td class=default width="80%"><br>
+<br>
+ Overview:<br>
+  phpMyAdmin is prone to multiple input-validation vulnerabilities, including a<br>
+  cross-site scripting and a SQL-injection issue.<br>
+<br>
+  A successful exploit may allow an attacker to steal cookie-based<br>
+  authentication credentials, compromise the application, access or modify data,<br>
+  or exploit latent vulnerabilities in the underlying database.<br>
+<br>
+  These issues affect versions prior to phpMyAdmin 2.11.2.1. <br>
+<br>
+ Solution:<br>
+  Vendor updates are available. Please see <a href="http://www.phpmyadmin.net">http://www.phpmyadmin.net</a> for more<br>
+  Information.<br>
+<br>
+ See also:<br>
+  <a href="http://www.securityfocus.com/bid/26512">http://www.securityfocus.com/bid/26512</a><br>
+<br>
+ Risk factor : Medium<br>
+CVE : <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-5976">CVE-2007-5976</a>, <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-5977">CVE-2007-5977</a><br>
+BID : <a href="http://www.securityfocus.com/bid/26512">26512</a><br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.100067">1.3.6.1.4.1.25623.1.0.100067</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Warning</td>
+	<td valign=top class=default width="10%"><a name="server2_80_tcp"></a>http (80/tcp)</td>
+	<td class=default width="80%"><br>
+The following files are calling the function phpinfo() which<br>
+disclose potentially sensitive information to the remote attacker : <br>
+/phpinfo.php<br>
+<br>
+<br>
+Solution : Delete them or restrict access to them<br>
+Risk factor : Low<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.11229">1.3.6.1.4.1.25623.1.0.11229</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Warning</td>
+	<td valign=top class=default width="10%"><a name="server2_80_tcp"></a>http (80/tcp)</td>
+	<td class=default width="80%"><br>
+<br>
+  Overview:<br>
+  PHP is prone to multiple security vulnerabilities. Successful<br>
+  exploits could allow an attacker to cause a denial-of-service<br>
+  condition. An unspecified issue with an unknown impact was also<br>
+  reported.<br>
+<br>
+  These issues affect PHP 5.2.8 and prior versions.<br>
+<br>
+  Solution:<br>
+  The vendor has released PHP 5.2.9 to address these issues. Please<br>
+  see <a href="http://www.php.net/">http://www.php.net/</a> fore more information.<br>
+<br>
+  See also:<br>
+  <a href="http://www.securityfocus.com/bid/33927">http://www.securityfocus.com/bid/33927</a><br>
+<br>
+  Risk factor : Medium<br>
+CVE : <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1271">CVE-2009-1271</a><br>
+BID : <a href="http://www.securityfocus.com/bid/33927">33927</a><br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.100146">1.3.6.1.4.1.25623.1.0.100146</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Warning</td>
+	<td valign=top class=default width="10%"><a name="server2_80_tcp"></a>http (80/tcp)</td>
+	<td class=default width="80%">The /doc directory is browsable.<br>
+/doc shows the content of the /usr/doc directory and therefore it shows which programs and - important! - the version of the installed programs.<br>
+<br>
+Solution : Use access restrictions for the /doc directory.<br>
+If you use Apache you might use this in your access.conf:<br>
+<br>
+ &lt;Directory /usr/doc&gt;<br>
+ AllowOverride None<br>
+ order deny,allow<br>
+ deny from all<br>
+ allow from localhost<br>
+ &lt;/Directory&gt;<br>
+<br>
+Risk factor : High<br>
+CVE : <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-1999-0678">CVE-1999-0678</a><br>
+BID : <a href="http://www.securityfocus.com/bid/318">318</a><br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.10056">1.3.6.1.4.1.25623.1.0.10056</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Warning</td>
+	<td valign=top class=default width="10%"><a name="server2_80_tcp"></a>http (80/tcp)</td>
+	<td class=default width="80%"><br>
+<br>
+  Overview: This host is running Apache Web Server and is prone to<br>
+  Information Disclosure Vulnerability.<br>
+<br>
+  Vulnerability Insight:<br>
+  This flaw is caused due to an error in 'mod_proxy_ajp' when handling<br>
+  improperly malformed POST requests.<br>
+<br>
+  Impact:<br>
+  Successful exploitation will let the attacker craft a special HTTP POST<br>
+  request and gain sensitive information about the web server.<br>
+<br>
+  Impact level: Application<br>
+<br>
+  Affected Software/OS:<br>
+  Apache HTTP Version 2.2.11<br>
+<br>
+  Workaround:<br>
+  Update mod_proxy_ajp.c through SVN Repository (Revision 767089)<br>
+  <a href="http://www.apache.org/dist/httpd/patches/apply_to_2.2.11/PR46949.diff">http://www.apache.org/dist/httpd/patches/apply_to_2.2.11/PR46949.diff</a><br>
+<br>
+  Fix: No solution or patch is available as on 29th April, 2009. Information<br>
+  regarding this issue will be updated once the solution details are available.<br>
+  For further updates refer, <a href="http://httpd.apache.org/download.cgi">http://httpd.apache.org/download.cgi</a><br>
+<br>
+  References:<br>
+  <a href="http://secunia.com/advisories/34827">http://secunia.com/advisories/34827</a><br>
+  <a href="http://xforce.iss.net/xforce/xfdb/50059">http://xforce.iss.net/xforce/xfdb/50059</a><br>
+  <a href="http://svn.apache.org/viewvc/httpd/httpd/trunk/CHANGES?r1=766938&r2=767089">http://svn.apache.org/viewvc/httpd/httpd/trunk/CHANGES?r1=766938&r2=767089</a><br>
+<br>
+  CVSS Score:<br>
+    CVSS Base Score     : 5.0 (AV:N/AC:L/Au:NR/C:P/I:N/A:N)<br>
+    CVSS Temporal Score : 4.0<br>
+  Risk factor: Medium<br>
+CVE : <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1191">CVE-2009-1191</a><br>
+BID : <a href="http://www.securityfocus.com/bid/34663">34663</a><br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.900499">1.3.6.1.4.1.25623.1.0.900499</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Warning</td>
+	<td valign=top class=default width="10%"><a name="server2_80_tcp"></a>http (80/tcp)</td>
+	<td class=default width="80%"><br>
+ Overview : The host is running Apache, which is prone to cross-site scripting<br>
+ vulnerability.<br>
+	<br>
+ Vulnerability Insight :<br>
+<br>
+        Input passed to the module mod_proxy_ftp with wildcard character<br>
+        is not properly sanitized before returning to the user.<br>
+<br>
+        Impact : Remote attackers can execute arbitrary script code.<br>
+<br>
+ Impact Level : Application<br>
+<br>
+ Affected Software/OS :<br>
+        Apache 2.0.0 to 2.0.63 and Apache 2.2.0 to 2.2.9 on All Platform<br>
+<br>
+ ***<br>
+    Note: The script might report a False Positive as it is only checking for <br>
+    the vulnerable version of Apache. Vulnerability is only when mod_proxy <br>
+    and mod_proxy_ftp is configured with the installed Apache version. <br>
+ ***<br>
+<br>
+ Fix : Fixed is available in the SVN repository,<br>
+ <a href="http://svn.apache.org/viewvc?view=rev&revision=682871">http://svn.apache.org/viewvc?view=rev&revision=682871</a><br>
+ <a href="http://svn.apache.org/viewvc?view=rev&revision=682868">http://svn.apache.org/viewvc?view=rev&revision=682868</a><br>
+<br>
+ References :<br>
+ <a href="http://httpd.apache.org/">http://httpd.apache.org/</a><br>
+ <a href="http://www.securityfocus.com/archive/1/495180">http://www.securityfocus.com/archive/1/495180</a><br>
+ <a href="http://httpd.apache.org/docs/2.0/mod/mod_proxy_ftp.html">http://httpd.apache.org/docs/2.0/mod/mod_proxy_ftp.html</a><br>
+<br>
+ CVSS Score :<br>
+        CVSS Base Score     : 5.8 (AV:N/AC:M/Au:NR/C:P/I:P/A:N)<br>
+        CVSS Temporal Score : 4.5<br>
+ Risk factor : Medium<br>
+CVE : <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2939">CVE-2008-2939</a><br>
+BID : <a href="http://www.securityfocus.com/bid/30560">30560</a><br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.900107">1.3.6.1.4.1.25623.1.0.900107</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Warning</td>
+	<td valign=top class=default width="10%"><a name="server2_80_tcp"></a>http (80/tcp)</td>
+	<td class=default width="80%"><br>
+<br>
+  Overview: The host is running PHP and is prone to Cross-Site Scripting<br>
+  vulnerability.<br>
+<br>
+  Vulnerability Insight:<br>
+  The flaw is caused due to improper handling of certain inputs when<br>
+  display_errors settings is enabled.<br>
+<br>
+  Impact:<br>
+  Successful exploitation could allow attackers to inject arbitrary web script<br>
+  or HTML via unspecified vectors and conduct Cross-Site Scripting attacks.<br>
+<br>
+  Impact Level: Application<br>
+<br>
+  Affected Software/OS:<br>
+  PHP, PHP version 5.2.7 and prior on all running platform.<br>
+<br>
+  Fix: Upgrade to version 5.2.8 or later<br>
+  <a href="http://www.php.net/downloads.php">http://www.php.net/downloads.php</a><br>
+<br>
+  References:<br>
+  <a href="http://jvn.jp/en/jp/JVN50327700/index.html">http://jvn.jp/en/jp/JVN50327700/index.html</a><br>
+  <a href="http://jvndb.jvn.jp/en/contents/2008/JVNDB-2008-000084.html">http://jvndb.jvn.jp/en/contents/2008/JVNDB-2008-000084.html</a><br>
+<br>
+  CVSS Score:<br>
+    CVSS Base Score     : 2.6 (AV:N/AC:H/Au:NR/C:N/I:P/A:N)<br>
+    CVSS Temporal Score : 1.9<br>
+  Risk factor : Low<br>
+CVE : <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-5814">CVE-2008-5814</a><br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.800334">1.3.6.1.4.1.25623.1.0.800334</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Warning</td>
+	<td valign=top class=default width="10%"><a name="server2_80_tcp"></a>http (80/tcp)</td>
+	<td class=default width="80%"><br>
+<br>
+  Overview: The host is running PHP and is prone to Memory Information<br>
+  Disclosure vulnerability.<br>
+<br>
+  Vulnerability Insight:<br>
+  The flaw is caused due to improper validation of bgd_color or clrBack<br>
+  argument in imageRotate function.<br>
+<br>
+  Impact:<br>
+  Successful exploitation could let the attacker read the contents of arbitrary<br>
+  memory locations through a crafted value for an indexed image.<br>
+<br>
+  Impact Level: Application<br>
+<br>
+  Affected Software/OS:<br>
+  PHP version 5.x to 5.2.8 on all running platform.<br>
+<br>
+  Fix: No solution or patch is available as on 31st December, 2008. Information<br>
+  regarding this issue will be updated once the solution details are available.<br>
+  For updates refer, <a href="http://www.php.net/">http://www.php.net/</a><br>
+<br>
+  References:<br>
+  <a href="http://securitytracker.com/alerts/2008/Dec/1021494.html">http://securitytracker.com/alerts/2008/Dec/1021494.html</a><br>
+  <a href="http://downloads.securityfocus.com/vulnerabilities/exploits/33002.php">http://downloads.securityfocus.com/vulnerabilities/exploits/33002.php</a><br>
+  <a href="http://downloads.securityfocus.com/vulnerabilities/exploits/33002-2.php">http://downloads.securityfocus.com/vulnerabilities/exploits/33002-2.php</a><br>
+<br>
+  CVSS Score:<br>
+    CVSS Base Score     : 5.0 (AV:N/AC:L/Au:NR/C:P/I:N/A:N)<br>
+    CVSS Temporal Score : 2.9<br>
+  Risk factor: Low<br>
+CVE : <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-5498">CVE-2008-5498</a><br>
+BID : <a href="http://www.securityfocus.com/bid/33002">33002</a><br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.900186">1.3.6.1.4.1.25623.1.0.900186</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Warning</td>
+	<td valign=top class=default width="10%"><a name="server2_80_tcp"></a>http (80/tcp)</td>
+	<td class=default width="80%"><br>
+<br>
+  Overview: The host is installed with PHP and is prone to Denial of<br>
+  Service vulnerability.<br>
+<br>
+  Vulnerability Insight:<br>
+  Improper handling of .zip file while doing extraction via<br>
+  php_zip_make_relative_path function in php_zip.c file.<br>
+<br>
+  Impact:<br>
+  Successful exploitation could result in denial of service condition.<br>
+<br>
+  Impact Level: Application<br>
+<br>
+  Affected Software/OS:<br>
+  PHP version prior to 5.2.9<br>
+<br>
+  Fix:<br>
+  Upgrade to PHP version 5.2.9 or above,<br>
+  <a href="http://www.php.net/downloads.php">http://www.php.net/downloads.php</a><br>
+<br>
+  Workaround:<br>
+  For workaround refer below link,<br>
+  <a href="http://cvs.php.net/viewvc.cgi/php-src/ext/json/JSON_parser.c?r1=1.1.2.14&r2=1.1.2.15">http://cvs.php.net/viewvc.cgi/php-src/ext/json/JSON_parser.c?r1=1.1.2.14&r2=1.1.2.15</a><br>
+<br>
+  References:<br>
+  <a href="http://www.php.net/releases/5_2_9.php">http://www.php.net/releases/5_2_9.php</a><br>
+  <a href="http://www.openwall.com/lists/oss-security/2009/04/01/9">http://www.openwall.com/lists/oss-security/2009/04/01/9</a><br>
+<br>
+  CVSS Score:<br>
+    CVSS Base Score     : 5.0 (AV:N/AC:L/Au:NR/C:N/I:N/A:P)<br>
+    CVSS Temporal Score : 3.7<br>
+  Risk factor : Medium<br>
+CVE : <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-1272">CVE-2009-1272</a><br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.800393">1.3.6.1.4.1.25623.1.0.800393</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_80_tcp"></a>http (80/tcp)</td>
+	<td class=default width="80%">A web server is running on this port<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.10330">1.3.6.1.4.1.25623.1.0.10330</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_80_tcp"></a>http (80/tcp)</td>
+	<td class=default width="80%">The remote web server type is :<br>
+<br>
+Apache/2.2.8 (Ubuntu) DAV/2<br>
+<br>
+<br>
+Solution : You can set the directive 'ServerTokens Prod' to limit<br>
+the information emanating from the server in its response headers.<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.10107">1.3.6.1.4.1.25623.1.0.10107</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_80_tcp"></a>http (80/tcp)</td>
+	<td class=default width="80%"><br>
+<br>
+  phpMyAdmin is running at this Host.<br>
+<br>
+  phpMyAdmin is a free software tool written in PHP intended to handle<br>
+  the administration of MySQL over the World Wide Web. <br>
+<br>
+ Risk factor : None<br>
+<br>
+phpMyAdmin was detected on the remote host in the following directory(s):<br>
+<br>
+phpMyAdmin (Ver. unknown) under /phpMyAdmin.<br>
+<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.900129">1.3.6.1.4.1.25623.1.0.900129</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_80_tcp"></a>http (80/tcp)</td>
+	<td class=default width="80%">The following directories were discovered:<br>
+/cgi-bin, /doc, /test, /icons, /phpMyAdmin<br>
+<br>
+While this is not, in and of itself, a bug, you should manually inspect <br>
+these directories to ensure that they are in compliance with company<br>
+security standards<br>
+<br>
+Other references : OWASP:OWASP-CM-006<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.11032">1.3.6.1.4.1.25623.1.0.11032</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_80_tcp"></a>http (80/tcp)</td>
+	<td class=default width="80%"><br>
+Synopsis :<br>
+<br>
+Debugging functions are enabled on the remote HTTP server.<br>
+<br>
+Description :<br>
+<br>
+The remote webserver supports the TRACE and/or TRACK methods. TRACE and TRACK<br>
+are HTTP methods which are used to debug web server connections.   <br>
+<br>
+It has been shown that servers supporting this method are subject to<br>
+cross-site-scripting attacks, dubbed XST for "Cross-Site-Tracing", when<br>
+used in conjunction with various weaknesses in browsers. <br>
+<br>
+An attacker may use this flaw to trick your legitimate web users to give<br>
+him their credentials. <br>
+<br>
+Solution :<br>
+<br>
+Disable these methods.<br>
+<br>
+See also :<br>
+<br>
+<a href="http://www.kb.cert.org/vuls/id/867593">http://www.kb.cert.org/vuls/id/867593</a><br>
+<br>
+Risk factor :<br>
+<br>
+Low / CVSS Base Score : 2 <br>
+(AV:R/AC:L/Au:NR/C:P/A:N/I:N/B:N)<br>
+<br>
+Plugin output :<br>
+<br>
+<br>
+Solution : <br>
+Add the following lines for each virtual host in your configuration file :<br>
+<br>
+    RewriteEngine on<br>
+    RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK)<br>
+    RewriteRule .* - [F]<br>
+<br>
+<br>
+CVE : <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-2320">CVE-2004-2320</a><br>
+BID : <a href="http://www.securityfocus.com/bid/9506">9506</a>, <a href="http://www.securityfocus.com/bid/9561">9561</a>, <a href="http://www.securityfocus.com/bid/11604">11604</a><br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.11213">1.3.6.1.4.1.25623.1.0.11213</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_111_tcp"></a>sunrpc (111/tcp)</td>
+	<td class=default width="80%">RPC program #100000 version 2 'portmapper' (portmap sunrpc rpcbind) is running on this port<br>
+<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.11111">1.3.6.1.4.1.25623.1.0.11111</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_21_tcp"></a>ftp (21/tcp)</td>
+	<td class=default width="80%">An FTP server is running on this port.<br>
+Here is its banner : <br>
+220 (vsFTPd 2.3.4)<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.10330">1.3.6.1.4.1.25623.1.0.10330</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_21_tcp"></a>ftp (21/tcp)</td>
+	<td class=default width="80%">Remote FTP server banner :<br>
+220 (vsFTPd 2.3.4)<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.10092">1.3.6.1.4.1.25623.1.0.10092</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Warning</td>
+	<td valign=top class=default width="10%"><a name="server2_22_tcp"></a>ssh (22/tcp)</td>
+	<td class=default width="80%"><br>
+<br>
+  Overview: The host is installed with OpenSSH and is prone to information<br>
+  disclosure vulnerability.<br>
+<br>
+  Vulnerability Insight:<br>
+  The flaw is caused due to the improper handling of errors within an SSH session<br>
+  encrypted with a block cipher algorithm in the Cipher-Block Chaining 'CBC' mode.<br>
+<br>
+  Impact:<br>
+  Successful exploits will allow attackers to obtain four bytes of plaintext from<br>
+  an encrypted session.<br>
+  <br>
+  Impact Level: Application<br>
+<br>
+  Affected Software/OS:<br>
+   Versions prior to OpenSSH 5.2 are vulnerable. Various versions of SSH Tectia<br>
+   are also affected. <br>
+<br>
+  Fix: Upgrade to higher version<br>
+  <a href="http://www.openssh.com/portable.html">http://www.openssh.com/portable.html</a><br>
+<br>
+  References:<br>
+   <a href="http://www.securityfocus.com/bid/32319">http://www.securityfocus.com/bid/32319</a><br>
+<br>
+  Risk factor: Medium<br>
+BID : <a href="http://www.securityfocus.com/bid/32319">32319</a><br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.100153">1.3.6.1.4.1.25623.1.0.100153</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_22_tcp"></a>ssh (22/tcp)</td>
+	<td class=default width="80%">An ssh server is running on this port<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.10330">1.3.6.1.4.1.25623.1.0.10330</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_22_tcp"></a>ssh (22/tcp)</td>
+	<td class=default width="80%">Remote SSH version : SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1<br>
+<br>
+Remote SSH supported authentication : publickey,password<br>
+<br>
+<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.10267">1.3.6.1.4.1.25623.1.0.10267</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_23_tcp"></a>telnet (23/tcp)</td>
+	<td class=default width="80%">A telnet server seems to be running on this port<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.10330">1.3.6.1.4.1.25623.1.0.10330</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_23_tcp"></a>telnet (23/tcp)</td>
+	<td class=default width="80%">Remote telnet banner :<br>
+                _                  _       _ _        _     _      ____  <br>
+ _ __ ___   ___| |_ __ _ ___ _ __ | | ___ (_) |_ __ _| |__ | | ___|___ \ <br>
+| '_ ` _ \ / _ \ __/ _` / __| '_ \| |/ _ \| | __/ _` | '_ \| |/ _ \ __) |<br>
+| | | | | |  __/ || (_| \__ \ |_) | | (_) | | || (_| | |_) | |  __// __/ <br>
+|_| |_| |_|\___|\__\__,_|___/ .__/|_|\___/|_|\__\__,_|_.__/|_|\___|_____|<br>
+                            |_|                                          <br>
+<br>
+<br>
+Warning: Never expose this VM to an untrusted network!<br>
+<br>
+Contact: msfdev[at]metasploit.com<br>
+<br>
+Login with msfadmin/msfadmin to get started<br>
+<br>
+<br>
+server2.deterlab3jsj.wsucpts483.isi.deterlab.net login: <br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.10281">1.3.6.1.4.1.25623.1.0.10281</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_23_tcp"></a>telnet (23/tcp)</td>
+	<td class=default width="80%"><br>
+  Overview:<br>
+<br>
+   A telnet Server is running at this host.<br>
+<br>
+   Experts in computer security, such as SANS Institute, and the members of the<br>
+   comp.os.linux.security newsgroup recommend that the use of Telnet for remote<br>
+   logins should be discontinued under all normal circumstances, for the following<br>
+   reasons:<br>
+<br>
+   * Telnet, by default, does not encrypt any data sent over the connection<br>
+     (including passwords), and so it is often practical to eavesdrop on the<br>
+     communications and use the password later for malicious purposes; anybody who<br>
+     has access to a router, switch, hub or gateway located on the network between<br>
+     the two hosts where Telnet is being used can intercept the packets passing by<br>
+     and obtain login and password information (and whatever else is typed) with any<br>
+     of several common utilities like tcpdump and Wireshark.<br>
+    <br>
+   * Most implementations of Telnet have no authentication that would ensure<br>
+     communication is carried out between the two desired hosts and not intercepted<br>
+     in the middle.<br>
+<br>
+   * Commonly used Telnet daemons have several vulnerabilities discovered over<br>
+     the years.<br>
+<br>
+  Risk factor : Medium<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.100074">1.3.6.1.4.1.25623.1.0.100074</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_25_tcp"></a>smtp (25/tcp)</td>
+	<td class=default width="80%">An SMTP server is running on this port<br>
+Here is its banner : <br>
+220 metasploitable.localdomain ESMTP Postfix (Ubuntu)<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.10330">1.3.6.1.4.1.25623.1.0.10330</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_25_tcp"></a>smtp (25/tcp)</td>
+	<td class=default width="80%">Remote SMTP server banner :<br>
+220 metasploitable.localdomain ESMTP Postfix (Ubuntu)<br>
+<br>
+<br>
+<br>
+This is probably: Postfix<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.10263">1.3.6.1.4.1.25623.1.0.10263</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_25_tcp"></a>smtp (25/tcp)</td>
+	<td class=default width="80%">The file 42.zip was sent 2 times. If there is an antivirus in your MTA, it might<br>
+have crashed. Please check its status right now, as it is<br>
+not possible to do so remotely<br>
+<br>
+BID : <a href="http://www.securityfocus.com/bid/3027">3027</a><br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.11036">1.3.6.1.4.1.25623.1.0.11036</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_25_tcp"></a>smtp (25/tcp)</td>
+	<td class=default width="80%"><br>
+Some antivirus scanners dies when they process an email with a <br>
+too long string without line breaks.<br>
+Such a message was sent. If there is an antivirus on your MTA,<br>
+it might have crashed. Please check its status right now, as <br>
+it is not possible to do it remotely<br>
+<br>
+<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.11270">1.3.6.1.4.1.25623.1.0.11270</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_139_tcp"></a>netbios-ssn (139/tcp)</td>
+	<td class=default width="80%">An SMB server is running on this port<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.11011">1.3.6.1.4.1.25623.1.0.11011</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_445_tcp"></a>microsoft-ds (445/tcp)</td>
+	<td class=default width="80%">A CIFS server is running on this port<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.11011">1.3.6.1.4.1.25623.1.0.11011</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_445_tcp"></a>microsoft-ds (445/tcp)</td>
+	<td class=default width="80%">It was possible to log into the remote host using user defined<br>
+login/password combinations :<br>
+<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.10394">1.3.6.1.4.1.25623.1.0.10394</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Warning</td>
+	<td valign=top class=default width="10%"><a name="server2_512_tcp"></a>exec (512/tcp)</td>
+	<td class=default width="80%"><br>
+  Overview:<br>
+   <br>
+   Rexecd Service is running at this Host.<br>
+   Rexecd (Remote Process Execution) has the same kind of functionality<br>
+   that rsh has : you can execute shell commands on a remote computer.<br>
+<br>
+   The main difference is that rexecd authenticate by reading the<br>
+   username and password *unencrypted* from the socket.<br>
+<br>
+  Solution:<br>
+   Disable rexec Service.<br>
+<br>
+  Risk factor : Medium<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.100111">1.3.6.1.4.1.25623.1.0.100111</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Warning</td>
+	<td valign=top class=default width="10%"><a name="server2_514_tcp"></a>shell (514/tcp)</td>
+	<td class=default width="80%"><br>
+  <br>
+  Overview:<br>
+   rsh Service is running at this Host.<br>
+   rsh (remote shell) is a command line computer program which can execute<br>
+   shell commands as another user, and on another computer across a computer<br>
+   network. <br>
+<br>
+  Solution:<br>
+   Disable rsh and use ssh instead.<br>
+   <br>
+  Risk factor : Medium<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.100080">1.3.6.1.4.1.25623.1.0.100080</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_2049_tcp"></a>nfs (2049/tcp)</td>
+	<td class=default width="80%">RPC program #100003 version 2 'nfs' (nfsprog) is running on this port<br>
+RPC program #100003 version 3 'nfs' (nfsprog) is running on this port<br>
+RPC program #100003 version 4 'nfs' (nfsprog) is running on this port<br>
+<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.11111">1.3.6.1.4.1.25623.1.0.11111</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Warning</td>
+	<td valign=top class=default width="10%"><a name="server2_2121_tcp"></a>scientia-ssdb (2121/tcp)</td>
+	<td class=default width="80%"><br>
+  Overview : The host is running ProFTPD Server, which is prone to cross-site <br>
+  request forgery vulnerability.<br>
+<br>
+  Vulnerability Insight :<br>
+  The flaw exists due to the application truncating an overly long FTP command,<br>
+  and improperly interpreting the remainder string as a new FTP command.<br>
+<br>
+  Impact : This can be exploited to execute arbitrary FTP commands on another<br>
+  user's session privileges.<br>
+<br>
+  Impact Level : Application<br>
+<br>
+  Affected Software/OS :<br>
+  ProFTPD Project versions 1.2.x on Linux<br>
+  ProFTPD Project versions 1.3.x on Linux<br>
+ <br>
+  Fix : Fixed is available in the SVN repository,<br>
+  <a href="http://www.proftpd.org/cvs.html">http://www.proftpd.org/cvs.html</a><br>
+<br>
+  *****<br>
+  NOTE : Ignore this warning, if above mentioned fix is applied already.<br>
+  *****<br>
+<br>
+  References :<br>
+  <a href="http://secunia.com/advisories/31930/">http://secunia.com/advisories/31930/</a><br>
+  <a href="http://bugs.proftpd.org/show_bug.cgi?id=3115">http://bugs.proftpd.org/show_bug.cgi?id=3115</a><br>
+<br>
+  CVSS Score :<br>
+    CVSS Base Score     : 5.5 (AV:N/AC:L/Au:SI/C:P/I:P/A:N)<br>
+    CVSS Temporal Score : 4.3<br>
+  Risk factor : Medium<br>
+BID : <a href="http://www.securityfocus.com/bid/31289">31289</a><br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.900133">1.3.6.1.4.1.25623.1.0.900133</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_2121_tcp"></a>scientia-ssdb (2121/tcp)</td>
+	<td class=default width="80%">An FTP server is running on this port.<br>
+Here is its banner : <br>
+220 ProFTPD 1.3.1 Server (Debian) [::ffff:10.1.1.4]<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.10330">1.3.6.1.4.1.25623.1.0.10330</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_2121_tcp"></a>scientia-ssdb (2121/tcp)</td>
+	<td class=default width="80%">Remote FTP server banner :<br>
+220 ProFTPD 1.3.1 Server (Debian) [::ffff:10.1.1.4]<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.10092">1.3.6.1.4.1.25623.1.0.10092</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%"><font color=red>Vulnerability</font></td>
+	<td valign=top class=default width="10%"><a name="server2_3306_tcp"></a>mysql (3306/tcp)</td>
+	<td class=default width="80%"><br>
+<br>
+ Overview:<br>
+  According to its version number, the remote version of MySQL is<br>
+  prone to a security-bypass vulnerability.<br>
+<br>
+  An attacker can exploit this issue to gain access to table files created by<br>
+  other users, bypassing certain security restrictions.<br>
+<br>
+  NOTE 1: This issue was also assigned CVE-2008-4097 because<br>
+  CVE-2008-2079 was incompletely fixed, allowing symlink attacks.<br>
+<br>
+  NOTE 2: CVE-2008-4098 was assigned because fixes for the vector<br>
+  described in CVE-2008-4097 can also be bypassed.<br>
+<br>
+  This issue affects versions prior to MySQL 4 (prior to 4.1.24) and<br>
+  MySQL 5 (prior to 5.0.60). <br>
+<br>
+ Solution:<br>
+  Updates are available. Update to newer Version.<br>
+<br>
+ See also:<br>
+  <a href="http://www.securityfocus.com/bid/29106">http://www.securityfocus.com/bid/29106</a><br>
+<br>
+ Risk factor : Medium<br>
+CVE : <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-2079">CVE-2008-2079</a>, <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-4097">CVE-2008-4097</a>, <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-4098">CVE-2008-4098</a><br>
+BID : <a href="http://www.securityfocus.com/bid/29106">29106</a><br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.100156">1.3.6.1.4.1.25623.1.0.100156</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%"><font color=red>Vulnerability</font></td>
+	<td valign=top class=default width="10%"><a name="server2_3306_tcp"></a>mysql (3306/tcp)</td>
+	<td class=default width="80%"><br>
+ Overview : This host is running MySQL, which is prone to Denial of Service<br>
+ Vulnerability.<br>
+<br>
+ Vulnerability Insight :<br>
+<br>
+        Issue is due to error while processing an empty bit string literal via<br>
+        a specially crafted SQL statement.<br>
+<br>
+        Impact : Successful exploitation by remote attackers could cause denying<br>
+        access to legitimate users.<br>
+<br>
+ Impact Level : Application<br>
+<br>
+ Affected Software/OS : <br>
+        MySQL versions prior to 5.0.x - 5.0.66,<br>
+                                5.1.x - 5.1.26, and<br>
+                                6.0.x - 6.0.5 on all running platform.<br>
+<br>
+ Fix : Update to version 5.0.66 or 5.1.26 or 6.0.6 or later.<br>
+ <a href="http://dev.mysql.com/downloads/">http://dev.mysql.com/downloads/</a><br>
+<br>
+ References : <br>
+ <a href="http://secunia.com/advisories/31769/">http://secunia.com/advisories/31769/</a><br>
+ <a href="http://bugs.mysql.com/bug.php?id=35658">http://bugs.mysql.com/bug.php?id=35658</a><br>
+ <a href="http://dev.mysql.com/doc/refman/5.1/en/news-5-1-26.html">http://dev.mysql.com/doc/refman/5.1/en/news-5-1-26.html</a><br>
+ <br>
+ CVSS Score :<br>
+        CVSS Base Score     : 7.1 (AV:N/AC:M/Au:NR/C:N/I:N/A:C)<br>
+        CVSS Temporal Score : 5.6<br>
+ Risk factor : High<br>
+CVE : <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3963">CVE-2008-3963</a><br>
+BID : <a href="http://www.securityfocus.com/bid/31081">31081</a><br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.900221">1.3.6.1.4.1.25623.1.0.900221</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_3306_tcp"></a>mysql (3306/tcp)</td>
+	<td class=default width="80%"><br>
+<br>
+ Overview:<br>
+  MySQL, a open source database system is running at this host.<br>
+<br>
+ See also:<br>
+  <a href="http://www.mysql.com">http://www.mysql.com</a>  <br>
+<br>
+ Risk factor : None<br>
+<br>
+MySQL Version '5.0.51a-3ubuntu5' was detected on the remote host.<br>
+<br>
+<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.100152">1.3.6.1.4.1.25623.1.0.100152</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_5432_tcp"></a>postgresql (5432/tcp)</td>
+	<td class=default width="80%"><br>
+<br>
+ Overview:<br>
+  PostgreSQL, a open source object-relational database system is running at<br>
+  this host.<br>
+<br>
+ See also:<br>
+  <a href="http://www.postgresql.org">http://www.postgresql.org</a>  <br>
+<br>
+ Risk factor : None<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.100151">1.3.6.1.4.1.25623.1.0.100151</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_5900_tcp"></a>vnc (5900/tcp)</td>
+	<td class=default width="80%"><br>
+Synopsis :<br>
+<br>
+The remote host is running a remote display software (VNC)<br>
+<br>
+Description :<br>
+<br>
+The remote server is running VNC, a software which ermits a <br>
+console to be displayed remotely.<br>
+<br>
+This allows authenticated users of the remote host to take its <br>
+control remotely.<br>
+<br>
+Solution : <br>
+<br>
+Make sure the use of this software is done in accordance with your<br>
+corporate security policy, filter incoming traffic to this port.<br>
+<br>
+Risk factor : <br>
+<br>
+None<br>
+<br>
+Plugin output :<br>
+The version of the VNC protocol is : RFB 003.003<br>
+<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.10342">1.3.6.1.4.1.25623.1.0.10342</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_5900_tcp"></a>vnc (5900/tcp)</td>
+	<td class=default width="80%">The remote VNC server chose security type #2 (VNC authentication)<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.19288">1.3.6.1.4.1.25623.1.0.19288</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_6000_tcp"></a>x11 (6000/tcp)</td>
+	<td class=default width="80%">This X server does *not* allow any client to connect to it<br>
+however it is recommended that you filter incoming connections<br>
+to this port as attacker may send garbage data and slow down<br>
+your X session or even kill the server.<br>
+<br>
+Here is the server version : 11.0<br>
+Here is the message we received : Client is not authorized<br>
+<br>
+Solution : filter incoming connections to ports 6000-6009<br>
+Risk factor : Low<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.10407">1.3.6.1.4.1.25623.1.0.10407</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_6667_tcp"></a>ircd (6667/tcp)</td>
+	<td class=default width="80%">The IRC server version is : Unreal3.2.8.1. FhiXOoE [*=2309]<br>
+<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.11156">1.3.6.1.4.1.25623.1.0.11156</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_43455_tcp"></a>unknown (43455/tcp)</td>
+	<td class=default width="80%">RPC program #100005 version 1 'mountd' (mount showmount) is running on this port<br>
+RPC program #100005 version 2 'mountd' (mount showmount) is running on this port<br>
+RPC program #100005 version 3 'mountd' (mount showmount) is running on this port<br>
+<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.11111">1.3.6.1.4.1.25623.1.0.11111</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_51602_tcp"></a>unknown (51602/tcp)</td>
+	<td class=default width="80%">RPC program #100021 version 1 'nlockmgr' is running on this port<br>
+RPC program #100021 version 3 'nlockmgr' is running on this port<br>
+RPC program #100021 version 4 'nlockmgr' is running on this port<br>
+<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.11111">1.3.6.1.4.1.25623.1.0.11111</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_53299_tcp"></a>unknown (53299/tcp)</td>
+	<td class=default width="80%">RPC program #100024 version 1 'status' is running on this port<br>
+<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.11111">1.3.6.1.4.1.25623.1.0.11111</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_111_udp"></a>sunrpc (111/udp)</td>
+	<td class=default width="80%">RPC program #100000 version 2 'portmapper' (portmap sunrpc rpcbind) is running on this port<br>
+<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.11111">1.3.6.1.4.1.25623.1.0.11111</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_2049_udp"></a>nfs (2049/udp)</td>
+	<td class=default width="80%">RPC program #100003 version 2 'nfs' (nfsprog) is running on this port<br>
+RPC program #100003 version 3 'nfs' (nfsprog) is running on this port<br>
+RPC program #100003 version 4 'nfs' (nfsprog) is running on this port<br>
+<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.11111">1.3.6.1.4.1.25623.1.0.11111</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_53705_udp"></a>unknown (53705/udp)</td>
+	<td class=default width="80%">RPC program #100005 version 1 'mountd' (mount showmount) is running on this port<br>
+RPC program #100005 version 2 'mountd' (mount showmount) is running on this port<br>
+RPC program #100005 version 3 'mountd' (mount showmount) is running on this port<br>
+<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.11111">1.3.6.1.4.1.25623.1.0.11111</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_55910_udp"></a>unknown (55910/udp)</td>
+	<td class=default width="80%">RPC program #100024 version 1 'status' is running on this port<br>
+<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.11111">1.3.6.1.4.1.25623.1.0.11111</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_60221_udp"></a>unknown (60221/udp)</td>
+	<td class=default width="80%">RPC program #100021 version 1 'nlockmgr' is running on this port<br>
+RPC program #100021 version 3 'nlockmgr' is running on this port<br>
+RPC program #100021 version 4 'nlockmgr' is running on this port<br>
+<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.11111">1.3.6.1.4.1.25623.1.0.11111</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Warning</td>
+	<td valign=top class=default width="10%"><a name="server2_137_udp"></a>netbios-ns (137/udp)</td>
+	<td class=default width="80%">The following 7 NetBIOS names have been gathered :<br>
+ SERVER2         = This is the computer name registered for workstation services by a WINS client.<br>
+ SERVER2         = This is the current logged in user registered for this workstation.<br>
+ SERVER2         = Computer name<br>
+   __MSBROWSE__ <br>
+ WORKGROUP       = Workgroup / Domain name<br>
+ WORKGROUP      <br>
+ WORKGROUP       = Workgroup / Domain name (part of the Browser elections)<br>
+<br>
+. This SMB server seems to be a SAMBA server (this is not a security<br>
+risk, this is for your information). This can be told because this server <br>
+claims to have a null MAC address<br>
+<br>
+If you do not want to allow everyone to find the NetBios name<br>
+of your computer, you should filter incoming traffic to this port.<br>
+<br>
+Risk factor : Medium<br>
+CVE : <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CAN-1999-0621">CAN-1999-0621</a><br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.10150">1.3.6.1.4.1.25623.1.0.10150</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Warning</td>
+	<td valign=top class=default width="10%"><a name="server2_general_tcp"></a>general/tcp</td>
+	<td class=default width="80%"><br>
+  Overview:<br>
+<br>
+   This FTP Server allows anonymous logins.<br>
+   <br>
+   A host that provides an FTP service may additionally provide Anonymous FTP<br>
+   access as well. Under this arrangement, users do not strictly need an account<br>
+   on the host. Instead the user typically enters 'anonymous' or 'ftp' when<br>
+   prompted for username. Although users are commonly asked to send their email<br>
+   address as their password, little to no verification is actually performed on<br>
+   the supplied data. <br>
+<br>
+ Solution:<br>
+   If you do not want to share files, you should disable anonymous logins.<br>
+<br>
+  Risk factor : Medium<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.900600">1.3.6.1.4.1.25623.1.0.900600</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_general_tcp"></a>general/tcp</td>
+	<td class=default width="80%">ICMP based OS fingerprint results: <br>
+<br>
+Linux Kernel 2.6.11 (accuracy 100%)<br>
+Linux Kernel 2.6.10 (accuracy 100%)<br>
+Linux Kernel 2.6.9 (accuracy 100%)<br>
+Linux Kernel 2.6.8 (accuracy 100%)<br>
+Linux Kernel 2.6.7 (accuracy 100%)<br>
+Linux Kernel 2.6.6 (accuracy 100%)<br>
+Linux Kernel 2.6.5 (accuracy 100%)<br>
+Linux Kernel 2.6.4 (accuracy 100%)<br>
+Linux Kernel 2.6.3 (accuracy 100%)<br>
+Linux Kernel 2.6.2 (accuracy 100%)<br>
+Linux Kernel 2.6.1 (accuracy 100%)<br>
+Linux Kernel 2.6.0 (accuracy 100%)<br>
+Linux Kernel 2.4.30 (accuracy 100%)<br>
+Linux Kernel 2.4.29 (accuracy 100%)<br>
+Linux Kernel 2.4.28 (accuracy 100%)<br>
+Linux Kernel 2.4.27 (accuracy 100%)<br>
+Linux Kernel 2.4.26 (accuracy 100%)<br>
+Linux Kernel 2.4.25 (accuracy 100%)<br>
+Linux Kernel 2.4.24 (accuracy 100%)<br>
+Linux Kernel 2.4.23 (accuracy 100%)<br>
+Linux Kernel 2.4.22 (accuracy 100%)<br>
+Linux Kernel 2.4.21 (accuracy 100%)<br>
+Linux Kernel 2.4.20 (accuracy 100%)<br>
+Linux Kernel 2.4.19 (accuracy 100%)<br>
+Linux Kernel 2.0.36 (accuracy 100%)<br>
+Linux Kernel 2.0.34 (accuracy 100%)<br>
+Linux Kernel 2.0.30 (accuracy 100%)<br>
+<br>
+<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.102002">1.3.6.1.4.1.25623.1.0.102002</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_general_tcp"></a>general/tcp</td>
+	<td class=default width="80%"><br>
+Synopsis :<br>
+<br>
+The remote service implements TCP timestamps.<br>
+<br>
+Description :<br>
+<br>
+The remote host implements TCP timestamps, as defined by RFC1323.<br>
+A side effect of this feature is that the uptime of the remote <br>
+host can sometimes be computed.<br>
+<br>
+See also :<br>
+<br>
+<a href="http://www.ietf.org/rfc/rfc1323.txt">http://www.ietf.org/rfc/rfc1323.txt</a><br>
+<br>
+Risk factor : <br>
+<br>
+None<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.80091">1.3.6.1.4.1.25623.1.0.80091</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_general_tcp"></a>general/tcp</td>
+	<td class=default width="80%">Nikto could not be found in your system path.<br>
+OpenVAS was unable to execute Nikto and to perform the scan you<br>
+requested.<br>
+Please make sure that Nikto is installed and that nikto.pl or nikto is<br>
+available in the PATH variable defined for your environment.<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.14260">1.3.6.1.4.1.25623.1.0.14260</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_69_udp"></a>tftp (69/udp)</td>
+	<td class=default width="80%"><br>
+Synopsis :<br>
+<br>
+The remote host has TFTP server running.<br>
+<br>
+Description :<br>
+<br>
+The remote host has TFTP server running. TFTP stands <br>
+for Trivial File Transfer Protocol.<br>
+<br>
+Solution : <br>
+<br>
+Disable TFTP server if not used.<br>
+<br>
+Risk factor : <br>
+<br>
+None<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.80100">1.3.6.1.4.1.25623.1.0.80100</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_123_udp"></a>ntp (123/udp)</td>
+	<td class=default width="80%"><br>
+  A NTP (Network Time Protocol) server is listening on this port.<br>
+<br>
+  Risk factor : Low<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.10884">1.3.6.1.4.1.25623.1.0.10884</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Warning</td>
+	<td valign=top class=default width="10%"><a name="server2_53_udp"></a>domain (53/udp)</td>
+	<td class=default width="80%"><br>
+<br>
+  Overview: The host is running BIND and is prone to Security Bypass<br>
+  Vulnerability.<br>
+<br>
+  Vulnerability Insight:<br>
+  The flaw is caused due to improper validation of return value from OpenSSL's<br>
+  DSA_do_verify and VP_VerifyFinal functions.<br>
+<br>
+  Impact:<br>
+  Successful exploitation could allow remote attackers to bypass the certificate<br>
+  validation checks and can cause man-in-the-middle attack via signature checks <br>
+  on DSA and ECDSA keys used with SSL/TLS.<br>
+<br>
+  Impact Level: Application<br>
+<br>
+  Affected Software/OS:<br>
+  ISC BIND version prior to 9.2 or 9.6.0 P1 or 9.5.1 P1 or 9.4.3 P1 or 9.3.6 P1/Linux<br>
+<br>
+  Fix: Upgrade to version 9.6.0 P1, 9.5.1 P1, 9.4.3 P1, 9.3.6 P1<br>
+  <a href="https://www.isc.org/downloadables/11">https://www.isc.org/downloadables/11</a><br>
+<br>
+  References:<br>
+  <a href="https://www.isc.org/node/373">https://www.isc.org/node/373</a><br>
+  <a href="http://secunia.com/advisories/33404/">http://secunia.com/advisories/33404/</a><br>
+  <a href="http://www.ocert.org/advisories/ocert-2008-016.html">http://www.ocert.org/advisories/ocert-2008-016.html</a><br>
+<br>
+  CVSS Score:<br>
+    CVSS Base Score     : 5.0 (AV:N/AC:L/Au:NR/C:P/I:N/A:N)<br>
+    CVSS Temporal Score : 3.7<br>
+  Risk factor: Medium<br>
+CVE : <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-5077">CVE-2008-5077</a>, <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0025">CVE-2009-0025</a>, <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0265">CVE-2009-0265</a><br>
+BID : <a href="http://www.securityfocus.com/bid/33150">33150</a>, <a href="http://www.securityfocus.com/bid/33151">33151</a><br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.800338">1.3.6.1.4.1.25623.1.0.800338</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_53_udp"></a>domain (53/udp)</td>
+	<td class=default width="80%"><br>
+<br>
+ Overview:<br>
+  A DNS Server is running at this Host.<br>
+  A Name Server translates domain names into IP addresses. This makes it<br>
+  possible for a user to access a website by typing in the domain name instead of<br>
+  the website's actual IP address.<br>
+<br>
+ Risk factor : None<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.100069">1.3.6.1.4.1.25623.1.0.100069</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_general_SMBClient"></a>general/SMBClient</td>
+	<td class=default width="80%">OS Version = UNIX<br>
+Domain = WORKGROUP<br>
+SMB Serverversion = SAMBA 3.0.20-DEBIAN<br>
+<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.90011">1.3.6.1.4.1.25623.1.0.90011</a></td></tr>
+   <tr>
+	<td valign=top class=default width="10%">Informational</td>
+	<td valign=top class=default width="10%"><a name="server2_general_icmp"></a>general/icmp</td>
+	<td class=default width="80%">Here is the route recorded between 10.1.1.2 and 10.1.1.4 :<br>
+10.1.1.4.<br>
+10.1.1.4.<br>
+<br>
+OID : <a href="http://www.openvas.org/?oid=1.3.6.1.4.1.25623.1.0.12264">1.3.6.1.4.1.25623.1.0.12264</a></td></tr>
+</table></td></tr></tbody></table>
+<hr>
+<i>This file was generated by the <a href="http://www.openvas.org">OpenVAS</a> security scanner.</i>
+</BODY>
+</HTML>

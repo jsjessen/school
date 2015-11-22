@@ -1,0 +1,143 @@
+wsu483ak@client1:~/3proj$ sudo openvas-adduser
+Using /var/tmp as a temporary file holder.
+
+Add a new openvasd user
+---------------------------------
+
+
+Login : jsjessen
+Authentication (pass/cert) [pass] : pass
+Login password : 
+Login password (again) : 
+
+User rules
+---------------
+openvasd has a rules system which allows you to restrict the hosts that jsjessen has the right to test.
+For instance, you may want him to be able to scan his own host only.
+
+Please see the openvas-adduser(8) man page for the rules syntax.
+
+Enter the rules for this user, and hit ctrl-D once you are done:
+(the user can have an empty rules set)
+accept 10.1.1.0/24
+default deny
+
+
+Login             : jsjessen
+Password          : ***********
+
+Rules             : 
+accept 10.1.1.0/24
+default deny
+
+
+Is that ok? (y/n) [y] y
+user added.
+wsu483ak@client1:~/3proj$ sudo service openvas-server start
+W32.Sasser.Worm.nasl could not be added to the cache and is likely to stay invisible to the client.
+openvasd.
+wsu483ak@client1:~/3proj$ echo 'server2' > ~/hostlist.txt
+wsu483ak@client1:~/3proj$ ls
+q2.txt
+wsu483ak@client1:~/3proj$ pwd
+/users/wsu483ak/3proj
+wsu483ak@client1:~/3proj$ ls ~
+2proj  3proj  hostlist.txt  switch_node.sh
+wsu483ak@client1:~/3proj$ cat ~/hostlist.txt 
+server2
+wsu483ak@client1:~/3proj$ sudo openvas-client -q 127.0.0.1 9390 jsjessen clandestine ~/hostlist.txt openvas-output.html -T html -V -x
+*** Info: Found and enabled 9848 new plugins.
+attack|server2|2|9849
+portscan|server2|121|4482
+portscan|server2|226|4482
+portscan|server2|333|4482
+portscan|server2|439|4482
+portscan|server2|547|4482
+portscan|server2|654|4482
+portscan|server2|758|4482
+portscan|server2|858|4482
+portscan|server2|959|4482
+portscan|server2|1072|4482
+portscan|server2|1181|4482
+portscan|server2|1293|4482
+portscan|server2|1397|4482
+portscan|server2|1500|4482
+portscan|server2|1606|4482
+portscan|server2|1712|4482
+portscan|server2|1825|4482
+portscan|server2|1934|4482
+portscan|server2|2038|4482
+portscan|server2|2142|4482
+portscan|server2|2252|4482
+portscan|server2|2363|4482
+portscan|server2|2469|4482
+portscan|server2|2573|4482
+portscan|server2|2675|4482
+portscan|server2|2785|4482
+portscan|server2|2892|4482
+portscan|server2|3001|4482
+portscan|server2|3103|4482
+portscan|server2|3207|4482
+portscan|server2|3322|4482
+portscan|server2|3426|4482
+portscan|server2|3529|4482
+portscan|server2|3631|4482
+portscan|server2|3731|4482
+portscan|server2|3831|4482
+portscan|server2|3932|4482
+portscan|server2|4032|4482
+portscan|server2|4132|4482
+portscan|server2|4240|4482
+portscan|server2|4348|4482
+portscan|server2|4456|4482
+portscan|server2|65535|65535
+attack|server2|197|9849
+attack|server2|394|9849
+attack|server2|591|9849
+attack|server2|788|9849
+attack|server2|985|9849
+attack|server2|1182|9849
+attack|server2|1379|9849
+attack|server2|1576|9849
+attack|server2|1773|9849
+attack|server2|1970|9849
+attack|server2|2167|9849
+attack|server2|2364|9849
+attack|server2|2561|9849
+attack|server2|2758|9849
+attack|server2|2955|9849
+attack|server2|3152|9849
+attack|server2|3349|9849
+attack|server2|3546|9849
+attack|server2|3743|9849
+attack|server2|3940|9849
+attack|server2|4137|9849
+attack|server2|4334|9849
+attack|server2|4531|9849
+attack|server2|4728|9849
+attack|server2|4925|9849
+attack|server2|5122|9849
+attack|server2|5319|9849
+attack|server2|5516|9849
+attack|server2|5713|9849
+attack|server2|5910|9849
+attack|server2|6107|9849
+attack|server2|6304|9849
+attack|server2|6501|9849
+attack|server2|6698|9849
+attack|server2|6895|9849
+attack|server2|7092|9849
+attack|server2|7289|9849
+attack|server2|7486|9849
+attack|server2|7683|9849
+attack|server2|7880|9849
+attack|server2|8077|9849
+attack|server2|8274|9849
+attack|server2|8471|9849
+attack|server2|8668|9849
+attack|server2|8865|9849
+attack|server2|9062|9849
+attack|server2|9259|9849
+attack|server2|9456|9849
+attack|server2|9653|9849
+attack|server2|9849|9849
